@@ -19,14 +19,14 @@ public class RobotTemplate extends IterativeRobot {
     
     Joystick control = new Joystick(1);
     
-    Victor  vic1 = new Victor(1),
-            vic2 = new Victor(2);
+    Victor  vic1 = new Victor(10),
+            vic2 = new Victor(9);
     
     AnalogChannel   encoder1 = new AnalogChannel(1),
                     encoder2 = new AnalogChannel(2);
     
-    TakeBackHalfControl.TakeBackHalf    tbh1 = new TakeBackHalf(1000),
-                                        tbh2 = new TakeBackHalf(1000);
+    TakeBackHalfControl.TakeBackHalf    tbh1 = new TakeBackHalf(4320),
+                                        tbh2 = new TakeBackHalf(3927);
     
     Timer time = new Timer();
     
@@ -34,17 +34,17 @@ public class RobotTemplate extends IterativeRobot {
     
     double  goalPos = 0,
             currentRPM1 = 0,
-            ticPerInch1 = 1,
+            ticPerInch1 = 0.03528,
             oldTime1 = time.get(),
             oldEncoderVal1 = encoder1.getValue(),
-            diameter1 = 0,
+            diameter1 = 2+7/8,
             speed1 = 0,
             
             currentRPM2 = 0,
-            ticPerInch2 = 1,
+            ticPerInch2 = 0.07526,
             oldTime2 = time.get(),
             oldEncoderVal2 = encoder2.getValue(),
-            diameter2 = 0,
+            diameter2 = 2+7/8,
             speed2 = 0;
     
     
@@ -68,6 +68,7 @@ public class RobotTemplate extends IterativeRobot {
         oldEncoderVal1 = encoder1.getValue();
         tbh1.setCurrentRPM(currentRPM1);
         tbh1.setTargetRPM(goalPos);
+        
         
         currentRPM2 = getVelocity(oldTime2, ticPerInch2, encoder2.getValue(), oldEncoderVal2)/getCirc(diameter2);
         oldEncoderVal2 = encoder2.getValue();
