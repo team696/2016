@@ -1,18 +1,26 @@
-
 package org.usfirst.frc.team696.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team696.robot.Robot;
+import org.usfirst.frc.team696.robot.Util;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
+public class Rotate extends Command {
 
-    public ExampleCommand() {
+	double goalDirection;
+	double currentDirection;
+	double error;
+	double k;
+	double leftSpeed;
+	double rightSpeed; 
+	
+    public Rotate(double goalDirection) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+        requires(Robot.chassis);
+        this.goalDirection = goalDirection;
     }
 
     // Called just before this Command runs the first time
@@ -21,10 +29,18 @@ public class ExampleCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	this.currentDirection = Robot.chassis.getAngle();
+    	error = Util.deadZone((goalDirection - currentDirection), -5.0, 5.0, 0.0);
+    	
+    	leftSpeed = error*k;
+    	rightSpeed = -error*k;
+    	Robot.chassis.setLeftSpeed(leftSpeed);
+    	Robot.chassis.setRightSpeed(rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        if(error == 0) return true;
         return false;
     }
 
