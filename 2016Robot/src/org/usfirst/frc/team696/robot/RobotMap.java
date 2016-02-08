@@ -29,4 +29,9 @@ public class RobotMap {
 	public static int gyroChannel = 0;
 	
 	public static int shifterSolenoid = 0;
+	
+	public static int pivotArmEncoderA = 0;
+	public static int pivotArmEncoderB = 0;
+	
+	public static int pivotArmLimitSwitchChannel = 0;
 }
