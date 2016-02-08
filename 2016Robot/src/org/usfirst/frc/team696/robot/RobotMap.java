@@ -27,4 +27,6 @@ public class RobotMap {
 	public static int rearRightMotor = 0;
 	
 	public static int gyroChannel = 0;
+	
+	public static int shifterSolenoid = 0;
 }
