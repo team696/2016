@@ -25,13 +25,15 @@ public class TeleopDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("Running TeleopDrive");
+    	fastTurn = Robot.chassis.getFastTurn();
     	speed = Robot.oi.control.getRawAxis(1);
     	turnValue = Robot.oi.control.getRawAxis(4);
+//    	System.out.println(speed + "   " + turnValue + "   " + fastTurn);
     	if(fastTurn)turnValue*=2;
-    	leftSpeed = speed + turnValue;
-    	rightSpeed = speed - turnValue;
+    	leftSpeed = speed - turnValue;
+    	rightSpeed = speed + turnValue;
     	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

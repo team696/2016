@@ -29,7 +29,7 @@ public class Rotate extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.currentDirection = Robot.chassis.getAngle();
+    	this.currentDirection = Robot.navX.getYaw();
     	error = Util.deadZone((goalDirection - currentDirection), -5.0, 5.0, 0.0);
     	
     	leftSpeed = error*k;

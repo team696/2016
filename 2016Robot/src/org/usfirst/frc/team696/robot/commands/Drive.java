@@ -32,7 +32,7 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	currentDirection = Robot.chassis.getAngle();
+    	currentDirection = Robot.navX.getYaw();
     	error = (goalDirection - currentDirection) * kP;
     	leftSpeed = speed;
     	rightSpeed = speed;
@@ -42,7 +42,7 @@ public class Drive extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(Robot.chassis.getAverageDistance() > goalDistance)return true;
+        if((Robot.leftEncoder.getDistance() + Robot.rightEncoder.getDistance())/2 > goalDistance)return true;
         return false;
     }
 

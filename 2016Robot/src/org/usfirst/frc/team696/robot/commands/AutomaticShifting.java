@@ -27,12 +27,13 @@ public class AutomaticShifting extends Command {
 	boolean stop = false;
 	
     public AutomaticShifting() {
-        requires(Robot.chassis);
+        requires(Robot.shifter);
     }
 
     protected void initialize() {
     	timer.start();
-    	Robot.chassis.setDistancePerPulse(distancePerPulse);
+    	Robot.leftEncoder.setDistancePerPulse(distancePerPulse);
+    	Robot.rightEncoder.setDistancePerPulse(distancePerPulse);
     	stop = false;
     	Robot.chassis.setAutomatic();
     }
@@ -41,8 +42,8 @@ public class AutomaticShifting extends Command {
     protected void execute() {
     	stop = Robot.chassis.isManual();
     	
-    	leftDistance = Robot.chassis.getLeftEncoderDistance();
-    	rightDistance = Robot.chassis.getRightEncoderDistance();
+    	leftDistance = Robot.leftEncoder.getDistance();
+    	rightDistance = Robot.rightEncoder.getDistance();
     	time = timer.get();
     	
     	leftRPM = Util.calculateRPM(leftDistance, oldLeftDistance, circumferenceOfWheel, time, oldTime);
@@ -52,8 +53,8 @@ public class AutomaticShifting extends Command {
     	oldRightDistance = rightDistance;
     	oldTime = time;
     	
-    	if(leftRPM < shiftLowRPM || rightRPM < shiftLowRPM)Robot.chassis.shiftLow();
-    	if(leftRPM > shiftHighRPM && rightRPM > shiftHighRPM)Robot.chassis.shiftHigh();
+    	if(leftRPM < shiftLowRPM || rightRPM < shiftLowRPM)Robot.shifter.shiftLow();
+    	if(leftRPM > shiftHighRPM && rightRPM > shiftHighRPM)Robot.shifter.shiftHigh();
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
