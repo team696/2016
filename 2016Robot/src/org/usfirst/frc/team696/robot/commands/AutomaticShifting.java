@@ -35,19 +35,16 @@ public class AutomaticShifting extends Command {
     	Robot.leftEncoder.setDistancePerPulse(distancePerPulse);
     	Robot.rightEncoder.setDistancePerPulse(distancePerPulse);
     	stop = false;
-    	Robot.chassis.setAutomatic();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	stop = Robot.chassis.isManual();
-    	
     	leftDistance = Robot.leftEncoder.getDistance();
     	rightDistance = Robot.rightEncoder.getDistance();
     	time = timer.get();
     	
-    	leftRPM = Util.calculateRPM(leftDistance, oldLeftDistance, circumferenceOfWheel, time, oldTime);
-    	rightRPM = Util.calculateRPM(rightDistance, oldRightDistance, circumferenceOfWheel, time, oldTime);
+//    	leftRPM = Util.calculateRPM(leftDistance, oldLeftDistance, circumferenceOfWheel, time, oldTime);
+//    	rightRPM = Util.calculateRPM(rightDistance, oldRightDistance, circumferenceOfWheel, time, oldTime);
     	
     	oldLeftDistance = leftDistance;
     	oldRightDistance = rightDistance;

@@ -15,7 +15,7 @@ public class OI {
 	public Joystick Joystick = new Joystick(0);
 	public Joystick controlBoard = new Joystick(1);
 	Button shiftHigh = new JoystickButton(Joystick, 6);
-	Button shiftLow = new JoystickButton(Joystick, 5);
+	Button shiftLow = new JoystickButton(Joystick, 7);
 	Button fastTurn = new JoystickButton(controlBoard, 7);
 	
 	public OI() {

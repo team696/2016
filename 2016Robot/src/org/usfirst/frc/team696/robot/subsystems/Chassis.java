@@ -24,40 +24,16 @@ public class Chassis extends Subsystem {
 	double leftSpeed = 0;
 	double rightSpeed = 0;
 	
-	boolean isManual = false;
-	boolean fastTurn = false;
-	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    
-    public void setFastTurn(boolean fastTurn) {
-		this.fastTurn = fastTurn;
-	}
-    
-    public boolean getFastTurn() {
-		// TODO Auto-generated method stub
-    	return fastTurn;
-	}
     
     public void setSpeeds(double leftSpeed, double rightSpeed){
     	this.leftSpeed = leftSpeed;
     	this.rightSpeed = rightSpeed;
     	drive();
     }
-    
-    public void setManual(){
-		isManual = true;
-	}
-	
-	public void setAutomatic() {
-		isManual = false;
-	}
-	
-	public boolean isManual() {
-		return isManual;
-	}
     
 	public double getLeftSpeed() {
 		return leftSpeed;
