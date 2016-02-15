@@ -1,7 +1,7 @@
 package org.usfirst.frc.team696.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team696.robot.*;
+import org.usfirst.frc.team696.robot.Robot;
 
 /**
  *
@@ -23,7 +23,7 @@ public class Fire extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.fire.get();
     }
 
     // Called once after isFinished returns true

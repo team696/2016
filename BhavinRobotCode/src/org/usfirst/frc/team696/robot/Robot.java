@@ -1,17 +1,9 @@
 
 package org.usfirst.frc.team696.robot;
 
+import org.usfirst.frc.team696.robot.subsystems.*;
 
-import org.usfirst.frc.team696.robot.commands.TeleopDrive;
-import org.usfirst.frc.team696.robot.subsystems.Chassis;
-import org.usfirst.frc.team696.robot.subsystems.Shifter;
-
-import com.kauailabs.nav6.frc.IMU;
-import com.kauailabs.nav6.frc.IMUAdvanced;
-
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -28,15 +20,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	public static Chassis chassis= new Chassis();
-	public static Shifter shifter = new Shifter();
-	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
-	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);
-	public boolean shiftedHigh = false;
+	public static Chassis chassis = new Chassis();
+	public static PivotingArm pivot = new PivotingArm();
+	public static shooterPiston fire = new shooterPiston();
+	
     Command autonomousCommand;
     SendableChooser chooser;
-    public static IMU navX;
-	SerialPort port;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -44,18 +33,11 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		chassis = new Chassis();
         chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-        try {
-			byte UpdateRateHz = 50;
-			port = new SerialPort(57600, SerialPort.Port.kMXP);
-			navX = new IMUAdvanced(port, UpdateRateHz);
-		} catch(Exception ex){System.out.println("NavX not working");};
-
-//		navX.zeroYaw();
-//		navX.getYaw();
     }
 	
 	/**
@@ -106,16 +88,17 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	Scheduler.getInstance().add(new TeleopDrive());
-    	System.out.println("Teleop Init");
-    	if (autonomousCommand != null) autonomousCommand.cancel();
+		// This makes sure that the autonomous stops running when
+        // teleop starts running. If you want the autonomous to 
+        // continue until interrupted by another command, remove
+        // this line or comment it out.
+        if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	System.out.println("Teleop Periodic");
         Scheduler.getInstance().run();
     }
     

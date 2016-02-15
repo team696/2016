@@ -13,11 +13,15 @@ public class shooterPiston extends Subsystem {
     Solenoid shooterPiston = new Solenoid(RobotMap.fireSolenoid);
 
     public void initDefaultCommand() {
-    	shooterPiston.set(false);
+    	
     }
     
     public void trigger() {
     	shooterPiston.set(true);
+    }
+    
+    public boolean get() {
+    	return shooterPiston.get();
     }
 
 }

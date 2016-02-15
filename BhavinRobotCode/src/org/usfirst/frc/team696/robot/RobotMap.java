@@ -20,6 +20,26 @@ public class RobotMap {
 	public static int encoderRightB = 3;
 	
 	public static int shifterSolenoid = 7;
+	
+	public static int pivotMotor = 0;
+	
+	public static int topMotor = 0;
+	public static int bottomMotor = 0;
+	public static int topMotorEncoderA = 0;
+	public static int bottomMotorEncoderA = 0;
+	public static int topMotorEncoderB = 0;
+	public static int bottomMotorEncoderB = 0;
+	
+	public static int gyroChannel = 0;
+	
+	public static int pivotArmEncoderA = 0;
+	public static int pivotArmEncoderB = 0;
+	
+	public static int pivotArmLimitSwitchChannel = 0;
+	
+	public static int fireSolenoid = 0;
+	
+	public static int joystick = 0;
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
