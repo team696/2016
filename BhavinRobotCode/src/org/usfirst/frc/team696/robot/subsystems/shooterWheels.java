@@ -23,7 +23,7 @@ public class shooterWheels extends Subsystem {
     }
     
     public void setBottomRPM(double bottomRPM) {
-    	topMotor.set(bottomRPM);
+    	bottomMotor.set(bottomRPM);
     }
 }
 
