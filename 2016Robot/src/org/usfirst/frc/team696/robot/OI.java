@@ -1,7 +1,7 @@
 package org.usfirst.frc.team696.robot;
 
-import org.usfirst.frc.team696.robot.commands.ShiftHigh;
-import org.usfirst.frc.team696.robot.commands.ShiftLow;
+import org.usfirst.frc.team696.robot.commands.FastTurn;
+import org.usfirst.frc.team696.robot.commands.Shift;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -12,12 +12,17 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public Joystick control = new Joystick(0);
-	Button shifting = new JoystickButton(control, 6);
+	public Joystick Joystick = new Joystick(0);
+	public Joystick controlBoard = new Joystick(1);
+	Button shiftHigh = new JoystickButton(Joystick, 6);
+	Button shiftLow = new JoystickButton(Joystick, 5);
+	Button fastTurn = new JoystickButton(controlBoard, 7);
 	
 	public OI() {
-		shifting.whenPressed(new ShiftHigh());
-		shifting.whenReleased(new ShiftLow());
+		shiftHigh.whenPressed(new Shift(false));
+		shiftLow.whenPressed(new Shift(true));
+		fastTurn.whenPressed(new FastTurn(true));
+		fastTurn.whenReleased(new FastTurn(false));
 	}
 }
 

@@ -7,19 +7,25 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShiftLow extends Command {
+public class Shift extends Command {
 
-    public ShiftLow() {
+	boolean shiftHigh = true;
+	
+    public Shift(boolean shiftHigh) {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.shifter);
+        requires(Robot.shifter);
+        this.shiftHigh = shiftHigh;
     }
+    
+    
 
     // Called just before this Command runs the first time
     protected void initialize() {}
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shifter.shiftLow();
+    	if(shiftHigh)Robot.shifter.shiftHigh();
+    	else Robot.shifter.shiftLow();
     }
 
     // Make this return true when this Command no longer needs to run execute()

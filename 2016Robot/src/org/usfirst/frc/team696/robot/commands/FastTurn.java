@@ -1,5 +1,6 @@
 package org.usfirst.frc.team696.robot.commands;
 
+
 import org.usfirst.frc.team696.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,19 +8,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShiftHigh extends Command {
+public class FastTurn extends Command {
 
-    public ShiftHigh() {
+    public FastTurn(boolean startFastTurn) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.shifter);
+        Robot.fastTurn = startFastTurn;
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {}
+    protected void initialize() {
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shifter.shiftHigh();
     }
 
     // Make this return true when this Command no longer needs to run execute()
