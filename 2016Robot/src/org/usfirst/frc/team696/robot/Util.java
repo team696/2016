@@ -142,4 +142,13 @@ public class Util {
         }
         return retString;
     }
+    
+    public static double findVelocity(double time, double oldTime, double distance, double oldDistance){
+    	double t = time - oldTime;
+    	double dX = distance - oldDistance;
+    	double v;
+    	t = t * (60/t);
+    	v = dX/t;
+    	return v;
+    }
 }
