@@ -1,6 +1,7 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.commands.FastTurn;
+import org.usfirst.frc.team696.robot.commands.Pivot;
 import org.usfirst.frc.team696.robot.commands.Shift;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -12,17 +13,22 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public Joystick Joystick = new Joystick(0);
 	public Joystick controlBoard = new Joystick(1);
-	Button shiftHigh = new JoystickButton(Joystick, 6);
-	Button shiftLow = new JoystickButton(Joystick, 7);
 	Button fastTurn = new JoystickButton(controlBoard, 7);
+	Button shiftHighButton = new JoystickButton(controlBoard, 9);
+	Button shiftLowButton = new JoystickButton(controlBoard, 8);
+	Button pivotUpButton = new JoystickButton(controlBoard, 10);
+	Button pivotDownButton = new JoystickButton(controlBoard, 11);
 	
 	public OI() {
-		shiftHigh.whenPressed(new Shift(false));
-		shiftLow.whenPressed(new Shift(true));
 		fastTurn.whenPressed(new FastTurn(true));
 		fastTurn.whenReleased(new FastTurn(false));
+		shiftHighButton.whenPressed(new Shift(false));
+		shiftLowButton.whenPressed(new Shift(true));
+		pivotUpButton.whenPressed(new Pivot(false, 0.25));
+		pivotUpButton.whenReleased(new Pivot(false, 0));
+		pivotDownButton.whenPressed(new Pivot(false, -0.25));
+		pivotDownButton.whenReleased(new Pivot(false, 0));
 	}
 }
 
