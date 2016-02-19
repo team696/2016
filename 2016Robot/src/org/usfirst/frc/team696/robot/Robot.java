@@ -6,6 +6,7 @@ import org.usfirst.frc.team696.robot.commands.TeleopDrive;
 import org.usfirst.frc.team696.robot.subsystems.Chassis;
 import org.usfirst.frc.team696.robot.subsystems.PivotArm;
 import org.usfirst.frc.team696.robot.subsystems.Shifter;
+import org.usfirst.frc.team696.robot.subsystems.Shoot;
 
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
 	public static Chassis chassis= new Chassis();
 	public static Shifter shifter = new Shifter();
 	public static PivotArm pivotArm = new PivotArm();
+	public static Shoot shoot = new Shoot();
 	
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
 	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);

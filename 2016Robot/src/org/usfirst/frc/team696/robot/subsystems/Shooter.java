@@ -24,7 +24,7 @@ public class Shooter extends Subsystem {
 	
 	Victor topShooterWheel = new Victor(RobotMap.topShooterWheel);
 	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterWheel);
-	Encoder topShooterWheelEnchoder = new Encoder(RobotMap.topShooterWheelEnchoderA, RobotMap.topShooterWheelEnchoderB);
+	Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
 	Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
 	
 	double speedTop = 0;
@@ -51,14 +51,14 @@ public class Shooter extends Subsystem {
     public void setTargetRPM(double topTargetRPM, double bottomTargetRPM) {
     	this.topTargetRPM = topTargetRPM;
     	this.bottomTargetRPM = bottomTargetRPM;
-    	topShooterWheelEnchoder.setDistancePerPulse(1);
+    	topShooterWheelEncoder.setDistancePerPulse(1);
     	bottomShooterWheelEncoder.setDistancePerPulse(1);
 	}
     
     public void run(){
     	time = timer.get();
     	
-    	topDistance = topShooterWheelEnchoder.getDistance();
+    	topDistance = topShooterWheelEncoder.getDistance();
     	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
     	oldTopDistance = topDistance;
     	
