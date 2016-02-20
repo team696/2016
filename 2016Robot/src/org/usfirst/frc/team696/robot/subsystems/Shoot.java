@@ -19,8 +19,8 @@ public class Shoot extends Subsystem {
     	
     }
    
-    public void trigger() { 
-    	shooterPiston.set(true);
+    public void setShoot(boolean shoot) { 
+    	shooterPiston.set(shoot);
     }
     
     public boolean get() {

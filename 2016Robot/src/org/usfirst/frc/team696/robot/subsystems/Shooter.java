@@ -1,7 +1,6 @@
 package org.usfirst.frc.team696.robot.subsystems;
 
-import java.awt.Robot;
-
+import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
 import org.usfirst.frc.team696.robot.TakeBackHalf;
 import org.usfirst.frc.team696.robot.Util;
@@ -24,8 +23,6 @@ public class Shooter extends Subsystem {
 	
 	Victor topShooterWheel = new Victor(RobotMap.topShooterWheel);
 	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterWheel);
-	Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
-	Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
 	
 	double speedTop = 0;
 	double speedBottom = 0;
@@ -51,18 +48,17 @@ public class Shooter extends Subsystem {
     public void setTargetRPM(double topTargetRPM, double bottomTargetRPM) {
     	this.topTargetRPM = topTargetRPM;
     	this.bottomTargetRPM = bottomTargetRPM;
-    	topShooterWheelEncoder.setDistancePerPulse(1);
-    	bottomShooterWheelEncoder.setDistancePerPulse(1);
+    	
 	}
     
     public void run(){
     	time = timer.get();
     	
-    	topDistance = topShooterWheelEncoder.getDistance();
+    	topDistance = Robot.topShooterWheelEncoder.getDistance();
     	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
     	oldTopDistance = topDistance;
     	
-    	bottomDistance = bottomShooterWheelEncoder.getDistance();
+    	bottomDistance = Robot.bottomShooterWheelEncoder.getDistance();
     	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
     	oldBottomDistance = bottomDistance;
     	

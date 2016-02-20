@@ -24,8 +24,8 @@ public class RobotMap {
 	public static int topPivotMotor = 5;
 	public static int bottomPivotMotor = 6;
 	
-	public static int pivotEncoderA = 8;
-	public static int pivotEncoderB = 9;
+	public static int topPivotEncoderA = 8;
+	public static int topPivotEncoderB = 9;
 
 	public static int topShooterWheel = 7;
 	public static int bottomShooterWheel = 8;

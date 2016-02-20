@@ -1,5 +1,6 @@
 package org.usfirst.frc.team696.robot.subsystems;
 
+import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -23,8 +24,6 @@ public class PivotArm extends PIDSubsystem {
 	private static final double vp = 0.0;
 	private static final double vi = 0.0;
 	private static final double vk = 0.0;
-	
-	Encoder encoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
 	
 	public PivotArm() {
 		super("PivotArm", vp, vi, vk);
@@ -69,11 +68,10 @@ public class PivotArm extends PIDSubsystem {
 									
     //find distancePerPulse
 	public void setDistancePerPulse(double distancePerPulse) {
-		encoder.setDistancePerPulse(distancePerPulse);
 	}
 	
-	public double getEncoderDistance() {
-		return encoder.getDistance();
+	public double getTopEncoderDistance() {
+		return Robot.topPivotEncoder.getDistance();
 		// total distance
 	}
 }

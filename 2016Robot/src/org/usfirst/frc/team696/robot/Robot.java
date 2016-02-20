@@ -7,6 +7,7 @@ import org.usfirst.frc.team696.robot.subsystems.Chassis;
 import org.usfirst.frc.team696.robot.subsystems.PivotArm;
 import org.usfirst.frc.team696.robot.subsystems.Shifter;
 import org.usfirst.frc.team696.robot.subsystems.Shoot;
+import org.usfirst.frc.team696.robot.subsystems.Shooter;
 
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static Shifter shifter = new Shifter();
 	public static PivotArm pivotArm = new PivotArm();
 	public static Shoot shoot = new Shoot();
+	public static Shooter shooter = new Shooter();
 	
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
 	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);
@@ -44,11 +46,17 @@ public class Robot extends IterativeRobot {
 	SerialPort port;
 	public static boolean fastTurn = false;
 	
+	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
+	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
+	
+	public static Encoder topPivotEncoder = new Encoder(RobotMap.topPivotEncoderA,RobotMap.topPivotEncoderB);
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+    	topShooterWheelEncoder.setDistancePerPulse(1);
+    	bottomShooterWheelEncoder.setDistancePerPulse(1);
 		oi = new OI();
         chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
