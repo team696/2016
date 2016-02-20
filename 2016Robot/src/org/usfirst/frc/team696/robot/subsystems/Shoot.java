@@ -13,7 +13,7 @@ public class Shoot extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	Solenoid shooterPiston = new Solenoid(RobotMap.shootSolenoid);
+	Solenoid shooterPiston = new Solenoid(RobotMap.shootSolenoidChannel);
 
     public void initDefaultCommand(){
     	

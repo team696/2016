@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team696.robot;
 
-
 import org.usfirst.frc.team696.robot.commands.TeleopDrive;
 import org.usfirst.frc.team696.robot.subsystems.Chassis;
 import org.usfirst.frc.team696.robot.subsystems.PivotArm;
@@ -12,6 +11,7 @@ import org.usfirst.frc.team696.robot.subsystems.Shooter;
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -39,6 +39,7 @@ public class Robot extends IterativeRobot {
 	
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
 	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);
+	
 	public boolean shiftedHigh = false;
     Command autonomousCommand;
     SendableChooser chooser;
@@ -50,7 +51,11 @@ public class Robot extends IterativeRobot {
 	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
 	
 	public static Encoder topPivotEncoder = new Encoder(RobotMap.topPivotEncoderA,RobotMap.topPivotEncoderB);
-    /**
+    
+	
+	public static DigitalInput zeroingPivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
+
+	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
