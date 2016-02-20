@@ -66,10 +66,10 @@ public class PivotArm extends PIDSubsystem {
     public double getSpeed() {
 		return speed;
 	}
-									//find distancePerPulse
+									
+    //find distancePerPulse
 	public void setDistancePerPulse(double distancePerPulse) {
 		encoder.setDistancePerPulse(distancePerPulse);
-		//distance per pulse
 	}
 	
 	public double getEncoderDistance() {
