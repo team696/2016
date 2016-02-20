@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 //	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
 //	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
 	
-//	public static Encoder topPivotEncoder = new Encoder(RobotMap.topPivotEncoderA,RobotMap.topPivotEncoderB);
+	public static Encoder pivotEncoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
     
 	
 //	public static DigitalInput pivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
@@ -72,7 +72,6 @@ public class Robot extends IterativeRobot {
 			port = new SerialPort(57600, SerialPort.Port.kMXP);
 			navX = new IMUAdvanced(port, UpdateRateHz);
 		} catch(Exception ex){System.out.println("NavX not working");};
-
 //		navX.zeroYaw();
 //		navX.getYaw();
     }

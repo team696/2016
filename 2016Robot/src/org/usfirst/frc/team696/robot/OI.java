@@ -23,12 +23,11 @@ public class OI {
 	public OI() {
 		fastTurn.whenPressed(new FastTurn(true));
 		fastTurn.whenReleased(new FastTurn(false));
+		
 		shiftHighButton.whenPressed(new Shift(false));
 		shiftLowButton.whenPressed(new Shift(true));
-		pivotUpButton.whenPressed(new Pivot(false, 0.25));
-		pivotUpButton.whenReleased(new Pivot(false, 0));
-		pivotDownButton.whenPressed(new Pivot(false, -0.25));
-		pivotDownButton.whenReleased(new Pivot(false, 0));
+		
+		
 	}
 }
 

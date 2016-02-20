@@ -8,14 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Pivot extends Command {
-	boolean isAngle = false;
 	boolean autoUnderLift = false;
-	double value = 0;
+	double targetAngle = 0;
 	
-    public Pivot(boolean isAngle, double value) {
+    public Pivot(double value) {
     	requires(Robot.pivotArm);
-    	this.isAngle = isAngle;
-    	this.value = value;
+    	this.targetAngle = value;
     }
 
     public Pivot(boolean autoUnderLift){
@@ -25,18 +23,19 @@ public class Pivot extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(isAngle)Robot.pivotArm.togglePID(true);
-    	else Robot.pivotArm.togglePID(false);
+    	Robot.pivotArm.togglePID(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!isAngle)Robot.pivotArm.setSpeed(value);
+    	targetAngle+=2.5;
+    	Robot.pivotArm.setTargetAngle(targetAngle);
+    	System.out.println(targetAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+    	return true;
     }
 
     // Called once after isFinished returns true
