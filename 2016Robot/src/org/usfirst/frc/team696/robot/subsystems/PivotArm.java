@@ -34,14 +34,14 @@ public class PivotArm extends Subsystem {
 	private static final double kiDown = 0.0;
 	private static final double kdDown = 0.0;
 	
-	PIDController PIDTop = new PIDController(0, 0, 0, Robot.topPivotEncoder, topMotor);
-	PIDController PIDBot = new PIDController(0, 0, 0, Robot.topPivotEncoder, bottomMotor);
+//	PIDController PIDTop = new PIDController(0, 0, 0, Robot.topPivotEncoder, topMotor);
+//	PIDController PIDBot = new PIDController(0, 0, 0, Robot.topPivotEncoder, bottomMotor);
 	
 	public PivotArm() {
-		PIDTop.enable();
-		PIDBot.enable();
-		PIDTop.setPID(kpDown, kiDown, kdDown);
-		PIDBot.setPID(kpDown, kiDown, kdDown);
+//		PIDTop.enable();
+//		PIDBot.enable();
+//		PIDTop.setPID(kpDown, kiDown, kdDown);
+//		PIDBot.setPID(kpDown, kiDown, kdDown);
 	}
 	
 //	protected double returnPIDInput() {
@@ -74,13 +74,13 @@ public class PivotArm extends Subsystem {
     }
     
     public void togglePID(boolean usePID){
-    	if(usePID){
-    		PIDTop.enable();
-    		PIDBot.enable();
-    	} else {
-    		PIDTop.disable();
-    		PIDTop.disable();
-    	}
+//    	if(usePID){
+//    		PIDTop.enable();
+//    		PIDBot.enable();
+//    	} else {
+//    		PIDTop.disable();
+//    		PIDTop.disable();
+//    	}
     }
     
     /**
@@ -89,14 +89,14 @@ public class PivotArm extends Subsystem {
      */
     public void setTargetAngle(double targetAngle){
     	this.targetAngle = targetAngle;
-    	error = this.targetAngle - Robot.topPivotEncoder.getDistance();
-    	if(error < 0){
-    		PIDTop.setPID(kpUp, kiUp, kdUp);
-    		PIDBot.setPID(kpUp, kiUp, kdUp);
-    	}else {
-    		PIDTop.setPID(kpDown, kiDown, kdDown);
-    		PIDBot.setPID(kpDown, kiDown, kdDown);
-    	}
+//    	error = this.targetAngle - Robot.topPivotEncoder.getDistance();
+//    	if(error < 0){
+//    		PIDTop.setPID(kpUp, kiUp, kdUp);
+//    		PIDBot.setPID(kpUp, kiUp, kdUp);
+//    	}else {
+//    		PIDTop.setPID(kpDown, kiDown, kdDown);
+//    		PIDBot.setPID(kpDown, kiDown, kdDown);
+//    	}
     	
     }
     
@@ -106,11 +106,12 @@ public class PivotArm extends Subsystem {
 									
     //find distancePerPulse
 	public void setDistancePerPulse(double distancePerPulse) {
-		Robot.topPivotEncoder.setDistancePerPulse(distancePerPulse);
+//		Robot.topPivotEncoder.setDistancePerPulse(distancePerPulse);
 	}
 	
 	public double getTopEncoderDistance() {
-		return Robot.topPivotEncoder.getDistance();
+//		return Robot.topPivotEncoder.getDistance();
+		return 0;
 		// total distance
 	}
 }

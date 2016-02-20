@@ -27,12 +27,12 @@ public class zeroPivot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	limitTrigger = Robot.zeroingPivotSwitch.get();
+//    	limitTrigger = Robot.pivotSwitch.get();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	limitTrigger = Robot.zeroingPivotSwitch.get();
+//    	limitTrigger = Robot.pivotSwitch.get();
     	if (limitTrigger == true) {
     		Robot.pivotArm.setSpeed(0.0);
     		isFinished();

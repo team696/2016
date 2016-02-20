@@ -47,21 +47,21 @@ public class Robot extends IterativeRobot {
 	SerialPort port;
 	public static boolean fastTurn = false;
 	
-	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
-	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
+//	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
+//	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
 	
-	public static Encoder topPivotEncoder = new Encoder(RobotMap.topPivotEncoderA,RobotMap.topPivotEncoderB);
+//	public static Encoder topPivotEncoder = new Encoder(RobotMap.topPivotEncoderA,RobotMap.topPivotEncoderB);
     
 	
-	public static DigitalInput zeroingPivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
+//	public static DigitalInput pivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
 
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	topShooterWheelEncoder.setDistancePerPulse(1);
-    	bottomShooterWheelEncoder.setDistancePerPulse(1);
+//    	topShooterWheelEncoder.setDistancePerPulse(1);
+//    	bottomShooterWheelEncoder.setDistancePerPulse(1);
 		oi = new OI();
         chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new ExampleCommand());

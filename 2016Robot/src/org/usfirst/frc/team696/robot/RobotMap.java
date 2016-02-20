@@ -12,28 +12,27 @@ public class RobotMap {
 	public static int frontRightMotor = 8;
 	public static int rearRightMotor = 9;
 	
+	public static int topPivotMotor = 5;
+	public static int bottomPivotMotor = 6;
+	
+	public static int topShooterMotor = 10;
+	public static int bottomShooterMotor = 11;
+	
 	public static int encoderLeftA = 0;
 	public static int encoderLeftB = 1;
 	public static int encoderRightA = 2;
 	public static int encoderRightB = 3;
-	
-	public static int shifterSolenoid = 7;
-	
-	public static int topPivotMotor = 5;
-	public static int bottomPivotMotor = 6;
-	
-	public static int topPivotEncoderA = 8;
-	public static int topPivotEncoderB = 9;
 
-	public static int topShooterWheelChannel = 7;
-	public static int bottomShooterWheelChannel = 8;
-	
-	public static int shootSolenoidChannel = 6;
-	
 	public static int topShooterWheelEncoderA = 4;
 	public static int topShooterWheelEncoderB = 5;
 	public static int bottomShooterWheelEncoderA = 6;
 	public static int bottomShooterWheelEncoderB = 7;
+	
+	public static int topPivotEncoderA = 8;
+	public static int topPivotEncoderB = 9;
+	
+	public static int shootSolenoidChannel = 6;
+	public static int shifterSolenoid = 7;
 
 	public static int pivotSwitchChannel = 1;
     // For example to map the left and right motors, you could define the

@@ -21,8 +21,8 @@ public class Shooter extends Subsystem {
 	TakeBackHalf topTBH = new TakeBackHalf(5000);
 	TakeBackHalf bottomTBH = new TakeBackHalf(5000);
 	
-	Victor topShooterWheel = new Victor(RobotMap.topShooterWheelChannel);
-	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterWheelChannel);
+	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
+	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
 	
 	double speedTop = 0;
 	double speedBottom = 0;
@@ -52,17 +52,17 @@ public class Shooter extends Subsystem {
 	}
     
     public void run(){
-    	time = timer.get();
-    	
-    	topDistance = Robot.topShooterWheelEncoder.getDistance();
-    	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
-    	oldTopDistance = topDistance;
-    	
-    	bottomDistance = Robot.bottomShooterWheelEncoder.getDistance();
-    	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
-    	oldBottomDistance = bottomDistance;
-    	
-    	oldTime = time;
+//    	time = timer.get();
+//    	
+//    	topDistance = Robot.topShooterWheelEncoder.getDistance();
+//    	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
+//    	oldTopDistance = topDistance;
+//    	
+//    	bottomDistance = Robot.bottomShooterWheelEncoder.getDistance();
+//    	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
+//    	oldBottomDistance = bottomDistance;
+//    	
+//    	oldTime = time;
     }
 }
 

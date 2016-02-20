@@ -17,8 +17,13 @@ public class TeleopDrive extends Command {
 	double rightSpeed = 0;
 	double goalAngle;
 	double currentAngle;
-	double kP = 0.0115;
+	double kP = 0.0105;
+	double kI = 0.0017;
+	double cumulativeError = 0;
+	double alpha = 0.95;
 	double delta = 0;
+	double oldDelta = 0;
+	double PIDSum = 0;
 	boolean fastTurn = false;
 	
     public TeleopDrive() {
@@ -44,6 +49,8 @@ public class TeleopDrive extends Command {
     	leftSpeed = speed;
     	rightSpeed = speed;
 
+
+    	
     	goalAngle+=(turnValue*1.5);
     	currentAngle = Robot.navX.getYaw();
     	
@@ -54,11 +61,17 @@ public class TeleopDrive extends Command {
     	if(delta > 180)delta = delta - 360;
     	if(delta < -180)delta = 360 + delta;
     	
+    	if(Util.signOf(delta) != Util.signOf(oldDelta))cumulativeError = 0;
+    	
+    	cumulativeError *= alpha;
+    	cumulativeError += delta;
+    	
 //    	goalAngle+=(turnValue*1.5);
 //    	currentAngle = Robot.navX.getYaw();
-
-    	leftSpeed+=(delta) * kP;
-    	rightSpeed-=(delta) * kP;
+        PIDSum = delta * kP + cumulativeError * kI;
+        
+    	leftSpeed+=PIDSum;
+    	rightSpeed-=PIDSum;
     	
     	if(Math.abs(leftSpeed)>1)rightSpeed-=(Math.abs(leftSpeed)-1) * Util.signOf(leftSpeed);
     	if(Math.abs(rightSpeed)>1)leftSpeed-=(Math.abs(rightSpeed)-1) * Util.signOf(rightSpeed);
@@ -67,6 +80,8 @@ public class TeleopDrive extends Command {
     	rightSpeed = Util.constrain(rightSpeed, -1, 1);
     	
     	System.out.println("delta:" + delta + "  speed:" + speed + "   tv:" + turnValue + "   l:" + leftSpeed + "   r:" + rightSpeed + "   ga:" + goalAngle + "   a:" + Robot.navX.getYaw());
+    	
+    	oldDelta = delta;
     	
     	//    	turnValue = Util.map(turnValue, -0.75, 0.63, -1, 1);
 ////    	System.out.println(speed + "   " + turnValue + "   " + fastTurn);
