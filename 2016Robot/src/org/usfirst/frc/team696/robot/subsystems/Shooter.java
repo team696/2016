@@ -21,8 +21,8 @@ public class Shooter extends Subsystem {
 	TakeBackHalf topTBH = new TakeBackHalf(5000);
 	TakeBackHalf bottomTBH = new TakeBackHalf(5000);
 	
-	Victor topShooterWheel = new Victor(RobotMap.topShooterWheel);
-	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterWheel);
+	Victor topShooterWheel = new Victor(RobotMap.topShooterWheelChannel);
+	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterWheelChannel);
 	
 	double speedTop = 0;
 	double speedBottom = 0;

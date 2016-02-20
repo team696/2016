@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.*;
+
 import org.usfirst.frc.team696.robot.subsystems.PivotArm;
 
 /**
@@ -13,10 +13,7 @@ import org.usfirst.frc.team696.robot.subsystems.PivotArm;
 **/
 
 public class zeroPivot extends Command {
-	
-	DigitalInput zeroingLimitSwitch = new DigitalInput(RobotMap.pivotLimSwitch);
-	Timer time = new Timer();
-	
+
 	boolean limitTrigger = false;
 	boolean zeroing = false;
 	
@@ -30,13 +27,12 @@ public class zeroPivot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	limitTrigger = zeroingLimitSwitch.get();
-    	Robot.pivotArm.usePID = false;
+    	limitTrigger = Robot.zeroingPivotSwitch.get();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	limitTrigger = zeroingLimitSwitch.get();
+    	limitTrigger = Robot.zeroingPivotSwitch.get();
     	if (limitTrigger == true) {
     		Robot.pivotArm.setSpeed(0.0);
     		isFinished();

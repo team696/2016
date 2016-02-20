@@ -21,7 +21,7 @@ public class Shooter extends Command {
     
     public Shooter(double RPM){
     	requires(Robot.shooter);
-    	topRPM = RPM;
+    	topRPM = RPM; 
     	bottomRPM = RPM;
     }
 
