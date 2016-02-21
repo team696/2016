@@ -18,9 +18,9 @@ public class TeleopDrive extends Command {
 	double goalAngle;
 	double currentAngle;
 	double kP = 0.0105;
-	double kI = 0.0017;
+	double kI = 0.0006;
 	double cumulativeError = 0;
-	double alpha = 0.95;
+	double alpha = 0.5;
 	double delta = 0;
 	double oldDelta = 0;
 	double PIDSum = 0;
