@@ -16,7 +16,7 @@ public class RobotMap {
 	public static int bottomPivotMotor = 6;
 	
 //	public static int topShooterMotor = 2;
-//	public static int bottomShooterMotor = 3;
+//	public static int bottomShooterMotor = 3; //7 in real robot
 	
 	public static int encoderLeftA = 0;
 	public static int encoderLeftB = 1;

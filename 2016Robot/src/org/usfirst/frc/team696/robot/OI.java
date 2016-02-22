@@ -19,6 +19,7 @@ public class OI {
 	Button shiftLowButton = new JoystickButton(controlBoard, 8);
 	Button pivotUpButton = new JoystickButton(controlBoard, 10);
 	Button pivotDownButton = new JoystickButton(controlBoard, 11);
+	Button pivotWOMoveButton = new JoystickButton(controlBoard, 12);
 	
 	public OI() {
 		fastTurn.whenPressed(new FastTurn(true));
@@ -27,7 +28,10 @@ public class OI {
 		shiftHighButton.whenPressed(new Shift(false));
 		shiftLowButton.whenPressed(new Shift(true));
 		
-		
+		pivotUpButton.whenPressed(new Pivot(true, 2.5));
+		pivotDownButton.whenPressed(new Pivot(true, -2.5));
+		pivotUpButton.whenInactive(new Pivot(true, 0));
+		pivotDownButton.whenInactive(new Pivot(true, 0));
 	}
 }
 

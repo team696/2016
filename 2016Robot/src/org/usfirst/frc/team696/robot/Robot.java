@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team696.robot;
 
+import org.usfirst.frc.team696.robot.commands.RunningPivot;
 import org.usfirst.frc.team696.robot.commands.TeleopDrive;
 import org.usfirst.frc.team696.robot.subsystems.Chassis;
 import org.usfirst.frc.team696.robot.subsystems.PivotArm;
@@ -51,8 +52,7 @@ public class Robot extends IterativeRobot {
 //	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
 	
 	public static Encoder pivotEncoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
-    
-	
+	public static double targetAngle = 0;
 //	public static DigitalInput pivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
 
 	/**
@@ -125,6 +125,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
     	Scheduler.getInstance().add(new TeleopDrive());
+    	Scheduler.getInstance().add(new RunningPivot());
     	System.out.println("Teleop Init");
     	if (autonomousCommand != null) autonomousCommand.cancel();
     }

@@ -7,36 +7,26 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Pivot extends Command {
-	boolean incremental = true;
-	boolean autoUnderLift = false;
-	double incrementValue = 0;
-	double targetAngle = 0;
-	
-    public Pivot(boolean incremental, double value) {
+public class RunningPivot extends Command {
+
+    public RunningPivot() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     	requires(Robot.pivotArm);
-    	if(!incremental)this.targetAngle = value;
-    	else incrementValue = value;
-    	this.incremental = incremental;
     }
 
-    public Pivot(boolean autoUnderLift){
-    	this.autoUnderLift = autoUnderLift;
-    }
-    
     // Called just before this Command runs the first time
     protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!incremental)Robot.targetAngle+=incrementValue;
-    	if(incremental)Robot.targetAngle = targetAngle;
+    	Robot.pivotArm.setTargetAngle(Robot.targetAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+        return false;
     }
 
     // Called once after isFinished returns true

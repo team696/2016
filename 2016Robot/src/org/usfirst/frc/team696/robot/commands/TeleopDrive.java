@@ -18,9 +18,11 @@ public class TeleopDrive extends Command {
 	double goalAngle;
 	double currentAngle;
 	double kP = 0.0105;
-	double kI = 0.0006;
+	double kI = 0.0002;
+	double kD = 0.0003;
 	double cumulativeError = 0;
-	double alpha = 0.5;
+	double derivativeError = 0;
+	double alpha = 0.95;
 	double delta = 0;
 	double oldDelta = 0;
 	double PIDSum = 0;
@@ -66,9 +68,11 @@ public class TeleopDrive extends Command {
     	cumulativeError *= alpha;
     	cumulativeError += delta;
     	
+    	derivativeError = delta - oldDelta;
+    	oldDelta = delta;
 //    	goalAngle+=(turnValue*1.5);
 //    	currentAngle = Robot.navX.getYaw();
-        PIDSum = delta * kP + cumulativeError * kI;
+        PIDSum = delta * kP + cumulativeError * kI + derivativeError * kD;
         
     	leftSpeed+=PIDSum;
     	rightSpeed-=PIDSum;
@@ -78,8 +82,6 @@ public class TeleopDrive extends Command {
 
     	leftSpeed = Util.constrain(leftSpeed, -1, 1);
     	rightSpeed = Util.constrain(rightSpeed, -1, 1);
-    	
-    	System.out.println("delta:" + delta + "  speed:" + speed + "   tv:" + turnValue + "   l:" + leftSpeed + "   r:" + rightSpeed + "   ga:" + goalAngle + "   a:" + Robot.navX.getYaw());
     	
     	oldDelta = delta;
     	

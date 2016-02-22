@@ -29,11 +29,11 @@ public class PivotArm extends Subsystem {
 	double cumulativeError = 0;
 	double alpha = 0;
 	
-	private static final double kpUp = 0.01;
+	private static final double kpUp = 0.001;
 	private static final double kiUp = 0.0;
 	private static final double kdUp = 0.0;
 	
-	private static final double kpDown = 0.0;
+	private static final double kpDown = 0.0001;
 	private static final double kiDown = 0.0;
 	private static final double kdDown = 0.0;
 	
@@ -67,13 +67,7 @@ public class PivotArm extends Subsystem {
     	this.speed = speed;
     }
     
-    public void togglePID(boolean usePID){
-    	if(usePID){
-//    		PID.enable();
-    	} else {
-//    		PID.disable();
-    	}
-    }
+    public void togglePID(boolean usePID){}
     
     /**
      * 
@@ -81,14 +75,16 @@ public class PivotArm extends Subsystem {
      */
     public void setTargetAngle(double targetAngle){
     	this.targetAngle = targetAngle;
-    	error = this.targetAngle - 0/*Robot.pivotEncoder.getDistance()*/;
-    	if(error < 0)setUp();
+    	error = this.targetAngle - Robot.pivotEncoder.get();
+    	if(error > 0)setUp();
     	else setDown();
     	cumulativeError *= alpha;
     	cumulativeError += error;
     	PIDSum = (error * kp) + (cumulativeError * ki);
     	PIDSum = Util.constrain(PIDSum, -1, 1);
-    	speed = PIDSum;
+    	speed = -PIDSum;
+    	run();
+    	System.out.println("ta" + targetAngle + "   e:" + error + "   ce:" + cumulativeError + "    s:" + speed);
     }
 
     public void run(){
