@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 /**
  *
  */
-public class telescopingArmSystem extends Subsystem {
+public class TelescopingArmSystem extends Subsystem {
   
 	static double climbSpeed = 0.0;
     Victor telLeft = new Victor(RobotMap.telescopingMotorLeft);
