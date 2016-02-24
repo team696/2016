@@ -6,7 +6,7 @@ import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
 
 
-import org.usfirst.frc.team696.robot.subsystems.PivotArm;
+import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
 
 /**
  *
@@ -15,7 +15,7 @@ import org.usfirst.frc.team696.robot.subsystems.PivotArm;
 public class zeroPivot extends Command {
 
 	boolean limitTrigger = false;
-	boolean zeroing = false;
+	boolean zeroing = true;
 	
 	double zeroingSpeed = 0.0;
 	// Set this to a safe negative speed to reverse the direction of the motor
@@ -32,22 +32,18 @@ public class zeroPivot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	limitTrigger = Robot.pivotSwitch.get();
-    	if (limitTrigger == true) {
-    		Robot.pivotArm.setSpeed(0.0);
-    		isFinished();
-    	} else {
-    		Robot.pivotArm.setSpeed(zeroingSpeed);
-    		zeroing = true;
+    	limitTrigger = Robot.pivotSwitch.get();
+    	zeroing = true;
+    	if (!limitTrigger) Robot.pivotArm.setSpeed(zeroingSpeed);
+    	else {
+    		Robot.pivotArm.setSpeed(0);
+    		zeroing = false;
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (limitTrigger == true) {
-        	zeroing = false;
-        	return true;
-        } else return false;
+       return !zeroing;
     }
 
     // Called once after isFinished returns true

@@ -3,11 +3,11 @@ package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.commands.RunningPivot;
 import org.usfirst.frc.team696.robot.commands.TeleopDrive;
-import org.usfirst.frc.team696.robot.subsystems.Chassis;
-import org.usfirst.frc.team696.robot.subsystems.PivotArm;
-import org.usfirst.frc.team696.robot.subsystems.Shifter;
-import org.usfirst.frc.team696.robot.subsystems.Shoot;
-import org.usfirst.frc.team696.robot.subsystems.Shooter;
+import org.usfirst.frc.team696.robot.subsystems.ChassisSystem;
+import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
+import org.usfirst.frc.team696.robot.subsystems.ShifterSystem;
+import org.usfirst.frc.team696.robot.subsystems.ShootSystem;
+import org.usfirst.frc.team696.robot.subsystems.ShooterSystem;
 
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
@@ -32,11 +32,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	public static Chassis chassis= new Chassis();
-	public static Shifter shifter = new Shifter();
-	public static PivotArm pivotArm = new PivotArm();
-	public static Shoot shoot = new Shoot();
-	public static Shooter shooter = new Shooter();
+	public static ChassisSystem chassis= new ChassisSystem();
+	public static ShifterSystem shifter = new ShifterSystem();
+	public static PivotArmSystem pivotArm = new PivotArmSystem();
+	public static ShootSystem shoot = new ShootSystem();
+	public static ShooterSystem shooter = new ShooterSystem();
 	
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
 	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);
@@ -48,12 +48,15 @@ public class Robot extends IterativeRobot {
 	SerialPort port;
 	public static boolean fastTurn = false;
 	
-//	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
-//	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
+	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
+	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
 	
 	public static Encoder pivotEncoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
 	public static double targetAngle = 0;
-//	public static DigitalInput pivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
+	public static double topShooterRPM = 0;
+	public static double botShooterRPM = 0;
+	
+	public static DigitalInput pivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
 
 	/**
      * This function is run when the robot is first started up and should be

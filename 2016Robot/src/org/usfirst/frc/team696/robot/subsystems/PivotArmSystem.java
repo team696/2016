@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class PivotArm extends Subsystem {
+public class PivotArmSystem extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -43,7 +43,7 @@ public class PivotArm extends Subsystem {
 	private static double ki = 0.0;
 	private static double kd = 0.0;
 	
-	public PivotArm() {
+	public PivotArmSystem() {
 //		PID.enable();
 //		PID.setPID(kp, ki, kd);
 	}

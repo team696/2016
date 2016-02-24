@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Shoot extends Subsystem {
+public class ShootSystem extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

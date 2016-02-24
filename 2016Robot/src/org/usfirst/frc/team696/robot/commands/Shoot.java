@@ -6,9 +6,9 @@ import org.usfirst.frc.team696.robot.Robot;
 /**
  *
  */
-public class Fire extends Command {
+public class Shoot extends Command {
 
-    public Fire() {
+    public Shoot() {
     	requires(Robot.shoot);
     }
 

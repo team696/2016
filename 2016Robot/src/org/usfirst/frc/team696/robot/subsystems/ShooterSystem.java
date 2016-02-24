@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Shooter extends Subsystem {
+public class ShooterSystem extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -21,8 +21,8 @@ public class Shooter extends Subsystem {
 	TakeBackHalf topTBH = new TakeBackHalf(5000);
 	TakeBackHalf bottomTBH = new TakeBackHalf(5000);
 	
-//	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
-//	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
+	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
+	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
 	
 	double speedTop = 0;
 	double speedBottom = 0;
@@ -45,24 +45,24 @@ public class Shooter extends Subsystem {
     	
     }
     
-    public void setTargetRPM(double topTargetRPM, double bottomTargetRPM) {
-    	this.topTargetRPM = topTargetRPM;
-    	this.bottomTargetRPM = bottomTargetRPM;
-    	
-	}
-    
     public void run(){
-//    	time = timer.get();
-//    	
-//    	topDistance = Robot.topShooterWheelEncoder.getDistance();
-//    	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
-//    	oldTopDistance = topDistance;
-//    	
-//    	bottomDistance = Robot.bottomShooterWheelEncoder.getDistance();
-//    	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
-//    	oldBottomDistance = bottomDistance;
-//    	
-//    	oldTime = time;
+    	topTargetRPM = Robot.topShooterRPM;
+    	bottomTargetRPM = Robot.botShooterRPM;
+    	
+    	time = timer.get();
+    	
+    	topDistance = Robot.topShooterWheelEncoder.getDistance();
+    	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
+    	oldTopDistance = topDistance;
+    	
+    	bottomDistance = Robot.bottomShooterWheelEncoder.getDistance();
+    	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
+    	oldBottomDistance = bottomDistance;
+    	
+    	oldTime = time;
+    	
+    	topShooterWheel.set(topTBH.getMotorPower());
+    	bottomShooterWheel.set(bottomTBH.getMotorPower());
     }
 }
 
