@@ -32,7 +32,7 @@ public class zeroPivot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	limitTrigger = Robot.pivotSwitch.get();
+//    	limitTrigger = Robot.pivotSwitch.get();
     	zeroing = true;
     	if (!limitTrigger) Robot.pivotArm.setSpeed(zeroingSpeed);
     	else {

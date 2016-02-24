@@ -18,7 +18,7 @@ public class Pivot extends Command {
     	if(!incremental)this.targetAngle = value;
     	else incrementValue = value;
     	this.incremental = incremental;
-    }
+    } 
 
     public Pivot(boolean autoUnderLift){
     	this.autoUnderLift = autoUnderLift;

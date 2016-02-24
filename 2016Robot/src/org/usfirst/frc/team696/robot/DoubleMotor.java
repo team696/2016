@@ -9,9 +9,7 @@ public class DoubleMotor implements PIDOutput {
 	
 	public DoubleMotor(int motorAChannel, int motorBChannel){
 		motorA = new Victor(motorAChannel);
-		System.out.println("assigne motor a");
 		motorB = new Victor(motorBChannel);
-		System.out.println("assigned motor b");
 	}
 	
 	public void set(double speed){

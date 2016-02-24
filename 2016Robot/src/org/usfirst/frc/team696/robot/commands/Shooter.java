@@ -14,13 +14,13 @@ public class Shooter extends Command {
 	
     public Shooter(double topRPM, double bottomRPM) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.shooter);
+//        requires(Robot.shooter);
         this.topRPM = topRPM;
         this.bottomRPM = bottomRPM;
     }
     
     public Shooter(double RPM){
-    	requires(Robot.shooter);
+//    	requires(Robot.shooter);
     	topRPM = RPM; 
     	bottomRPM = RPM;
     }
@@ -33,6 +33,7 @@ public class Shooter extends Command {
     protected void execute() {
     	Robot.topShooterRPM = topRPM;
     	Robot.botShooterRPM = bottomRPM;
+    	Robot.shooter.run();
     }
 
     // Make this return true when this Command no longer needs to run execute()

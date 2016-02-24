@@ -3,6 +3,8 @@ package org.usfirst.frc.team696.robot;
 import org.usfirst.frc.team696.robot.commands.FastTurn;
 import org.usfirst.frc.team696.robot.commands.Pivot;
 import org.usfirst.frc.team696.robot.commands.Shift;
+import org.usfirst.frc.team696.robot.commands.Shoot;
+import org.usfirst.frc.team696.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -19,7 +21,10 @@ public class OI {
 	Button shiftLowButton = new JoystickButton(controlBoard, 8);
 	Button pivotUpButton = new JoystickButton(controlBoard, 10);
 	Button pivotDownButton = new JoystickButton(controlBoard, 11);
-	Button pivotWOMoveButton = new JoystickButton(controlBoard, 12);
+	Button shootButton = new JoystickButton(controlBoard, 6);
+	Button shootingSpeedButton = new JoystickButton(controlBoard, 12);
+	Button intakeSpeedButton = new JoystickButton(controlBoard, 13);
+	Button stopWheelButton = new JoystickButton(controlBoard, 5);
 	
 	public OI() {
 		fastTurn.whenPressed(new FastTurn(true));
@@ -32,6 +37,11 @@ public class OI {
 		pivotDownButton.whenPressed(new Pivot(true, -2.5));
 		pivotUpButton.whenInactive(new Pivot(true, 0));
 		pivotDownButton.whenInactive(new Pivot(true, 0));
+		
+		shootButton.whenPressed(new Shoot());
+		shootingSpeedButton.whenPressed(new Shooter(4000));
+		intakeSpeedButton.whenPressed(new Shooter(-1500));
+		stopWheelButton.whenActive(new Shooter(0));
 	}
 }
 

@@ -146,9 +146,11 @@ public class Util {
     public static double findVelocity(double time, double oldTime, double distance, double oldDistance){
     	double t = time - oldTime;
     	double dX = distance - oldDistance;
-    	double v;
-    	t = t * (60/t);
-    	v = dX/t;
+    	double v = 0;
+    	if(t != 0){
+    		t = t * (60/t);
+    		v = dX/t;
+    	}
     	return v;
     }
 }

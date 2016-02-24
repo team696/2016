@@ -39,6 +39,11 @@ public class ShooterSystem extends Subsystem {
 	
 	Timer timer = new Timer();
 	
+	public ShooterSystem(){
+		topShooterWheel.setInverted(true);
+		
+	}
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -46,18 +51,27 @@ public class ShooterSystem extends Subsystem {
     }
     
     public void run(){
+    	System.out.print("RUN");
     	topTargetRPM = Robot.topShooterRPM;
     	bottomTargetRPM = Robot.botShooterRPM;
+
+    	topTBH.setTargetRPM(topTargetRPM);
+    	bottomTBH.setTargetRPM(bottomTargetRPM);
     	
+    	System.out.println("   " + topTargetRPM + "   " + bottomTargetRPM);
     	time = timer.get();
     	
-    	topDistance = Robot.topShooterWheelEncoder.getDistance();
+    	topDistance = Robot.topShooterWheelEncoder.get();
     	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
+    	topTBH.setCurrentRPM(currentTopRPM);
     	oldTopDistance = topDistance;
     	
-    	bottomDistance = Robot.bottomShooterWheelEncoder.getDistance();
+    	bottomDistance = Robot.bottomShooterWheelEncoder.get();
     	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
+    	bottomTBH.setCurrentRPM(currentBottomRPM);
     	oldBottomDistance = bottomDistance;
+    	
+    	System.out.println("current" + currentTopRPM + "   " + currentBottomRPM);
     	
     	oldTime = time;
     	

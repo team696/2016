@@ -52,7 +52,6 @@ public class TakeBackHalf {
         motorPower = constrain(motorPower, 1, -1);
         if(isPositive(oldError) != isPositive(error)){
             motorPower = 0.5* (motorPower + tbh);
-            
             oldError =  error;
         }
     }

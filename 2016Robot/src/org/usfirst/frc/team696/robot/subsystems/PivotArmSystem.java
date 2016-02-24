@@ -88,7 +88,6 @@ public class PivotArmSystem extends Subsystem {
     	if(Util.signOf(speed) > 0)pivotRatchetSol.set(true);
     	else pivotRatchetSol.set(false);
     	run();
-    	System.out.println("ta" + targetAngle + "   e:" + error + "   ce:" + cumulativeError + "    s:" + speed);
     }
 
     public void run(){
