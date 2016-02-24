@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -21,6 +22,7 @@ public class PivotArm extends Subsystem {
     // here. Call these from Commands.
 	
 	DoubleMotor pivotMotors= new DoubleMotor(RobotMap.topPivotMotor, RobotMap.bottomPivotMotor);;
+	Solenoid pivotRatchetSol = new Solenoid(RobotMap.pivotRathcetSolChannel);
 	
 	double speed = 0.0;
 	double targetAngle = 0;
@@ -83,6 +85,8 @@ public class PivotArm extends Subsystem {
     	PIDSum = (error * kp) + (cumulativeError * ki);
     	PIDSum = Util.constrain(PIDSum, -1, 1);
     	speed = -PIDSum;
+    	if(Util.signOf(speed) > 0)pivotRatchetSol.set(true);
+    	else pivotRatchetSol.set(false);
     	run();
     	System.out.println("ta" + targetAngle + "   e:" + error + "   ce:" + cumulativeError + "    s:" + speed);
     }
