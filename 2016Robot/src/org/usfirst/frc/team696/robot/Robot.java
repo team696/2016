@@ -54,6 +54,8 @@ public class Robot extends IterativeRobot {
 	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
 	
 	public static Encoder pivotEncoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
+	public static Encoder telescopingEncoder = new Encoder(RobotMap.telescopingArmEncoderA, RobotMap.telescopingArmEncoderB);
+	
 	public static double targetAngle = 0;
 	public static double topShooterRPM = 0;
 	public static double botShooterRPM = 0;

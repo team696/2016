@@ -17,6 +17,10 @@ public class TelescopingArmSystem extends Subsystem {
 	protected double kD = 0.0;
 	protected double alpha = 0.0;
 	
+	//hardStop is the max distance that the arms should go
+	public double hardStop = 0;
+	public boolean stop = false;
+	
     Victor telLeft = new Victor(RobotMap.telescopingMotorLeft);
     Victor telRight = new Victor(RobotMap.telescopingMotorRight);
     Solenoid telescopingRatchet = new Solenoid(RobotMap.telescopingSolenoid);
@@ -25,7 +29,7 @@ public class TelescopingArmSystem extends Subsystem {
     
     public void deploy() {
     	if (telescopingSpeed.getValue() > 0) telescopingRatchet.set(true);
-    	else telescopingRatchet.set(false);
+    		else telescopingRatchet.set(false);
     	telLeft.set(telescopingSpeed.getValue());
     	telRight.set(telescopingSpeed.getValue());
     }
