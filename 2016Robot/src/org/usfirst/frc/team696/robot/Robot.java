@@ -8,6 +8,7 @@ import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShifterSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShootSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShooterSystem;
+import org.usfirst.frc.team696.robot.subsystems.TelescopingArmSystem;
 
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
@@ -37,6 +38,7 @@ public class Robot extends IterativeRobot {
 	public static PivotArmSystem pivotArm = new PivotArmSystem();
 	public static ShootSystem shoot = new ShootSystem();
 	public static ShooterSystem shooter = new ShooterSystem();
+	public static TelescopingArmSystem telescopes = new TelescopingArmSystem();
 	
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
 	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);

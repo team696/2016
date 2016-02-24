@@ -22,7 +22,7 @@ public class PivotArmSystem extends Subsystem {
     // here. Call these from Commands.
 	
 	DoubleMotor pivotMotors= new DoubleMotor(RobotMap.topPivotMotor, RobotMap.bottomPivotMotor);;
-	Solenoid pivotRatchetSol = new Solenoid(RobotMap.pivotRathcetSolChannel);
+	Solenoid pivotRatchetSol = new Solenoid(RobotMap.pivotRatchetSolChannel);
 	
 	double speed = 0.0;
 	double targetAngle = 0;

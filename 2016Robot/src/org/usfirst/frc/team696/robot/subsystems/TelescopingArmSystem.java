@@ -11,17 +11,18 @@ import edu.wpi.first.wpilibj.Solenoid;
  *
  */
 public class TelescopingArmSystem extends Subsystem {
-  
-	static double climbSpeed = 0.0;
+	
     Victor telLeft = new Victor(RobotMap.telescopingMotorLeft);
     Victor telRight = new Victor(RobotMap.telescopingMotorRight);
     Solenoid telescopingRatchet = new Solenoid(RobotMap.telescopingSolenoid);
     
-    public void climb(boolean forward) {
-    	if (forward) {
-    		telLeft.set(climbSpeed);
-    		telRight.set(climbSpeed);
-    	}
+    PID telescopingSpeed = new PID(0,0,0,0);
+    
+    public void deploy() {
+    	if (telescopingSpeed.getValue() > 0) telescopingRatchet.set(true);
+    	else telescopingRatchet.set(false);
+    	telLeft.set(telescopingSpeed.getValue());
+    	telRight.set(telescopingSpeed.getValue());
     }
     
     public void initDefaultCommand() {
