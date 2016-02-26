@@ -41,7 +41,7 @@ public class ShooterSystem extends Subsystem {
 	
 	public ShooterSystem(){
 		topShooterWheel.setInverted(true);
-		
+		timer.start();
 	}
 	
     public void initDefaultCommand() {
