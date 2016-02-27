@@ -38,11 +38,10 @@ public class RobotMap {
 	public static int telescopingArmEncoderB = 11;
 	
 	public static int pivotRatchetSolChannel = 4;
-	
+	public static int winchSolenoid = 5;
+
 	public static int shootSolenoidChannel = 6;
 	public static int shifterSolenoidChannel = 7;
-	
-	public static int winchSolenoid = 5;
 	
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
