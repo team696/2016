@@ -18,8 +18,8 @@ public class ShooterSystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	TakeBackHalf topTBH = new TakeBackHalf(5000);
-	TakeBackHalf bottomTBH = new TakeBackHalf(5000);
+	TakeBackHalf topTBH = new TakeBackHalf(4000);
+	TakeBackHalf bottomTBH = new TakeBackHalf(4000);
 	
 	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
 	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
@@ -51,27 +51,28 @@ public class ShooterSystem extends Subsystem {
     }
     
     public void run(){
-    	System.out.print("RUN");
+//    	System.out.print("RUN     ");
     	topTargetRPM = Robot.topShooterRPM;
     	bottomTargetRPM = Robot.botShooterRPM;
 
     	topTBH.setTargetRPM(topTargetRPM);
     	bottomTBH.setTargetRPM(bottomTargetRPM);
     	
-    	System.out.println("   " + topTargetRPM + "   " + bottomTargetRPM);
     	time = timer.get();
     	
     	topDistance = Robot.topShooterWheelEncoder.get();
     	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
     	topTBH.setCurrentRPM(currentTopRPM);
+    	topTBH.run();
     	oldTopDistance = topDistance;
     	
     	bottomDistance = Robot.bottomShooterWheelEncoder.get();
     	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
     	bottomTBH.setCurrentRPM(currentBottomRPM);
+    	bottomTBH.run();
     	oldBottomDistance = bottomDistance;
-    	
-    	System.out.println("current" + currentTopRPM + "   " + currentBottomRPM);
+
+    	System.out.println("            current " + currentTopRPM + "   " + currentBottomRPM);
     	
     	oldTime = time;
     	

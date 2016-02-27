@@ -13,7 +13,6 @@ public class DoubleMotor implements PIDOutput {
 	}
 	
 	public void set(double speed){
-		System.out.println("Setting Speed");
 		motorA.set(speed);
 		motorB.set(speed);
 	}
@@ -21,7 +20,6 @@ public class DoubleMotor implements PIDOutput {
 	@Override
 	public void pidWrite(double output) {
 		// TODO Auto-generated method stub
-		System.out.println("Setting output");
 		set(output);
 	}
 	

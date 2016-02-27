@@ -148,9 +148,12 @@ public class Util {
     	double dX = distance - oldDistance;
     	double v = 0;
     	if(t != 0){
-    		t = t * (60/t);
+//    		t = t * (t);
     		v = dX/t;
     	}
+    	v /= 3;//counts per rotation of encoder
+    	v *= (12.0/45.0);//gearing ratio
+    	v *= 60;
     	return v;
     }
 }

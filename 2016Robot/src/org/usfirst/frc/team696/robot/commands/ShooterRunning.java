@@ -7,22 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Shooter extends Command {
+public class ShooterRunning extends Command {
 
-	double topRPM = 0;
-	double bottomRPM= 0;
-	
-    public Shooter(double topRPM, double bottomRPM) {
+    public ShooterRunning() {
         // Use requires() here to declare subsystem dependencies
-//        requires(Robot.shooter);
-        this.topRPM = topRPM;
-        this.bottomRPM = bottomRPM;
-    }
-    
-    public Shooter(double RPM){
-//    	requires(Robot.shooter);
-    	topRPM = RPM; 
-    	bottomRPM = RPM;
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
@@ -31,13 +20,12 @@ public class Shooter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.topShooterRPM = topRPM;
-    	Robot.botShooterRPM = bottomRPM;
+    	Robot.shooter.run();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

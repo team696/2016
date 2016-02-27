@@ -61,7 +61,6 @@ public class TeleopDrive extends Command {
     	if(delta > 180)delta = delta - 360;
     	if(delta < -180)delta = 360 + delta;
     	
-    	System.out.println(delta);
     	
     	if(Util.signOf(delta) != Util.signOf(oldDelta))cumulativeError = 0;
     	

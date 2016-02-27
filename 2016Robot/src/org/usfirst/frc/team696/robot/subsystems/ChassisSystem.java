@@ -25,8 +25,8 @@ public class ChassisSystem extends Subsystem {
 	double rightSpeed = 0;
 	
 	public ChassisSystem(){
-		drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-		drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+//		drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+//		drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
 	}
 	
     public void initDefaultCommand() {

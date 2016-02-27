@@ -24,7 +24,7 @@ public class OI {
 	Button shootButton = new JoystickButton(controlBoard, 6);
 	Button shootingSpeedButton = new JoystickButton(controlBoard, 12);
 	Button intakeSpeedButton = new JoystickButton(controlBoard, 13);
-	Button stopWheelButton = new JoystickButton(controlBoard, 5);
+	Button stopWheelButton = new JoystickButton(controlBoard, 4);
 	
 	public OI() {
 		fastTurn.whenPressed(new FastTurn(true));
@@ -41,7 +41,7 @@ public class OI {
 		shootButton.whenPressed(new Shoot());
 		shootingSpeedButton.whenPressed(new Shooter(4000));
 		intakeSpeedButton.whenPressed(new Shooter(-1500));
-		stopWheelButton.whenActive(new Shooter(0));
+		stopWheelButton.whenPressed(new Shooter(0));
 	}
 }
 

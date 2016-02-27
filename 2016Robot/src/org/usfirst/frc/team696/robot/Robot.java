@@ -2,6 +2,7 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.commands.RunningPivot;
+import org.usfirst.frc.team696.robot.commands.ShooterRunning;
 import org.usfirst.frc.team696.robot.commands.TeleopDrive;
 import org.usfirst.frc.team696.robot.subsystems.ChassisSystem;
 import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
@@ -13,6 +14,7 @@ import org.usfirst.frc.team696.robot.subsystems.ShooterSystem;
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -50,8 +52,8 @@ public class Robot extends IterativeRobot {
 	SerialPort port;
 	public static boolean fastTurn = false;
 	
-	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB);
-	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB);
+	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB, false,EncodingType.k1X);
+	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB, false, EncodingType.k1X);
 	
 	public static Encoder pivotEncoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
 	public static Encoder telescopingEncoder = new Encoder(RobotMap.telescopingArmEncoderA, RobotMap.telescopingArmEncoderB);
@@ -133,6 +135,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
     	Scheduler.getInstance().add(new TeleopDrive());
     	Scheduler.getInstance().add(new RunningPivot());
+    	Scheduler.getInstance().add(new ShooterRunning());
     	System.out.println("Teleop Init");
     	if (autonomousCommand != null) autonomousCommand.cancel();
     }
