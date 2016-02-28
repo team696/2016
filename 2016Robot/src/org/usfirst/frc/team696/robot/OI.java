@@ -16,9 +16,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public Joystick controlBoard = new Joystick(1);
-	Button fastTurn = new JoystickButton(controlBoard, 7);
-	Button shiftHighButton = new JoystickButton(controlBoard, 9);
-	Button shiftLowButton = new JoystickButton(controlBoard, 8);
+	public Joystick wheel = new Joystick(2);
+	Button fastTurn = new JoystickButton(wheel, 6);
+	Button shiftHighButton = new JoystickButton(wheel, 3);
+	Button shiftLowButton = new JoystickButton(controlBoard, 2);
 	Button pivotUpButton = new JoystickButton(controlBoard, 10);
 	Button pivotDownButton = new JoystickButton(controlBoard, 11);
 	Button shootButton = new JoystickButton(controlBoard, 6);
@@ -40,7 +41,7 @@ public class OI {
 		
 		shootButton.whenPressed(new Shoot());
 		shootingSpeedButton.whenPressed(new Shooter(4000));
-		intakeSpeedButton.whenPressed(new Shooter(-1500));
+		intakeSpeedButton.whenPressed(new Shooter(-2500));
 		stopWheelButton.whenPressed(new Shooter(0));
 	}
 }

@@ -43,7 +43,7 @@ public class TeleopDrive extends Command {
     protected void execute() {
     	fastTurn = Robot.fastTurn;
     	speed = Robot.oi.controlBoard.getAxis(Joystick.AxisType.kY);
-    	turnValue = Robot.oi.controlBoard.getAxis(Joystick.AxisType.kX);
+    	turnValue = Robot.oi.wheel.getAxis(Joystick.AxisType.kX);
     	turnValue = Util.map(turnValue, -0.75, 0.63, -1, 1);
     	turnValue = Util.smoothDeadZone(turnValue, -0.125, 0.125, -1, 1, 0);
     	if(fastTurn)turnValue*=2;
@@ -69,8 +69,6 @@ public class TeleopDrive extends Command {
     	
     	derivativeError = delta - oldDelta;
     	oldDelta = delta;
-//    	goalAngle+=(turnValue*1.5);
-//    	currentAngle = Robot.navX.getYaw();
         PIDSum = delta * kP + cumulativeError * kI + derivativeError * kD;
         
     	leftSpeed+=PIDSum;
@@ -84,11 +82,6 @@ public class TeleopDrive extends Command {
     	
     	oldDelta = delta;
     	
-    	//    	turnValue = Util.map(turnValue, -0.75, 0.63, -1, 1);
-////    	System.out.println(speed + "   " + turnValue + "   " + fastTurn);
-//    	if(fastTurn)turnValue*=2;
-//    	turnValue = Util.signOf(turnValue) * Math.pow(Math.abs(Util.smoothDeadZone(turnValue, -0.125, 0.125, -1, 1, 0)),1.2);
-//    	System.out.println(turnValue + "   " + leftSpeed + "   " + rightSpeed);
     	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
 //    	
     }

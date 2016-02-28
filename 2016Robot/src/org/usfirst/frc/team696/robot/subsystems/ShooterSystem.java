@@ -36,6 +36,8 @@ public class ShooterSystem extends Subsystem {
 	double oldTopDistance = 0;
 	double bottomDistance = 0;
 	double oldBottomDistance = 0;
+	double topMotorPower = 0;
+	double bottomMotorPower = 0;
 	
 	Timer timer = new Timer();
 	
@@ -55,29 +57,51 @@ public class ShooterSystem extends Subsystem {
     	topTargetRPM = Robot.topShooterRPM;
     	bottomTargetRPM = Robot.botShooterRPM;
 
-    	topTBH.setTargetRPM(topTargetRPM);
-    	bottomTBH.setTargetRPM(bottomTargetRPM);
+    	
+    	
     	
     	time = timer.get();
     	
     	topDistance = Robot.topShooterWheelEncoder.get();
     	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
-    	if(Util.signOf(topTargetRPM) != Util.signOf(currentTopRPM))topTBH.setTargetRPM(0);
+//    	if(Util.signOf(topTargetRPM) != Util.signOf(currentTopRPM) && currentTopRPM != 0){
+//    		topTargetRPM = 0;
+//    		System.out.println("topTargetRPM = 0");
+//    	}
+//    	if(topTargetRPM == 0 && currentTopRPM != 0)topTargetRPM = (0.0001) * Util.signOf(currentTopRPM);
+    	topTBH.setTargetRPM(topTargetRPM);
     	topTBH.setCurrentRPM(currentTopRPM);
     	topTBH.run();
     	oldTopDistance = topDistance;
     	
     	bottomDistance = Robot.bottomShooterWheelEncoder.get();
     	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
-    	if(Util.signOf(bottomTargetRPM) != Util.signOf(currentTopRPM))bottomTBH.setTargetRPM(0);
+//    	if(Util.signOf(bottomTargetRPM) != Util.signOf(currentBottomRPM) && currentBottomRPM != 0){
+//    		bottomTargetRPM = 0;
+//    		System.out.println("bottomtargetRPM = 0");
+//    	}
+    	bottomTBH.setTargetRPM(bottomTargetRPM);
     	bottomTBH.setCurrentRPM(currentBottomRPM);
     	bottomTBH.run();
     	oldBottomDistance = bottomDistance;
 
     	oldTime = time;
     	
-    	topShooterWheel.set(topTBH.getMotorPower());
-    	bottomShooterWheel.set(bottomTBH.getMotorPower());
+    	topMotorPower = topTBH.getMotorPower();
+    	if(Math.abs(topMotorPower) < 0.05)topMotorPower = 0;
+    	
+//    	bottomMotorPower = bottomTBH.getMotorPower();
+//    	if(Math.abs(bottomMotorPower) < 0.05)bottomMotorPower = 0;
+    	
+    	topShooterWheel.set(topMotorPower);
+    	bottomShooterWheel.set(topMotorPower);
+    	
+    	System.out.print("\ttopCurrent: " + currentTopRPM + "\ttopTarget: " + topTargetRPM + "\ttopEncoder: " + Robot.topShooterWheelEncoder.get() + "\ttopMP: " + topMotorPower);
+//    	System.out.print("\tbottomCurrent: " + currentBottomRPM + "\tbottomTarget: " + bottomTargetRPM + "\tbottomEncoder: " + Robot.bottomShooterWheelEncoder.get() + "\tbottomMP: " + bottomMotorPower);
+    	
+//    	System.out.print("\t" + Robot.topShooterWheelEncoder.get() + "\t" + Robot.bottomShooterWheelEncoder.get());
+    	
+    	System.out.println();
     }
 }
 

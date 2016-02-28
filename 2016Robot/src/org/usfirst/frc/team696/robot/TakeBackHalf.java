@@ -50,13 +50,10 @@ public class TakeBackHalf {
         error = targetRPM - currentRPM;
         motorPower+=gain * error;
         motorPower = constrain(motorPower, 1, -1);
-        System.out.print("    error  " + error + "    currentRPM " + currentRPM + "   motorPower " + motorPower);
         if(isPositive(oldError) != isPositive(error)){
             motorPower = tbh = 0.5* (motorPower + tbh);
             oldError =  error;
-            System.out.print("     Taking back HALF!!!     " + "tbh " + tbh);
         }
-        System.out.println();
     }
     
     public double getMotorPower() { 
