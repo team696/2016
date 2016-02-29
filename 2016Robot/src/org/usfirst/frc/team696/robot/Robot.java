@@ -2,8 +2,6 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.commands.Pivot;
-import org.usfirst.frc.team696.robot.commands.RunningPivot;
-import org.usfirst.frc.team696.robot.commands.ShooterRunning;
 import org.usfirst.frc.team696.robot.commands.TeleopDrive;
 import org.usfirst.frc.team696.robot.subsystems.ChassisSystem;
 import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
@@ -27,6 +25,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import or.usfirst.frc.team696.robot.runningCommands.RunningPivot;
+import or.usfirst.frc.team696.robot.runningCommands.ShooterRunning;
 
 /**
  * The VM is configured to automatically run this class, and to call the

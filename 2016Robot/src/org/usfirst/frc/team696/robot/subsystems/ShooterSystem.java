@@ -2,9 +2,9 @@ package org.usfirst.frc.team696.robot.subsystems;
 
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
-import org.usfirst.frc.team696.robot.StallPrevention;
-import org.usfirst.frc.team696.robot.TakeBackHalf;
-import org.usfirst.frc.team696.robot.Util;
+import org.usfirst.frc.team696.utilities.StallPrevention;
+import org.usfirst.frc.team696.utilities.TakeBackHalf;
+import org.usfirst.frc.team696.utilities.Util;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;

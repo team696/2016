@@ -1,4 +1,6 @@
-package org.usfirst.frc.team696.robot;
+package org.usfirst.frc.team696.utilities;
+
+import org.usfirst.frc.team696.robot.Robot;
 
 public class StallPrevention {
 	double maxAmps = 10;

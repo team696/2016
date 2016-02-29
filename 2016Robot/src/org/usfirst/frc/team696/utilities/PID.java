@@ -1,4 +1,4 @@
-package org.usfirst.frc.team696.robot;
+package org.usfirst.frc.team696.utilities;
 
 public class PID {
 	private double kP = 0;

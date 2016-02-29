@@ -1,10 +1,10 @@
 package org.usfirst.frc.team696.robot.subsystems;
 
-import org.usfirst.frc.team696.robot.DoubleMotor;
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
-import org.usfirst.frc.team696.robot.StallPrevention;
-import org.usfirst.frc.team696.robot.Util;
+import org.usfirst.frc.team696.utilities.DoubleMotor;
+import org.usfirst.frc.team696.utilities.StallPrevention;
+import org.usfirst.frc.team696.utilities.Util;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
