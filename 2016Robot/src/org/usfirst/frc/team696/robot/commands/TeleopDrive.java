@@ -43,9 +43,9 @@ public class TeleopDrive extends Command {
     protected void execute() {
     	fastTurn = Robot.fastTurn;
     	speed = Robot.oi.controlBoard.getAxis(Joystick.AxisType.kY);
+    	speed = Util.deadZone(speed, -0.025, 0.025, 0);
     	turnValue = Robot.oi.wheel.getAxis(Joystick.AxisType.kX);
-    	turnValue = Util.map(turnValue, -0.75, 0.63, -1, 1);
-    	turnValue = Util.smoothDeadZone(turnValue, -0.125, 0.125, -1, 1, 0);
+    	turnValue = Util.smoothDeadZone(turnValue, -0.03, 0.03, -1, 1, 0);
     	if(fastTurn)turnValue*=2;
     	
     	leftSpeed = speed;
@@ -57,10 +57,19 @@ public class TeleopDrive extends Command {
     	if(goalAngle > 180)goalAngle-=360;
     	if(goalAngle < -180)goalAngle+=360;
     	
+    	if(turnValue == 0)goalAngle = currentAngle;
+    	
     	delta = currentAngle - goalAngle;
     	if(delta > 180)delta = delta - 360;
     	if(delta < -180)delta = 360 + delta;
+    	delta = Util.deadZone(delta, -1, 1, 0);
     	
+//    	if(speed == 0 && delta != 0){
+////    		delta = Util.deadZone(delta, -45, 45, 0);
+//    		speed = 0.02;
+//    	}
+    	
+    	System.out.println("turnValue: " + turnValue + "delta:   " + delta);
     	
     	if(Util.signOf(delta) != Util.signOf(oldDelta))cumulativeError = 0;
     	
@@ -81,6 +90,7 @@ public class TeleopDrive extends Command {
     	rightSpeed = Util.constrain(rightSpeed, -1, 1);
     	
     	oldDelta = delta;
+    	
     	
     	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
 //    	

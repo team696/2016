@@ -38,7 +38,7 @@ public class TakeBackHalf {
     public void setTargetRPM(double newRPM){
         if(targetRPM < newRPM) oldError = 1;
         if(targetRPM > newRPM) oldError = -1;
-        tbh = (2* (targetRPM/maxRPM)) - 1;
+        if(targetRPM != newRPM)tbh = (2* (targetRPM/maxRPM)) - 1;
         targetRPM = newRPM;
     }
     

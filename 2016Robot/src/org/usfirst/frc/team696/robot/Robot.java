@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team696.robot;
 
+import org.usfirst.frc.team696.robot.commands.Pivot;
 import org.usfirst.frc.team696.robot.commands.RunningPivot;
 import org.usfirst.frc.team696.robot.commands.ShooterRunning;
 import org.usfirst.frc.team696.robot.commands.TeleopDrive;
@@ -18,7 +19,9 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -62,6 +65,10 @@ public class Robot extends IterativeRobot {
 	public static double topShooterRPM = 0;
 	public static double botShooterRPM = 0;
 	
+	public static Timer shootTimer = new Timer();
+	
+	public static PowerDistributionPanel PDP = new PowerDistributionPanel();
+	
 //	public static DigitalInput pivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
 
 	/**
@@ -83,6 +90,7 @@ public class Robot extends IterativeRobot {
 		} catch(Exception ex){System.out.println("NavX not working");};
 //		navX.zeroYaw();
 //		navX.getYaw();
+		shootTimer.start();
     }
 	
 	/**
@@ -144,6 +152,12 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+//    	if(Robot.oi.controlBoard.getRawAxis(3) < -0.75){
+//    	}
+//    	if(Robot.oi.controlBoard.getRawAxis(3) > 0.75){
+//    		new Pivot(false, 0);
+//    		System.out.println("down");
+//    	}
         Scheduler.getInstance().run();
     }
     

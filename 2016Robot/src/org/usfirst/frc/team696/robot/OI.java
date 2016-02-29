@@ -26,6 +26,8 @@ public class OI {
 	Button shootingSpeedButton = new JoystickButton(controlBoard, 12);
 	Button intakeSpeedButton = new JoystickButton(controlBoard, 13);
 	Button stopWheelButton = new JoystickButton(controlBoard, 4);
+//	Button intakePivotArmPosButton = new JoystickButton(wheel, 1);
+//	Button shootPivotArmPosButton = new JoystickButton(wheel,8);
 	
 	public OI() {
 		fastTurn.whenPressed(new FastTurn(true));
@@ -34,15 +36,17 @@ public class OI {
 		shiftHighButton.whenPressed(new Shift(false));
 		shiftLowButton.whenPressed(new Shift(true));
 		
-		pivotUpButton.whenPressed(new Pivot(true, 2.5));
-		pivotDownButton.whenPressed(new Pivot(true, -2.5));
+		pivotUpButton.whileHeld(new Pivot(true, 2.5));
+		pivotDownButton.whileHeld(new Pivot(true, -2.5));
 		pivotUpButton.whenInactive(new Pivot(true, 0));
 		pivotDownButton.whenInactive(new Pivot(true, 0));
 		
 		shootButton.whenPressed(new Shoot());
-		shootingSpeedButton.whenPressed(new Shooter(4000));
-		intakeSpeedButton.whenPressed(new Shooter(-2500));
+		shootingSpeedButton.whenPressed(new Shooter(4500));
+		intakeSpeedButton.whenPressed(new Shooter(-3500));
 		stopWheelButton.whenPressed(new Shooter(0));
+		
+		
 	}
 }
 

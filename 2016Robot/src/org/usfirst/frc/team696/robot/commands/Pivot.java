@@ -14,10 +14,10 @@ public class Pivot extends Command {
 	double targetAngle = 0;
 	
     public Pivot(boolean incremental, double value) {
-    	requires(Robot.pivotArm);
     	if(!incremental)this.targetAngle = value;
     	else incrementValue = value;
     	this.incremental = incremental;
+//    	System.out.println(this.targetAngle);
     } 
 
     public Pivot(boolean autoUnderLift){
@@ -30,13 +30,13 @@ public class Pivot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!incremental)Robot.targetAngle+=incrementValue;
-    	if(incremental)Robot.targetAngle = targetAngle;
+    	if(incremental)Robot.targetAngle+=incrementValue;
+    	if(!incremental)Robot.targetAngle = targetAngle;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+    	return true;
     }
 
     // Called once after isFinished returns true

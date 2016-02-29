@@ -2,6 +2,7 @@ package org.usfirst.frc.team696.robot.subsystems;
 
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
+import org.usfirst.frc.team696.robot.StallPrevention;
 import org.usfirst.frc.team696.robot.TakeBackHalf;
 import org.usfirst.frc.team696.robot.Util;
 
@@ -18,11 +19,14 @@ public class ShooterSystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	TakeBackHalf topTBH = new TakeBackHalf(4000);
-	TakeBackHalf bottomTBH = new TakeBackHalf(4000);
+	TakeBackHalf topTBH = new TakeBackHalf(4500);
+	TakeBackHalf bottomTBH = new TakeBackHalf(4500);
 	
 	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
 	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
+	
+	StallPrevention topSP = new StallPrevention(40);
+	StallPrevention botSP = new StallPrevention(40);
 	
 	double speedTop = 0;
 	double speedBottom = 0;
@@ -38,6 +42,7 @@ public class ShooterSystem extends Subsystem {
 	double oldBottomDistance = 0;
 	double topMotorPower = 0;
 	double bottomMotorPower = 0;
+	double direction = 0;
 	
 	Timer timer = new Timer();
 	
@@ -57,31 +62,30 @@ public class ShooterSystem extends Subsystem {
     	topTargetRPM = Robot.topShooterRPM;
     	bottomTargetRPM = Robot.botShooterRPM;
 
-    	
-    	
+    	direction = Util.signOf(topTargetRPM);
     	
     	time = timer.get();
     	
     	topDistance = Robot.topShooterWheelEncoder.get();
-    	currentTopRPM = Util.findVelocity(time, oldTime, topDistance, oldTopDistance);
+    	currentTopRPM = Util.findVelocity(time, oldTime, Math.abs(topDistance), Math.abs(oldTopDistance));
 //    	if(Util.signOf(topTargetRPM) != Util.signOf(currentTopRPM) && currentTopRPM != 0){
 //    		topTargetRPM = 0;
 //    		System.out.println("topTargetRPM = 0");
 //    	}
 //    	if(topTargetRPM == 0 && currentTopRPM != 0)topTargetRPM = (0.0001) * Util.signOf(currentTopRPM);
-    	topTBH.setTargetRPM(topTargetRPM);
-    	topTBH.setCurrentRPM(currentTopRPM);
+    	topTBH.setTargetRPM(Math.abs(topTargetRPM));
+    	topTBH.setCurrentRPM(Math.abs(currentTopRPM));
     	topTBH.run();
     	oldTopDistance = topDistance;
     	
     	bottomDistance = Robot.bottomShooterWheelEncoder.get();
-    	currentBottomRPM = Util.findVelocity(time, oldTime, bottomDistance, oldBottomDistance);
+    	currentBottomRPM = Util.findVelocity(time, oldTime, Math.abs(bottomDistance), Math.abs(oldBottomDistance));
 //    	if(Util.signOf(bottomTargetRPM) != Util.signOf(currentBottomRPM) && currentBottomRPM != 0){
 //    		bottomTargetRPM = 0;
 //    		System.out.println("bottomtargetRPM = 0");
 //    	}
-    	bottomTBH.setTargetRPM(bottomTargetRPM);
-    	bottomTBH.setCurrentRPM(currentBottomRPM);
+    	bottomTBH.setTargetRPM(Math.abs(bottomTargetRPM));
+    	bottomTBH.setCurrentRPM(Math.abs(currentBottomRPM));
     	bottomTBH.run();
     	oldBottomDistance = bottomDistance;
 
@@ -93,15 +97,18 @@ public class ShooterSystem extends Subsystem {
 //    	bottomMotorPower = bottomTBH.getMotorPower();
 //    	if(Math.abs(bottomMotorPower) < 0.05)bottomMotorPower = 0;
     	
-    	topShooterWheel.set(topMotorPower);
-    	bottomShooterWheel.set(topMotorPower);
+    	topSP.setCurrentAmps(Robot.PDP.getCurrent(12), topMotorPower*direction);
+    	botSP.setCurrentAmps(Robot.PDP.getCurrent(3), topMotorPower*direction);
     	
-    	System.out.print("\ttopCurrent: " + currentTopRPM + "\ttopTarget: " + topTargetRPM + "\ttopEncoder: " + Robot.topShooterWheelEncoder.get() + "\ttopMP: " + topMotorPower);
+    	topShooterWheel.set(topSP.getOutput());
+    	bottomShooterWheel.set(botSP.getOutput());
+    	
+//    	System.out.print("\ttopCurrent: " + currentTopRPM + "\ttopTarget: " + topTargetRPM + "\ttopEncoder: " + Robot.topShooterWheelEncoder.get() + "\ttopMP: " + topMotorPower);
 //    	System.out.print("\tbottomCurrent: " + currentBottomRPM + "\tbottomTarget: " + bottomTargetRPM + "\tbottomEncoder: " + Robot.bottomShooterWheelEncoder.get() + "\tbottomMP: " + bottomMotorPower);
     	
 //    	System.out.print("\t" + Robot.topShooterWheelEncoder.get() + "\t" + Robot.bottomShooterWheelEncoder.get());
     	
-    	System.out.println();
+//    	System.out.println();
     }
 }
 
