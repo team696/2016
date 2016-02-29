@@ -17,32 +17,25 @@ public class Shoot extends Command {
     	requires(Robot.shoot);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     	startTime = Robot.shootTimer.get();
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	time = Robot.shootTimer.get();
     	Robot.shoot.setShoot(true);
     	if(time - startTime > 1)finished = true;
     	else finished = false;
-    	System.out.println(time + "   " + startTime);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return finished;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     	Robot.shoot.setShoot(false);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
 }

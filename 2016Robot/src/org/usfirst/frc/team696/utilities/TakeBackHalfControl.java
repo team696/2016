@@ -10,7 +10,6 @@ package org.usfirst.frc.team696.utilities;
  * @author Daniel
  */
 public class TakeBackHalfControl {
-//    private double                  error;
     private double
             error = 0,
             oldError = error,

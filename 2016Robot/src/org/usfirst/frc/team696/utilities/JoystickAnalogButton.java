@@ -14,6 +14,7 @@ public class JoystickAnalogButton extends JoystickButton {
 		super(joystick, 1);
 		this.joystick = joystick;
 		this.axisNum = axisNum;
+		System.out.println();
 	}
 	
 	@Override

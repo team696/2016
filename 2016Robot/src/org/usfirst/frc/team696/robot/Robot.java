@@ -43,7 +43,6 @@ public class Robot extends IterativeRobot {
 	public static PivotArmSystem pivotArm = new PivotArmSystem();
 	public static ShootSystem shoot = new ShootSystem();
 	public static ShooterSystem shooter = new ShooterSystem();
-//	public static TelescopingArmSystem telescope = new TelescopingArmSystem();
 	
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
 	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);
@@ -69,15 +68,11 @@ public class Robot extends IterativeRobot {
 	
 	public static PowerDistributionPanel PDP = new PowerDistributionPanel();
 	
-//	public static DigitalInput pivotSwitch = new DigitalInput(RobotMap.pivotSwitchChannel);
-
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-//    	topShooterWheelEncoder.setDistancePerPulse(1);
-//    	bottomShooterWheelEncoder.setDistancePerPulse(1);
 		oi = new OI();
         chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new ExampleCommand());
@@ -88,8 +83,6 @@ public class Robot extends IterativeRobot {
 			port = new SerialPort(57600, SerialPort.Port.kMXP);
 			navX = new IMUAdvanced(port, UpdateRateHz);
 		} catch(Exception ex){System.out.println("NavX not working");};
-//		navX.zeroYaw();
-//		navX.getYaw();
 		shootTimer.start();
     }
 	
@@ -129,7 +122,6 @@ public class Robot extends IterativeRobot {
 			break;
 		} */
     	
-    	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -152,12 +144,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-//    	if(Robot.oi.controlBoard.getRawAxis(3) < -0.75){
-//    	}
-//    	if(Robot.oi.controlBoard.getRawAxis(3) > 0.75){
-//    		new Pivot(false, 0);
-//    		System.out.println("down");
-//    	}
         Scheduler.getInstance().run();
     }
     

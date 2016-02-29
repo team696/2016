@@ -27,8 +27,6 @@ public class OI {
 	Button shootingSpeedButton = new JoystickButton(controlBoard, 12);
 	Button intakeSpeedButton = new JoystickButton(controlBoard, 13);
 	Button stopWheelButton = new JoystickButton(controlBoard, 4);
-//	Button intakePivotArmPosButton = new JoystickButton(wheel, 1);
-//	Button shootPivotArmPosButton = new JoystickButton(wheel,8);
 	Button intakePivotArmPosButton = new JoystickAnalogButton(controlBoard, 3, 0.75, 1);
 	Button shootPivotArmPosButton = new JoystickAnalogButton(controlBoard, 3, -1, -0.75);
 	

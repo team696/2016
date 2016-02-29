@@ -36,14 +36,12 @@ public class TeleopDrive extends Command {
     	requires(Robot.chassis);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.navX.zeroYaw();
     	goalAngle = Robot.navX.getYaw();
     	currentAngle = Robot.navX.getYaw();
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	fastTurn = Robot.fastTurn;
     	speed = Robot.oi.controlBoard.getAxis(Joystick.AxisType.kY);
@@ -89,17 +87,13 @@ public class TeleopDrive extends Command {
 //    	
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
 }

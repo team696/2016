@@ -37,14 +37,10 @@ public class AutomaticShifting extends Command {
     	stop = false;
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	leftDistance = Robot.leftEncoder.getDistance();
     	rightDistance = Robot.rightEncoder.getDistance();
     	time = timer.get();
-    	
-//    	leftRPM = Util.calculateRPM(leftDistance, oldLeftDistance, circumferenceOfWheel, time, oldTime);
-//    	rightRPM = Util.calculateRPM(rightDistance, oldRightDistance, circumferenceOfWheel, time, oldTime);
     	
     	oldLeftDistance = leftDistance;
     	oldRightDistance = rightDistance;
@@ -53,17 +49,14 @@ public class AutomaticShifting extends Command {
     	if(leftRPM < shiftLowRPM || rightRPM < shiftLowRPM)Robot.shifter.shiftLow();
     	if(leftRPM > shiftHighRPM && rightRPM > shiftHighRPM)Robot.shifter.shiftHigh();
     }
-    // Make this return true when this Command no longer needs to run execute()
+
     protected boolean isFinished() {
         return stop;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
 }

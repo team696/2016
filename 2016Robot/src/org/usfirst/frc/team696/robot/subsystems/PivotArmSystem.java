@@ -20,9 +20,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class PivotArmSystem extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
 	DoubleMotor pivotMotors= new DoubleMotor(RobotMap.topPivotMotor, RobotMap.bottomPivotMotor);;
 	Solenoid pivotRatchetSol = new Solenoid(RobotMap.pivotRatchetSolChannel);
 	StallPrevention topSP = new StallPrevention(30);
