@@ -5,6 +5,7 @@ import org.usfirst.frc.team696.robot.commands.Pivot;
 import org.usfirst.frc.team696.robot.commands.Shift;
 import org.usfirst.frc.team696.robot.commands.Shoot;
 import org.usfirst.frc.team696.robot.commands.Shooter;
+import org.usfirst.frc.team696.utilities.JoystickAnalogButton;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -28,6 +29,8 @@ public class OI {
 	Button stopWheelButton = new JoystickButton(controlBoard, 4);
 //	Button intakePivotArmPosButton = new JoystickButton(wheel, 1);
 //	Button shootPivotArmPosButton = new JoystickButton(wheel,8);
+	Button intakePivotArmPosButton = new JoystickAnalogButton(controlBoard, 3, 0.75, 1);
+	Button shootPivotArmPosButton = new JoystickAnalogButton(controlBoard, 3, -1, -0.75);
 	
 	public OI() {
 		fastTurn.whenPressed(new FastTurn(true));
@@ -46,7 +49,8 @@ public class OI {
 		intakeSpeedButton.whenPressed(new Shooter(-3500));
 		stopWheelButton.whenPressed(new Shooter(0));
 		
-		
+		intakePivotArmPosButton.whenPressed(new Pivot(false, 0));
+		shootPivotArmPosButton.whenPressed(new Pivot(false, 160));
 	}
 }
 
