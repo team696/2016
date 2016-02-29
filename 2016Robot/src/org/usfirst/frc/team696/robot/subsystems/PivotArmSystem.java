@@ -3,6 +3,7 @@ package org.usfirst.frc.team696.robot.subsystems;
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
 import org.usfirst.frc.team696.utilities.DoubleMotor;
+import org.usfirst.frc.team696.utilities.PIDControl;
 import org.usfirst.frc.team696.utilities.StallPrevention;
 import org.usfirst.frc.team696.utilities.Util;
 
@@ -27,6 +28,7 @@ public class PivotArmSystem extends Subsystem {
 	StallPrevention topSP = new StallPrevention(30);
 	StallPrevention botSP = new StallPrevention(30);
 	
+	
 	boolean notRatchet = true;
 	
 	double speed = 0.0;
@@ -36,38 +38,14 @@ public class PivotArmSystem extends Subsystem {
 	double cumulativeError = 0;
 	double alpha = 0;
 	
-//	private static final double kpUp = 0.003;
-//	private static final double kiUp = 0.0;
-//	private static final double kdUp = 0.0;
-//	
-//	private static final double kpDown = 0.001;
-//	private static final double kiDown = 0.0;
-//	private static final double kdDown = 0.0;
+	private static double kP = 0.05;
 	
-	private static double kp = 0.05;
-	private static double ki = 0.0;
-	private static double kd = 0.0;
+	PIDControl PID = new PIDControl(kP);
 	
 	public PivotArmSystem() {
-//		PID.enable();
-//		PID.setPID(kp, ki, kd);
 	}
-	
-//	private void setDown(){
-//		kp = kpDown;
-//		ki = kiDown;
-//		kd = kdDown;
-//	}
-	
-//	private void setUp(){
-//		kp = kpUp;
-//		ki = kiUp;
-//		kd = kdUp;
-//	}
-	
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+
+	public void initDefaultCommand() {
     }
     
     public void setSpeed(double speed){
@@ -86,37 +64,18 @@ public class PivotArmSystem extends Subsystem {
     public void setTargetAngle(double targetAngle){
     	this.targetAngle = targetAngle;
     	error = this.targetAngle - Robot.pivotEncoder.get();
-//    	if(error > 0)setUp();
-//    	else setDown();
-    	cumulativeError *= alpha;
-    	cumulativeError += error;
-    	PIDSum = (error * kp) + (cumulativeError * ki);
-    	PIDSum = Util.constrain(PIDSum, -1, 1);
-    	speed = PIDSum;
-//    	if(Util.signOf(speed) > 0)pivotRatchetSol.set(true);
-//    	else pivotRatchetSol.set(false);
+    	PID.setError(error);
+    	speed = Util.constrain(PID.getValue(), -1, 1);
     	pivotRatchetSol.set(notRatchet);
     	run();
-//    	System.out.println("target: " + this.targetAngle + "   encoder: " + Robot.pivotEncoder.get() + "    speed: " + speed + "   error: " + error);
     }
 
     public void run(){
     	pivotMotors.set(speed);
-//    	System.out.println("run");
     }
     
     public double getSpeed() {
 		return speed;
 	}
 									
-    //find distancePerPulse
-	public void setDistancePerPulse(double distancePerPulse) {
-//		Robot.topPivotEncoder.setDistancePerPulse(distancePerPulse);
-	}
-	
-	public double getTopEncoderDistance() {
-//		return Robot.topPivotEncoder.getDistance();
-		return 0;
-		// total distance
-	}
 }

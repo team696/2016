@@ -9,7 +9,7 @@ package org.usfirst.frc.team696.utilities;
  *
  * @author Daniel
  */
-public class TakeBackHalf {
+public class TakeBackHalfControl {
 //    private double                  error;
     private double
             error = 0,
@@ -21,7 +21,7 @@ public class TakeBackHalf {
             maxRPM,
             gain = 1E-5;
     
-    public TakeBackHalf(double maxRPM){
+    public TakeBackHalfControl(double maxRPM){
         this.maxRPM = maxRPM;
     }
     

@@ -1,6 +1,6 @@
 package org.usfirst.frc.team696.utilities;
 
-public class PID {
+public class PIDControl {
 	private double kP = 0;
 	private double kI = 0;
 	private double kD = 0;
@@ -9,11 +9,21 @@ public class PID {
 	private double oldError = 0;
 	private double cumulativeError = 0;
 	
-	public PID(double kP, double kI, double kD, double aplpha){
+	public PIDControl(double kP, double kI, double kD, double alpha){
 		this.kP = kP;
 		this.kI = kI;
 		this.kD = kD;
 		this.alpha = alpha;
+	}
+	
+	public PIDControl(double kP, double kI, double alpha){
+		this.kP = kP;
+		this.kI = kI;
+		this.alpha = alpha;
+	}
+	
+	public PIDControl(double kP){
+		this.kP = kP;
 	}
 
 	public void setError(double error){
@@ -26,6 +36,16 @@ public class PID {
 		this.kI = kI;
 		this.kD = kD;
 		this.alpha = alpha;
+	}
+	
+	public void setPID(double kP, double kI, double alpha){
+		this.kP = kP;
+		this.kI = kI;
+		this.alpha = alpha;
+	}
+	
+	public void setPID(double kP){
+		this.kP = kP;
 	}
 	
 	private double P(){

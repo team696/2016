@@ -1,6 +1,7 @@
 package org.usfirst.frc.team696.robot.commands;
 
 import org.usfirst.frc.team696.robot.Robot;
+import org.usfirst.frc.team696.utilities.PIDControl;
 import org.usfirst.frc.team696.utilities.Util;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,13 +21,16 @@ public class TeleopDrive extends Command {
 	double kP = 0.0105;
 	double kI = 0.0002;
 	double kD = 0.0003;
+	double alpha = 0.95;
 	double cumulativeError = 0;
 	double derivativeError = 0;
-	double alpha = 0.95;
 	double delta = 0;
 	double oldDelta = 0;
 	double PIDSum = 0;
+	double output = 0;
 	boolean fastTurn = false;
+	
+	PIDControl PID = new PIDControl(kP, kI, kD, alpha);
 	
     public TeleopDrive() {
     	requires(Robot.chassis);
@@ -57,31 +61,20 @@ public class TeleopDrive extends Command {
     	if(goalAngle > 180)goalAngle-=360;
     	if(goalAngle < -180)goalAngle+=360;
     	
-    	if(turnValue == 0)goalAngle = currentAngle;
+    	if(turnValue == 0 && speed == 0)goalAngle = currentAngle;
     	
     	delta = currentAngle - goalAngle;
     	if(delta > 180)delta = delta - 360;
     	if(delta < -180)delta = 360 + delta;
     	delta = Util.deadZone(delta, -1, 1, 0);
     	
-//    	if(speed == 0 && delta != 0){
-////    		delta = Util.deadZone(delta, -45, 45, 0);
-//    		speed = 0.02;
-//    	}
-    	
-    	System.out.println("turnValue: " + turnValue + "delta:   " + delta);
-    	
     	if(Util.signOf(delta) != Util.signOf(oldDelta))cumulativeError = 0;
-    	
-    	cumulativeError *= alpha;
-    	cumulativeError += delta;
-    	
-    	derivativeError = delta - oldDelta;
-    	oldDelta = delta;
-        PIDSum = delta * kP + cumulativeError * kI + derivativeError * kD;
         
-    	leftSpeed+=PIDSum;
-    	rightSpeed-=PIDSum;
+        PID.setError(delta);
+        output = PID.getValue();
+        
+    	leftSpeed+=output;
+    	rightSpeed-=output;
     	
     	if(Math.abs(leftSpeed)>1)rightSpeed-=(Math.abs(leftSpeed)-1) * Util.signOf(leftSpeed);
     	if(Math.abs(rightSpeed)>1)leftSpeed-=(Math.abs(rightSpeed)-1) * Util.signOf(rightSpeed);

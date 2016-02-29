@@ -3,7 +3,7 @@ package org.usfirst.frc.team696.robot.subsystems;
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
 import org.usfirst.frc.team696.utilities.StallPrevention;
-import org.usfirst.frc.team696.utilities.TakeBackHalf;
+import org.usfirst.frc.team696.utilities.TakeBackHalfControl;
 import org.usfirst.frc.team696.utilities.Util;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -19,8 +19,8 @@ public class ShooterSystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	TakeBackHalf topTBH = new TakeBackHalf(4500);
-	TakeBackHalf bottomTBH = new TakeBackHalf(4500);
+	TakeBackHalfControl topTBH = new TakeBackHalfControl(4500);
+	TakeBackHalfControl bottomTBH = new TakeBackHalfControl(4500);
 	
 	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
 	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
