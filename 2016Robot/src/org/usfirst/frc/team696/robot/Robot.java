@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import or.usfirst.frc.team696.robot.runningCommands.RunningPivot;
-import or.usfirst.frc.team696.robot.runningCommands.ShooterRunning;
+import or.usfirst.frc.team696.robot.runningCommands.RunningShooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -135,7 +135,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
     	Scheduler.getInstance().add(new TeleopDrive());
     	Scheduler.getInstance().add(new RunningPivot());
-    	Scheduler.getInstance().add(new ShooterRunning());
+    	Scheduler.getInstance().add(new RunningShooter());
     	System.out.println("Teleop Init");
     	if (autonomousCommand != null) autonomousCommand.cancel();
     }
