@@ -9,6 +9,7 @@ import org.usfirst.frc.team696.robot.subsystems.ShifterSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShootSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShooterSystem;
 // import org.usfirst.frc.team696.robot.subsystems.TelescopingArmSystem;
+import org.usfirst.frc.team696.robot.subsystems.TelescopingArmSystem;
 
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
@@ -27,6 +28,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import or.usfirst.frc.team696.robot.runningCommands.RunningPivot;
 import or.usfirst.frc.team696.robot.runningCommands.RunningShooter;
+import or.usfirst.frc.team696.robot.runningCommands.RunningTelescopingArm;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -43,6 +45,7 @@ public class Robot extends IterativeRobot {
 	public static PivotArmSystem pivotArm = new PivotArmSystem();
 	public static ShootSystem shoot = new ShootSystem();
 	public static ShooterSystem shooter = new ShooterSystem();
+	public static TelescopingArmSystem telescopingArmSystem = new TelescopingArmSystem();
 	
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
 	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);
@@ -60,11 +63,15 @@ public class Robot extends IterativeRobot {
 	public static Encoder pivotEncoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
 	public static Encoder telescopingEncoder = new Encoder(RobotMap.telescopingArmEncoderA, RobotMap.telescopingArmEncoderB);
 	
+	public static double telescopingTargetDistance = 0;
+	
 	public static double targetAngle = 0;
 	public static double topShooterRPM = 0;
 	public static double botShooterRPM = 0;
 	
+	
 	public static Timer shootTimer = new Timer();
+	Timer matchTimer = new Timer();
 	
 	public static PowerDistributionPanel PDP = new PowerDistributionPanel();
 	
@@ -109,6 +116,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+    	matchTimer.start();
         autonomousCommand = (Command) chooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -123,6 +131,7 @@ public class Robot extends IterativeRobot {
 		} */
     	
         if (autonomousCommand != null) autonomousCommand.start();
+        
     }
 
     /**
@@ -136,14 +145,20 @@ public class Robot extends IterativeRobot {
     	Scheduler.getInstance().add(new TeleopDrive());
     	Scheduler.getInstance().add(new RunningPivot());
     	Scheduler.getInstance().add(new RunningShooter());
+    	Scheduler.getInstance().add(new RunningTelescopingArm());
+    	
     	System.out.println("Teleop Init");
     	if (autonomousCommand != null) autonomousCommand.cancel();
+    	matchTimer.stop();
+    	matchTimer.reset();
+    	matchTimer.start();
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+//    	if(2-matchTimer.get() < 25)Scheduler.getInstance().add(new RunningTelescopingArm());
         Scheduler.getInstance().run();
     }
     

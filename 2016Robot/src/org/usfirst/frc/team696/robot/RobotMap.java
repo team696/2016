@@ -38,7 +38,8 @@ public class RobotMap {
 	public static int telescopingArmEncoderB = 11;
 	
 	public static int pivotRatchetSolChannel = 4;
-	public static int winchSolenoid = 5;
+	
+	public static int telescopingSolenoid = 5;
 
 	public static int shootSolenoidChannel = 6;
 	public static int shifterSolenoidChannel = 7;
