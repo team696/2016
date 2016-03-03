@@ -2,7 +2,6 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.commands.Pivot;
-import org.usfirst.frc.team696.robot.commands.TeleopDrive;
 import org.usfirst.frc.team696.robot.subsystems.ChassisSystem;
 import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShifterSystem;
@@ -29,6 +28,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import or.usfirst.frc.team696.robot.runningCommands.RunningPivot;
 import or.usfirst.frc.team696.robot.runningCommands.RunningShooter;
 import or.usfirst.frc.team696.robot.runningCommands.RunningTelescopingArm;
+import or.usfirst.frc.team696.robot.runningCommands.TeleopDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the

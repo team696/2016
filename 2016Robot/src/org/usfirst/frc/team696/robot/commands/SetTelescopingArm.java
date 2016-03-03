@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetTelescopingArm extends Command {
 
 	double target = 0;
-	double fullyExtended = 100;
-	double halfExtended = 50;
+	double fullyExtended = 890;
+	double halfExtended = 300;
 	double fullyContracted = 0;
 	
     public SetTelescopingArm(int whatTarget) {
