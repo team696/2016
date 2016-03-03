@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team696.robot;
 
-import org.usfirst.frc.team696.robot.commands.Pivot;
+import org.usfirst.frc.team696.robot.commands.SetPivot;
 import org.usfirst.frc.team696.robot.subsystems.ChassisSystem;
 import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShifterSystem;
@@ -91,6 +91,8 @@ public class Robot extends IterativeRobot {
 			navX = new IMUAdvanced(port, UpdateRateHz);
 		} catch(Exception ex){System.out.println("NavX not working");};
 		shootTimer.start();
+		leftEncoder.setDistancePerPulse(0.009765625);
+		rightEncoder.setDistancePerPulse(0.009765625);
     }
 	
 	/**

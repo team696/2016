@@ -1,11 +1,11 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.commands.FastTurn;
-import org.usfirst.frc.team696.robot.commands.Pivot;
+import org.usfirst.frc.team696.robot.commands.SetPivot;
 import org.usfirst.frc.team696.robot.commands.SetTelescopingArm;
 import org.usfirst.frc.team696.robot.commands.Shift;
 import org.usfirst.frc.team696.robot.commands.Shoot;
-import org.usfirst.frc.team696.robot.commands.Shooter;
+import org.usfirst.frc.team696.robot.commands.SetShooterSpeed;
 import org.usfirst.frc.team696.utilities.JoystickAnalogButton;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -41,18 +41,18 @@ public class OI {
 		shiftHighButton.whenPressed(new Shift(false));
 		shiftLowButton.whenPressed(new Shift(true));
 		
-		pivotUpButton.whileHeld(new Pivot(true, 2.5));
-		pivotDownButton.whileHeld(new Pivot(true, -2.5));
-		pivotUpButton.whenInactive(new Pivot(true, 0));
-		pivotDownButton.whenInactive(new Pivot(true, 0));
+		pivotUpButton.whileHeld(new SetPivot(true, 2.5));
+		pivotDownButton.whileHeld(new SetPivot(true, -2.5));
+		pivotUpButton.whenInactive(new SetPivot(true, 0));
+		pivotDownButton.whenInactive(new SetPivot(true, 0));
 		
 		shootButton.whenPressed(new Shoot());
-		shootingSpeedButton.whenPressed(new Shooter(4500));
-		intakeSpeedButton.whenPressed(new Shooter(-3500));
-		stopWheelButton.whenPressed(new Shooter(0));
+		shootingSpeedButton.whenPressed(new SetShooterSpeed(4500));
+		intakeSpeedButton.whenPressed(new SetShooterSpeed(-3500));
+		stopWheelButton.whenPressed(new SetShooterSpeed(0));
 		
-		intakePivotArmPosButton.whenPressed(new Pivot(false, 0));
-		shootPivotArmPosButton.whenPressed(new Pivot(false, 160));
+		intakePivotArmPosButton.whenPressed(new SetPivot(false, 0));
+		shootPivotArmPosButton.whenPressed(new SetPivot(false, 160));
 		
 		telescopingArmFullPosButton.whenPressed(new SetTelescopingArm(2));
 		telescopingArmMidPosButton.whenPressed(new SetTelescopingArm(1));

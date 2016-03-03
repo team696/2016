@@ -7,17 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Shooter extends Command {
+public class SetShooterSpeed extends Command {
 
 	double topRPM = 0;
 	double bottomRPM= 0;
 	
-    public Shooter(double topRPM, double bottomRPM) {
+    public SetShooterSpeed(double topRPM, double bottomRPM) {
         this.topRPM = topRPM;
         this.bottomRPM = bottomRPM;
     }
     
-    public Shooter(double RPM){
+    public SetShooterSpeed(double RPM){
     	topRPM = RPM; 
     	bottomRPM = RPM;
     }
