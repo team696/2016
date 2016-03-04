@@ -18,9 +18,12 @@ public class TeleopDrive extends Command {
 	double rightSpeed = 0;
 	double goalAngle;
 	double currentAngle;
-	double kP = 0.0105;
-	double kI = 0.0002;
-	double kD = 0.0003;
+	double kPHigh = 0.0105;
+	double kIHigh = 0.0002;
+	double kDHigh = 0.0003;
+	double kPLow  = 0.009;
+	double kILow  = 0.00015;
+	double kDLow  = 0.00025;
 	double alpha = 0.95;
 	double cumulativeError = 0;
 	double derivativeError = 0;
@@ -30,7 +33,7 @@ public class TeleopDrive extends Command {
 	double output = 0;
 	boolean fastTurn = false;
 	
-	PIDControl PID = new PIDControl(kP, kI, kD, alpha);
+	PIDControl PID = new PIDControl(kPHigh, kIHigh, kDHigh, alpha);
 	
     public TeleopDrive() {
     	requires(Robot.chassis);
@@ -43,11 +46,16 @@ public class TeleopDrive extends Command {
     }
 
     protected void execute() {
-    	fastTurn = Robot.fastTurn;
+    	if(Robot.shiftedHigh)PID.setPID(kPHigh, kIHigh, kDHigh, alpha);
+    	else PID.setPID(kPLow, kILow, kDLow, alpha);
+    	
     	speed = Robot.oi.arduino.getAxis(Joystick.AxisType.kY);
     	speed = Util.deadZone(speed, -0.05, 0.05, 0);
+    	
     	turnValue = Robot.oi.wheel.getAxis(Joystick.AxisType.kX);
     	turnValue = Util.smoothDeadZone(turnValue, -0.09, 0.09, -1, 1, 0);
+    	
+    	fastTurn = Robot.fastTurn;
     	if(fastTurn)turnValue*=2;
     	
     	leftSpeed = speed;

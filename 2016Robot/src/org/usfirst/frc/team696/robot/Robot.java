@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
 	public static Encoder rightEncoder = new Encoder(RobotMap.encoderRightA, RobotMap.encoderRightB);
 	
-	public boolean shiftedHigh = false;
+	public static boolean shiftedHigh = true;
     Command autonomousCommand;
     SendableChooser chooser;
     public static IMU navX;
