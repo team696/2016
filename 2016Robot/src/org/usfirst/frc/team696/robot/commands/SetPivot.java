@@ -12,12 +12,36 @@ public class SetPivot extends Command {
 	boolean autoUnderLift = false;
 	double incrementValue = 0;
 	double targetAngle = 0;
+	
 	double zeroPivotPos = 0;
 	double climbingAngle = 0;
 	double shootAtBatterPos = 0;
+	double distanceShot = 0;
+	double partWay = 0;
 	
     public SetPivot(boolean incremental, double value) {
-    	if(!incremental)this.targetAngle = value;
+    	if(!incremental){
+    		switch((int)value){
+    		case 0:
+    			targetAngle = zeroPivotPos;
+    			break;
+    		case 1:
+    			targetAngle = partWay;
+    			break;
+    		case 2:
+    			targetAngle = distanceShot;
+    			break;
+    		case 3:
+    			targetAngle = shootAtBatterPos;
+    			break;
+    		case 4:
+    			targetAngle = climbingAngle;
+    			break;
+			default:
+				targetAngle = zeroPivotPos;
+				break;
+    		}
+    	}
     	else incrementValue = value;
     	this.incremental = incremental;
     } 

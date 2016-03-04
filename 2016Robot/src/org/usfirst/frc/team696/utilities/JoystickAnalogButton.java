@@ -1,9 +1,9 @@
 package org.usfirst.frc.team696.utilities;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Button;
 
-public class JoystickAnalogButton extends JoystickButton {
+public class JoystickAnalogButton extends Button {
 
 	double minVal = 0;
 	double maxVal = 0;
@@ -11,15 +11,20 @@ public class JoystickAnalogButton extends JoystickButton {
 	int axisNum;
 	
 	public JoystickAnalogButton(GenericHID joystick, int axisNum, double minVal, double maxVal) {
-		super(joystick, 1);
 		this.joystick = joystick;
 		this.axisNum = axisNum;
 		System.out.println();
 	}
 	
+//	public boolean grab(){
+//		return (minVal < joystick.getRawAxis(axisNum)) && (joystick.getRawAxis(axisNum) < maxVal);
+//	}
+
 	@Override
-	public boolean get(){
+	public boolean get() {
+		// TODO Auto-generated method stub
 		return (minVal < joystick.getRawAxis(axisNum)) && (joystick.getRawAxis(axisNum) < maxVal);
+
 	}
-	
+
 }

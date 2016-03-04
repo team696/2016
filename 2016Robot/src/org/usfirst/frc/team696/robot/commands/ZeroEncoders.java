@@ -7,27 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SetTelescopingArm extends Command {
+public class ZeroEncoders extends Command {
 
-	double target = 0;
-	double fullyExtended = 950;
-//	double fullyExtended = 500;
-	double halfExtended = 270;
-	double fullyContracted = 0;
-	
-    public SetTelescopingArm(int whatTarget) {
-        
-    	switch(whatTarget){
-    	case 1:
-    		target = halfExtended;
-    		break;
-    	case 2:
-    		target = fullyExtended;
-    		break;
-		default:
-			target = fullyContracted;
-			break;
-    	}
+    public ZeroEncoders() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -36,7 +20,12 @@ public class SetTelescopingArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.telescopingTargetDistance = target;
+    	Robot.bottomShooterWheelEncoder.reset();
+    	Robot.topShooterWheelEncoder.reset();
+    	Robot.leftEncoder.reset();
+    	Robot.rightEncoder.reset();
+    	Robot.telescopingEncoder.reset();
+    	Robot.pivotEncoder.reset();
     }
 
     // Make this return true when this Command no longer needs to run execute()

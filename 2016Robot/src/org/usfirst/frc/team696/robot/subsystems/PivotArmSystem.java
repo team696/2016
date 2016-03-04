@@ -26,7 +26,7 @@ public class PivotArmSystem extends Subsystem {
 	StallPrevention botSP = new StallPrevention(30);
 	
 	
-	boolean notRatchet = true;
+	boolean ratchet = false;
 	
 	double speed = 0.0;
 	double targetAngle = 0;
@@ -63,10 +63,14 @@ public class PivotArmSystem extends Subsystem {
     	error = this.targetAngle - Robot.pivotEncoder.get();
     	PID.setError(error);
     	speed = Util.constrain(PID.getValue(), -1, 1);
-    	pivotRatchetSol.set(notRatchet);
+    	pivotRatchetSol.set(!ratchet);
     	run();
     }
 
+    public void setRatcheted(boolean ratcheted){
+    	this.ratchet = ratcheted;
+    }
+    
     public void run(){
     	pivotMotors.set(speed);
     }

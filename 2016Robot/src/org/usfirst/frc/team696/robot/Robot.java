@@ -69,7 +69,6 @@ public class Robot extends IterativeRobot {
 	public static double topShooterRPM = 0;
 	public static double botShooterRPM = 0;
 	
-	
 	public static Timer shootTimer = new Timer();
 	Timer matchTimer = new Timer();
 	

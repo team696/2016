@@ -42,7 +42,8 @@ public class ChassisSystem extends Subsystem {
 	}
 	
     public void drive() {
-    	drive.tankDrive(leftSpeed, rightSpeed);
+//    	drive.tankDrive(leftSpeed, rightSpeed);
+    	drive.tankDrive(0, 0);
     }
     
     public void stop() {

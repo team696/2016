@@ -44,10 +44,10 @@ public class TeleopDrive extends Command {
 
     protected void execute() {
     	fastTurn = Robot.fastTurn;
-    	speed = Robot.oi.controlBoard.getAxis(Joystick.AxisType.kY);
-    	speed = Util.deadZone(speed, -0.025, 0.025, 0);
+    	speed = Robot.oi.arduino.getAxis(Joystick.AxisType.kY);
+    	speed = Util.deadZone(speed, -0.05, 0.05, 0);
     	turnValue = Robot.oi.wheel.getAxis(Joystick.AxisType.kX);
-    	turnValue = Util.smoothDeadZone(turnValue, -0.03, 0.03, -1, 1, 0);
+    	turnValue = Util.smoothDeadZone(turnValue, -0.09, 0.09, -1, 1, 0);
     	if(fastTurn)turnValue*=2;
     	
     	leftSpeed = speed;
@@ -83,8 +83,8 @@ public class TeleopDrive extends Command {
     	oldDelta = delta;
     	
     	
-    	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
-//    	
+//    	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
+    	
     }
 
     protected boolean isFinished() {
