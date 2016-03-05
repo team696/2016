@@ -31,8 +31,10 @@ public class TeleopDrive extends Command {
 	double oldDelta = 0;
 	double PIDSum = 0;
 	double output = 0;
+	double wheelNonLinearity = 0;
 	boolean fastTurn = false;
-	boolean regularDrive = true;
+	boolean regularDrive = false;
+	boolean arcingDrive = true;
 	
 	PIDControl PID = new PIDControl(kPHigh, kIHigh, kDHigh, alpha);
 	
@@ -63,10 +65,37 @@ public class TeleopDrive extends Command {
     	rightSpeed = speed;
 
     	if(regularDrive)regularArcade();
+    	else if(arcingDrive)arcingDrive();
     	else driveStraight();
     	
     	
     	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
+    	
+    }
+    
+    public void arcingDrive(){
+    	if(!fastTurn){
+	    	if (Robot.shiftedHigh) {
+	            wheelNonLinearity = 0.6;
+	            // Apply a sin function that's scaled to make it feel better.
+	            turnValue = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turnValue)
+	                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+	            turnValue = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turnValue)
+	                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+	        } else {
+	            wheelNonLinearity = 0.5;
+	            // Apply a sin function that's scaled to make it feel better.
+	            turnValue = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turnValue)
+	                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+	            turnValue = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turnValue)
+	                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+	            turnValue = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turnValue)
+	                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+	        }
+    	}
+    	
+    	leftSpeed-=turnValue;
+    	rightSpeed+= turnValue;
     	
     }
     
