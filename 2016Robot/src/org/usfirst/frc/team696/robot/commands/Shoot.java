@@ -22,10 +22,12 @@ public class Shoot extends Command {
     }
 
     protected void execute() {
-    	time = Robot.shootTimer.get();
-    	Robot.shoot.setShoot(true);
-    	if(time - startTime > 1)finished = true;
-    	else finished = false;
+    	if(Robot.isAtSpeed){
+	    	time = Robot.shootTimer.get();
+	    	Robot.shoot.setShoot(true);
+	    	if(time - startTime > 1)finished = true;
+	    	else finished = false;
+    	} else finished = true;
     }
 
     protected boolean isFinished() {

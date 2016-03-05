@@ -14,16 +14,17 @@ public class JoystickAnalogButton extends Button {
 		this.joystick = joystick;
 		this.axisNum = axisNum;
 		System.out.println();
+		this.minVal = minVal;
+		this.maxVal = maxVal;
 	}
 	
 //	public boolean grab(){
 //		return (minVal < joystick.getRawAxis(axisNum)) && (joystick.getRawAxis(axisNum) < maxVal);
 //	}
 
-	@Override
 	public boolean get() {
 		// TODO Auto-generated method stub
-		return (minVal < joystick.getRawAxis(axisNum)) && (joystick.getRawAxis(axisNum) < maxVal);
+		return (minVal < joystick.getRawAxis(axisNum) && joystick.getRawAxis(axisNum) < maxVal);
 
 	}
 

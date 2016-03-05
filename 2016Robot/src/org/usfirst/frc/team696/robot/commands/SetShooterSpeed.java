@@ -10,16 +10,30 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetShooterSpeed extends Command {
 
 	double topRPM = 0;
-	double bottomRPM= 0;
+	double botRPM= 0;
+	double topSpeed = 0;
+	double botSpeed = 0;
+	boolean isRPM = true;
 	
     public SetShooterSpeed(double topRPM, double bottomRPM) {
         this.topRPM = topRPM;
-        this.bottomRPM = bottomRPM;
+        this.botRPM = bottomRPM;
     }
     
     public SetShooterSpeed(double RPM){
     	topRPM = RPM; 
-    	bottomRPM = RPM;
+    	botRPM = RPM;
+    }
+    
+    public SetShooterSpeed(boolean isRPM, double value){
+		if(isRPM){	
+    		topRPM = value; 
+			botRPM = value;
+		} else {
+			topSpeed = value;
+			botSpeed = value;
+		}
+    	this.isRPM = isRPM;
     }
 
     protected void initialize() {
@@ -27,7 +41,10 @@ public class SetShooterSpeed extends Command {
 
     protected void execute() {
     	Robot.topShooterRPM = topRPM;
-    	Robot.botShooterRPM = bottomRPM;
+    	Robot.botShooterRPM = botRPM;
+    	Robot.topShooterSpeed = topSpeed;
+    	Robot.botShooterSpeed = botSpeed;
+    	Robot.isRPM = isRPM;
     }
 
     protected boolean isFinished() {

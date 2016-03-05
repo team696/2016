@@ -22,15 +22,15 @@ public class ShooterSystem extends Subsystem {
 	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
 	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
 	
-	StallPrevention topSP = new StallPrevention(40);
-	StallPrevention botSP = new StallPrevention(40);
+	StallPrevention topSP = new StallPrevention(43);
+	StallPrevention botSP = new StallPrevention(43);
 	
 	double speedTop = 0;
 	double speedBottom = 0;
 	double currentTopRPM = 0;
 	double currentBottomRPM = 0;
 	double topTargetRPM = 0;
-	double bottomTargetRPM = 0;
+	double botTargetRPM = 0;
 	double time = 0;
 	double oldTime = 0;
 	double topDistance = 0;
@@ -38,7 +38,7 @@ public class ShooterSystem extends Subsystem {
 	double bottomDistance = 0;
 	double oldBottomDistance = 0;
 	double topMotorPower = 0;
-	double bottomMotorPower = 0;
+	double botMotorPower = 0;
 	double direction = 0;
 	
 	Timer timer = new Timer();
@@ -55,33 +55,51 @@ public class ShooterSystem extends Subsystem {
     
     public void run(){
     	topTargetRPM = Robot.topShooterRPM;
-    	bottomTargetRPM = Robot.botShooterRPM;
+    	botTargetRPM = Robot.botShooterRPM;
 
     	direction = Util.signOf(topTargetRPM);
     	
     	time = timer.get();
     	
-    	topDistance = Robot.topShooterWheelEncoder.get();
-    	currentTopRPM = Util.findVelocity(time, oldTime, Math.abs(topDistance), Math.abs(oldTopDistance));
-    	topTBH.setTargetRPM(Math.abs(topTargetRPM));
-    	topTBH.setCurrentRPM(Math.abs(currentTopRPM));
-    	topTBH.run();
-    	oldTopDistance = topDistance;
-    	
-    	bottomDistance = Robot.bottomShooterWheelEncoder.get();
-    	currentBottomRPM = Util.findVelocity(time, oldTime, Math.abs(bottomDistance), Math.abs(oldBottomDistance));
-    	bottomTBH.setTargetRPM(Math.abs(bottomTargetRPM));
-    	bottomTBH.setCurrentRPM(Math.abs(currentBottomRPM));
-    	bottomTBH.run();
-    	oldBottomDistance = bottomDistance;
+    	if(direction > 0){
+	    	topDistance = Robot.topShooterWheelEncoder.get();
+	    	currentTopRPM = Util.findVelocity(time, oldTime, Math.abs(topDistance), Math.abs(oldTopDistance));
+	    	topTBH.setTargetRPM(Math.abs(topTargetRPM));
+	    	topTBH.setCurrentRPM(Math.abs(currentTopRPM));
+	    	topTBH.run();
+	    	oldTopDistance = topDistance;
+	    	
+	    	bottomDistance = Robot.bottomShooterWheelEncoder.get();
+	    	currentBottomRPM = Util.findVelocity(time, oldTime, Math.abs(bottomDistance), Math.abs(oldBottomDistance));
+	    	bottomTBH.setTargetRPM(Math.abs(botTargetRPM));
+	    	bottomTBH.setCurrentRPM(Math.abs(currentBottomRPM));
+	    	bottomTBH.run();
+	    	oldBottomDistance = bottomDistance;
+	    	
+	    	topMotorPower = topTBH.getMotorPower();
+    	} else {
+    		topMotorPower = topTargetRPM;
+    		botMotorPower = botTargetRPM;
+    	}
 
     	oldTime = time;
     	
-    	topMotorPower = topTBH.getMotorPower();
+    	if(!Robot.isRPM){
+    		topMotorPower = Robot.topShooterSpeed;
+    		botMotorPower = Robot.botShooterSpeed;
+    		Robot.isAtSpeed = true;
+    	} else {
+    		if(topTargetRPM - currentTopRPM < 100 /*&& botTargetRPM - currentBottomRPM < 100*/)Robot.isAtSpeed = true;
+        	else Robot.isAtSpeed = false;
+    	}
+    	
     	if(Math.abs(topMotorPower) < 0.05)topMotorPower = 0;
+
     	
     	topSP.setCurrentAmps(Robot.PDP.getCurrent(12), topMotorPower*direction);
     	botSP.setCurrentAmps(Robot.PDP.getCurrent(3), topMotorPower*direction);
+    	
+//    	System.out.println("SP: " + topSP.getOutput());
     	
     	topShooterWheel.set(topSP.getOutput());
     	bottomShooterWheel.set(botSP.getOutput());

@@ -68,11 +68,18 @@ public class Robot extends IterativeRobot {
 	public static double targetAngle = 0;
 	public static double topShooterRPM = 0;
 	public static double botShooterRPM = 0;
+	public static double topShooterSpeed = 0;
+	public static double botShooterSpeed = 0;
+	public static boolean isRPM = true;
 	
 	public static Timer shootTimer = new Timer();
 	Timer matchTimer = new Timer();
 	
 	public static PowerDistributionPanel PDP = new PowerDistributionPanel();
+	
+	public static boolean isAtSpeed = false;
+	
+//	public static boolean manualPivotControl = false;
 	
 	/**
      * This function is run when the robot is first started up and should be

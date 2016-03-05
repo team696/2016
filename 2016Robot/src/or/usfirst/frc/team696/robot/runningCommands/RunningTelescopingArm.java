@@ -40,35 +40,28 @@ public class RunningTelescopingArm extends Command {
     	
     	speed = 1 * Util.signOf(error);
 
-//    	speed = Util.constrain(speed, -1, 0.7);
     	speed = Util.constrain(speed, -0.7, 0.7);
     	
     	if(Math.abs(error) < 300)speed = Util.constrain(speed, -0.5, 0.5);
     	
-    	if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.3, 0.3);
+    	if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.2, 0.2);
     	
-//    	if(maxDistance < current && speed > 0 || current < 10 && speed < 0)speed = 0.05 * Util.signOf(speed);
     	if(maxDistance < current && speed > 0 || current < 10 && speed < 0)speed = 0;
     	
     	if(error == 0)speed = 0;
     	
-    	if(speed < -0.3){
+    	if(speed < 0){
     		Robot.telescopingArmSystem.ratchet(true);
-    		Robot.pivotArm.setRatcheted(true);
-    	} else {
+    		Robot.pivotArm.ratchet(true);
+    	}else if(speed > 0){
     		Robot.telescopingArmSystem.ratchet(false);
-    		Robot.pivotArm.setRatcheted(false);
+    		Robot.pivotArm.ratchet(false);
+    	}else{
+    		Robot.telescopingArmSystem.ratchet(true);
     	}
     	
-//    	if(speed > 0 && current > target)speed = 0;
-//    	if(speed < 0 && current < target) speed = 0;
+    	if(!Robot.telescopingArmSystem.getRatchet() && speed > 0)speed = 0;
     	
-//    	System.out.println("   error: " + error + "   current: " + current + "   target: " + target + "   speed: " + speed + "   timer: " + timer.get());
-    	
-//    	if(Robot.PDP.getCurrent(8) > 6.5 && Robot.telescopingEncoder.get() > 200)Robot.telescopingArmSystem.ratchet(true);
-    	
-    	System.out.println("speed: " + speed + "   error: " + error);
-    	   	
     	Robot.telescopingArmSystem.set(speed);
     	
     	oldSpeed = speed;

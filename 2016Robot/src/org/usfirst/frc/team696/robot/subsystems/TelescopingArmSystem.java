@@ -30,6 +30,10 @@ public class TelescopingArmSystem extends Subsystem {
     	telescopingArms.set(speed);
     }
     
+    public boolean getRatchet(){
+    	return telescopingRatchet.get();
+    }
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

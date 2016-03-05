@@ -18,6 +18,7 @@ public class SetPivot extends Command {
 	double shootAtBatterPos = 0;
 	double distanceShot = 0;
 	double partWay = 0;
+	double speed = 0;
 	
     public SetPivot(boolean incremental, double value) {
     	if(!incremental){
@@ -48,6 +49,10 @@ public class SetPivot extends Command {
 
     public SetPivot(boolean autoUnderLift){
     	this.autoUnderLift = autoUnderLift;
+    }
+    
+    public SetPivot(double speed){
+    	this.speed = speed;
     }
     
     protected void initialize() {

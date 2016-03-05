@@ -65,9 +65,11 @@ public class PivotArmSystem extends Subsystem {
     	speed = Util.constrain(PID.getValue(), -1, 1);
     	pivotRatchetSol.set(!ratchet);
     	run();
+    	
+    	System.out.println(Robot.pivotEncoder.get());
     }
 
-    public void setRatcheted(boolean ratcheted){
+    public void ratchet(boolean ratcheted){
     	this.ratchet = ratcheted;
     }
     
