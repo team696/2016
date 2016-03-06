@@ -56,7 +56,9 @@ public class TeleopDrive extends Command {
     	speed = Util.deadZone(speed, -0.05, 0.05, 0);
     	
     	turnValue = Robot.oi.wheel.getAxis(Joystick.AxisType.kX);
-    	turnValue = Util.smoothDeadZone(turnValue, -0.2, 0.2, -1, 1, 0);
+    	turnValue = Util.smoothDeadZone(turnValue, -0.13, 0.13, -1, 1, 0);
+//    	if squaring isn't enough, do this
+//    	turnValue = Util.map(turnValue, -1, 1, -1.5, 1.5);
     	
     	fastTurn = Robot.fastTurn;
     	if(fastTurn)turnValue*=2;
@@ -92,6 +94,7 @@ public class TeleopDrive extends Command {
 	            turnValue = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turnValue)
 	                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 	        }
+	    	turnValue = Math.pow(turnValue, 2);
     	}
     	
     	leftSpeed-=turnValue;

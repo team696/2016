@@ -23,6 +23,7 @@ public class RunningTelescopingArm extends Command {
 	double oldError = 0;
 	Timer timer = new Timer();
 	boolean hanging = false;
+	boolean firstTimeExtend = true;
 	
     public RunningTelescopingArm() {
     	requires(Robot.telescopingArmSystem);
@@ -50,18 +51,18 @@ public class RunningTelescopingArm extends Command {
     	if(Math.abs(error) < 300)speed = Util.constrain(speed, -0.5, 0.5);
     	
     	if(!hanging)if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.3, 0.3);
-    	speed = Util.constrain(speed, -0.5, 0.3);
-//    	speed = Util.constrain(speed, -0.5, 0.5);
-//    	
-//    	if(Math.abs(error) < 300)speed = Util.constrain(speed, -0.35, 0.35);
-//    	
-//    	if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.2, 0.2);
+    	if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.5, 0.3);
     	
     	if(maxDistance < current && speed > 0 || current < 10 && speed < 0)speed = 0;
     	
     	if(error == 0)speed = 0;
     	
-    	if(speed < 0)hanging = true;
+    	if(speed > 0 && firstTimeExtend){
+    		speed = -0.1;
+    		firstTimeExtend = false;
+    	}
+    	
+    	if(speed < 0 && !firstTimeExtend)hanging = true;
     	
     	if(speed < 0){
     		Robot.telescopingArmSystem.ratchet(true);

@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
 	
 	public static boolean shiftedHigh = true;
     Command autonomousCommand;
-    SendableChooser chooser;
+//    SendableChooser chooser;
     public static IMU navX;
 	SerialPort port;
 	public static boolean fastTurn = false;
@@ -88,7 +88,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        chooser = new SendableChooser();
+//        chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new DoNothing());
 //        chooser.addObject("Low Bar", new LowBarAuto());
 //        chooser.addObject("Do Nothing", new DoNothing());
@@ -128,21 +128,20 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
     	matchTimer.start();
-        autonomousCommand = (Command) chooser.getSelected();
-        
-//        String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
-//		switch(autoSelected) {
-//		case "Low Bar":
-//			autonomousCommand = new LowBarAuto();
-//			break;
-//		case "Default Auto":
-//		default:
-//			autonomousCommand = new Drive(navX.getYaw(), 0, 0);
-//			break;
-//		} 
+//        autonomousCommand = (Command) chooser.getSelected();
+        String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
+		switch(autoSelected) {
+		case "Low Bar":
+			autonomousCommand = new LowBarAuto();
+			break;
+		case "Default Auto":
+		default:
+			autonomousCommand = new DoNothing();
+			break;
+		} 
     	
-//        Scheduler.getInstance().add(new RunningPivot());
-//        Scheduler.getInstance().add(new RunningShooter());
+        Scheduler.getInstance().add(new RunningPivot());
+        Scheduler.getInstance().add(new RunningShooter());
         
         if (autonomousCommand != null) autonomousCommand.start();
         
