@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LowBarAuto extends CommandGroup {
+public class LowBarAutoPickUp extends CommandGroup {
     
-    public  LowBarAuto() {
+    public  LowBarAutoPickUp() {
     	addSequential(new SetPivot(false, 0));
     	addParallel(new Drive(Robot.navX.getYaw(), 0.5, 1));
     	addSequential(new SetShooterSpeed(false, false, -0.75), 2);
@@ -22,7 +22,7 @@ public class LowBarAuto extends CommandGroup {
     	addParallel(new SetPivot(false, 100));
     	addSequential(new Drive(Robot.navX.getYaw() - 120, 0.5, 0));
     	addSequential(new SetShooterSpeed(false, false, 1));
-    	addSequential(new Shoot());
+    	addSequential(new Shoot(), 2);
     	addSequential(new SetShooterSpeed(false, false, 0));
     	
     }

@@ -21,6 +21,7 @@ public class SetPivot extends Command {
 	double speed = 0;
 	
     public SetPivot(boolean incremental, double value) {
+    	System.out.println("SetPivot Constructor");
     	if(!incremental){
     		switch((int)value){
     		case 0:
@@ -47,18 +48,19 @@ public class SetPivot extends Command {
     	this.incremental = incremental;
     } 
 
-    public SetPivot(boolean autoUnderLift){
-    	this.autoUnderLift = autoUnderLift;
-    }
+//    public SetPivot(boolean autoUnderLift){
+//    	this.autoUnderLift = autoUnderLift;
+//    }
     
-    public SetPivot(double speed){
-    	this.speed = speed;
-    }
+//    public SetPivot(double speed){
+//    	this.speed = speed;
+//    }
     
     protected void initialize() {
     }
 
     protected void execute() {
+    	System.out.println("execute of SetPivot");
     	if(incremental)Robot.targetAngle+=incrementValue;
     	if(!incremental)Robot.targetAngle = targetAngle;
     }

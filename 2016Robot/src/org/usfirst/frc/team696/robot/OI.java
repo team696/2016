@@ -66,9 +66,6 @@ public class OI {
 //		stopWheelButton.whenPressed(new SetShooterSpeed(0));
 		
 		
-//		highShootingSpeedButton.whenPressed(new SetShooterSpeed(false, 1));
-//		lowShootingSpeedButton.whenPressed(new SetShooterSpeed(false, 0.9));
-//		noShootingSpeedButton.whenPressed(new SetShooterSpeed(false, 0));
 		setShootingSpeedButton.whileHeld(new SetShooterSpeed(true, false, arduino.getRawAxis(3)));
 		setShootingSpeedButton.whenReleased(new SetShooterSpeed(false, false, 0));
 		

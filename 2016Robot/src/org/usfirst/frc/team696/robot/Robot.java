@@ -2,7 +2,7 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.autonomousCommands.DoNothing;
-import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAuto;
+import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAutoPickUp;
 import org.usfirst.frc.team696.robot.commands.Drive;
 import org.usfirst.frc.team696.robot.runningCommands.RunningPivot;
 import org.usfirst.frc.team696.robot.runningCommands.RunningShooter;
@@ -80,6 +80,9 @@ public class Robot extends IterativeRobot {
 	
 	public static boolean isAtSpeed = false;
 	
+	public static int state = 0;
+	public static boolean startReleaseRatchetTimer = false;
+	
 //	public static boolean manualPivotControl = false;
 	
 	/**
@@ -132,7 +135,7 @@ public class Robot extends IterativeRobot {
         String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
 		switch(autoSelected) {
 		case "Low Bar":
-			autonomousCommand = new LowBarAuto();
+			autonomousCommand = new LowBarAutoPickUp();
 			break;
 		case "Default Auto":
 		default:
@@ -155,6 +158,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	state = 0;
     	Scheduler.getInstance().add(new TeleopDrive());
     	Scheduler.getInstance().add(new RunningPivot());
     	Scheduler.getInstance().add(new RunningShooter());
@@ -167,6 +171,7 @@ public class Robot extends IterativeRobot {
     	matchTimer.start();
     }
 
+    
     /**
      * This function is called periodically during operator control
      */

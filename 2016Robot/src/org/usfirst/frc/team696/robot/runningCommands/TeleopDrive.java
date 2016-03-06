@@ -94,7 +94,7 @@ public class TeleopDrive extends Command {
 	            turnValue = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turnValue)
 	                    / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 	        }
-	    	turnValue = Math.pow(turnValue, 2);
+	    	turnValue = Math.pow(turnValue, 2) * Util.signOf(turnValue);
     	}
     	
     	leftSpeed-=turnValue;
