@@ -1,7 +1,13 @@
 
 package org.usfirst.frc.team696.robot;
 
-import org.usfirst.frc.team696.robot.commands.SetPivot;
+import org.usfirst.frc.team696.robot.autonomousCommands.DoNothing;
+import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAuto;
+import org.usfirst.frc.team696.robot.commands.Drive;
+import org.usfirst.frc.team696.robot.runningCommands.RunningPivot;
+import org.usfirst.frc.team696.robot.runningCommands.RunningShooter;
+import org.usfirst.frc.team696.robot.runningCommands.RunningTelescopingArm;
+import org.usfirst.frc.team696.robot.runningCommands.TeleopDrive;
 import org.usfirst.frc.team696.robot.subsystems.ChassisSystem;
 import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShifterSystem;
@@ -14,7 +20,6 @@ import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -25,10 +30,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import or.usfirst.frc.team696.robot.runningCommands.RunningPivot;
-import or.usfirst.frc.team696.robot.runningCommands.RunningShooter;
-import or.usfirst.frc.team696.robot.runningCommands.RunningTelescopingArm;
-import or.usfirst.frc.team696.robot.runningCommands.TeleopDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -88,9 +89,10 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         chooser = new SendableChooser();
-//        chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+//        chooser.addDefault("Default Auto", new DoNothing());
+//        chooser.addObject("Low Bar", new LowBarAuto());
+//        chooser.addObject("Do Nothing", new DoNothing());
+//        SmartDashboard.putData("Auto mode", chooser);
         try {
 			byte UpdateRateHz = 50;
 			port = new SerialPort(57600, SerialPort.Port.kMXP);
@@ -99,6 +101,7 @@ public class Robot extends IterativeRobot {
 		shootTimer.start();
 		leftEncoder.setDistancePerPulse(0.009765625);
 		rightEncoder.setDistancePerPulse(0.009765625);
+//		navX.zeroYaw();
     }
 	
 	/**
@@ -127,17 +130,20 @@ public class Robot extends IterativeRobot {
     	matchTimer.start();
         autonomousCommand = (Command) chooser.getSelected();
         
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
+//        String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
+//		switch(autoSelected) {
+//		case "Low Bar":
+//			autonomousCommand = new LowBarAuto();
+//			break;
+//		case "Default Auto":
+//		default:
+//			autonomousCommand = new Drive(navX.getYaw(), 0, 0);
+//			break;
+//		} 
     	
+//        Scheduler.getInstance().add(new RunningPivot());
+//        Scheduler.getInstance().add(new RunningShooter());
+        
         if (autonomousCommand != null) autonomousCommand.start();
         
     }

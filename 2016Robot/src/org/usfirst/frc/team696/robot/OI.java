@@ -4,7 +4,7 @@ package org.usfirst.frc.team696.robot;
 import org.usfirst.frc.team696.robot.commands.FastTurn;
 import org.usfirst.frc.team696.robot.commands.SetPivot;
 import org.usfirst.frc.team696.robot.commands.SetTelescopingArm;
-import org.usfirst.frc.team696.robot.commands.Shift;
+import org.usfirst.frc.team696.robot.commands.ShiftHigh;
 import org.usfirst.frc.team696.robot.commands.Shoot;
 import org.usfirst.frc.team696.robot.commands.ZeroEncoders;
 import org.usfirst.frc.team696.utilities.JoystickAnalogButton;
@@ -29,14 +29,20 @@ public class OI {
 	Button pivotUpButton = new JoystickAnalogButton(arduino, 1, -1.1, -0.7);
 	Button pivotDownButton = new JoystickAnalogButton(arduino, 1, 0.7, 1.1);
 	
-	Button shootButton = new JoystickButton(arduino, 11);
-	Button shootingSpeedButton = new JoystickAnalogButton(arduino, 3, 0.7, 1.1);
-	Button intakeSpeedButton = new JoystickAnalogButton(arduino, 3, -1.1, -0.7);
-	Button stopWheelButton = new JoystickAnalogButton(arduino, 3, -0.5, 0.5);
+	Button shootButton = new JoystickButton(arduino, 7);
 	
-	Button telescopingArmFullPosButton = new JoystickButton(arduino, 4);
-	Button telescopingArmMidPosButton = new JoystickButton(arduino, 5);
-	Button telescopingArmFullRetractButton = new JoystickButton(arduino, 6);
+//	Button highShootingSpeedButton = new JoystickAnalogButton(arduino, 3, 0.7, 1.1);
+//	Button noShootingSpeedButton = new JoystickAnalogButton(arduino, 3, -0.5, 0.5);
+//	Button lowShootingSpeedButton = new JoystickAnalogButton(arduino, 3, -1.1, -0.7);
+	Button setShootingSpeedButton = new JoystickButton(arduino, 11);
+	
+	Button intakeSpeedButton = new JoystickAnalogButton(arduino, 2, -1.1, -0.7);
+	Button noSpeedButton = new JoystickAnalogButton(arduino, 2, -0.5, 0.5);
+	Button outtakeSpeedButton = new JoystickAnalogButton(arduino, 2, 0.7, 1.1);
+	
+	Button telescopingArmFullPosButton = new JoystickButton(arduino, 9);
+	Button telescopingArmMidPosButton = new JoystickButton(arduino, 10);
+	Button telescopingArmFullRetractButton = new JoystickButton(arduino, 8);
 	
 	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
@@ -44,8 +50,8 @@ public class OI {
 		fastTurn.whenPressed(new FastTurn(true));
 		fastTurn.whenReleased(new FastTurn(false));
 		
-		shiftHighButton.whenPressed(new Shift(false));
-		shiftLowButton.whenPressed(new Shift(true));
+		shiftHighButton.whenPressed(new ShiftHigh(true));
+		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
 		pivotUpButton.whileHeld(new SetPivot(true, 2.5));
 		pivotDownButton.whileHeld(new SetPivot(true, -2.5));
@@ -60,9 +66,15 @@ public class OI {
 //		stopWheelButton.whenPressed(new SetShooterSpeed(0));
 		
 		
-		shootingSpeedButton.whenPressed(new SetShooterSpeed(false, 1));
-		intakeSpeedButton.whenPressed(new SetShooterSpeed(false, -0.75));
-		stopWheelButton.whileHeld(new SetShooterSpeed(false, 0));
+//		highShootingSpeedButton.whenPressed(new SetShooterSpeed(false, 1));
+//		lowShootingSpeedButton.whenPressed(new SetShooterSpeed(false, 0.9));
+//		noShootingSpeedButton.whenPressed(new SetShooterSpeed(false, 0));
+		setShootingSpeedButton.whileHeld(new SetShooterSpeed(true, false, arduino.getRawAxis(3)));
+		setShootingSpeedButton.whenReleased(new SetShooterSpeed(false, false, 0));
+		
+		intakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, -0.75));
+		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.75));
+		noSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0));
 		
 //		intakePivotArmPosButton.whenPressed(new SetPivot(false, arduino.getRawAxis(1)));
 //		shootPivotArmPosButton.whenPressed(new SetPivot(false, 160));

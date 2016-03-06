@@ -25,16 +25,43 @@ public class SetShooterSpeed extends Command {
     	botRPM = RPM;
     }
     
-    public SetShooterSpeed(boolean isRPM, double value){
-		if(isRPM){	
-    		topRPM = value; 
-			botRPM = value;
-		} else {
-			topSpeed = value;
-			botSpeed = value;
-		}
+    public SetShooterSpeed(boolean isAxis, boolean isRPM, double value){
+    	if(!isRPM){
+    		if(isAxis){
+	    		if(value > 0.7){
+	    			topSpeed = 1;
+	    			botSpeed = 1;
+	    		} else if(value < -0.7){
+	    			topSpeed = 0.8;
+	    			botSpeed = 0.8;
+	    		} else {
+	    			topSpeed = 0.9;
+	    			botSpeed = 0.9;
+	    		}
+    		} else {
+    			topSpeed = value;
+    			botSpeed = value;
+    		}
+    	} else {
+    		if(isAxis){
+    			if(value > 0.7){
+	    			topRPM = 4500;
+	    			botRPM = 4500;
+	    		} else if(value < -0.7){
+	    			topRPM = 4000;
+	    			botRPM = 4000;
+	    		} else {
+	    			topRPM = 4250;
+	    			botRPM = 4250;
+	    		}
+    		} else {
+    			topRPM = value;
+    			botRPM = value;
+    		}
+    	}
     	this.isRPM = isRPM;
     }
+    
 
     protected void initialize() {
     }

@@ -9,9 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ZeroEncoders extends Command {
 
+	boolean isFinished = false;
+	
     public ZeroEncoders() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	isFinished = false;
     }
 
     // Called just before this Command runs the first time
@@ -26,11 +29,12 @@ public class ZeroEncoders extends Command {
     	Robot.rightEncoder.reset();
     	Robot.telescopingEncoder.reset();
     	Robot.pivotEncoder.reset();
+    	isFinished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return isFinished;
     }
 
     // Called once after isFinished returns true

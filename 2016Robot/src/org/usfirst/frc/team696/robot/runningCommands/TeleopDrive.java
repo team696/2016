@@ -1,4 +1,4 @@
-package or.usfirst.frc.team696.robot.runningCommands;
+package org.usfirst.frc.team696.robot.runningCommands;
 
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.utilities.PIDControl;
@@ -56,7 +56,7 @@ public class TeleopDrive extends Command {
     	speed = Util.deadZone(speed, -0.05, 0.05, 0);
     	
     	turnValue = Robot.oi.wheel.getAxis(Joystick.AxisType.kX);
-    	turnValue = Util.smoothDeadZone(turnValue, -0.15, 0.15, -1, 1, 0);
+    	turnValue = Util.smoothDeadZone(turnValue, -0.2, 0.2, -1, 1, 0);
     	
     	fastTurn = Robot.fastTurn;
     	if(fastTurn)turnValue*=2;

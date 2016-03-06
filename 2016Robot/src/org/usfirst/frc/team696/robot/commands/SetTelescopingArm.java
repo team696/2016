@@ -12,7 +12,7 @@ public class SetTelescopingArm extends Command {
 	double target = 0;
 	double fullyExtended = 950;
 //	double fullyExtended = 500;
-	double halfExtended = 270;
+	double halfExtended = 220;
 	double fullyContracted = 0;
 	
     public SetTelescopingArm(int whatTarget) {

@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Shift extends Command {
+public class ShiftHigh extends Command {
 
 	boolean shiftHigh = true;
 	
-    public Shift(boolean shiftHigh) {
+    public ShiftHigh(boolean shiftHigh) {
         requires(Robot.shifter);
         this.shiftHigh = shiftHigh;
     }

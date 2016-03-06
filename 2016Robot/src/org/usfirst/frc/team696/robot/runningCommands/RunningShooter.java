@@ -1,4 +1,4 @@
-package or.usfirst.frc.team696.robot.runningCommands;
+package org.usfirst.frc.team696.robot.runningCommands;
 
 import org.usfirst.frc.team696.robot.Robot;
 
