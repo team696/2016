@@ -1,4 +1,4 @@
-package org.usfirst.frc.team696.robot;
+package org.usfirst.frc.team696.robot.utilities;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 

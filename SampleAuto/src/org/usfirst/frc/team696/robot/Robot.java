@@ -2,7 +2,7 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.GetCamVals;
-import org.usfirst.frc.team696.robot.autonomouscommands.AutoAdjust;
+import org.usfirst.frc.team696.robot.autonomousCommands.AutoAdjust;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;

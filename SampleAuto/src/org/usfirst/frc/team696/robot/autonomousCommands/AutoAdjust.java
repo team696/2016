@@ -1,7 +1,8 @@
-package org.usfirst.frc.team696.robot.autonomouscommands;
+package org.usfirst.frc.team696.robot.autonomousCommands;
 
-import org.usfirst.frc.team696.robot.GetCamVals;
+import org.usfirst.frc.team696.utilities.GetCamVals;
 import org.usfirst.frc.team696.robot.Robot;
+import org.usfirst.frc.team696.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,6 +19,8 @@ public class AutoAdjust extends Command {
     
 	double minAcceptableArea = 0;
 	double maxAcceptableArea = 0;
+	double minLeftRange = 0;
+	double minRightRange = 0;
 	double acceptableRange = 0;
 	
 	boolean inRange = false;
@@ -29,7 +32,6 @@ public class AutoAdjust extends Command {
 	
     public AutoAdjust() {
         requires(Robot.chassis);
-        requires(Robot.pivot);
     }
 
     // Called just before this Command runs the first time
@@ -45,14 +47,17 @@ public class AutoAdjust extends Command {
         height = camCaller.getHeight();
         width = camCaller.getWidthVals();
         
-    	if (Robot.leftEncoder < acceptableRange) {
-    		new Drive(Robot.navX.getYaw(), 1, 0.5)
+    	if (Robot.leftEncoder.get() < acceptableRange) {
+    		new Drive(Robot.navX.getYaw(), 1, 0.5);
     	} else inRange = true;
     	
     	if (inRange) {
-    		if (area < acceptableArea && centerX < minLeftRange) {
+    		if (area < minAcceptableArea && centerX < minLeftRange) {
     			new Drive(Robot.navX.getYaw()+5, 1, 0.25);
-    		} else if (area < maxAcceptableArea && area > minAcceptableArea)fire = true;
+    		} else if (area < maxAcceptableArea && area > minAcceptableArea) {
+    			fire = true;
+    		}
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
