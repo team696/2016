@@ -1,5 +1,7 @@
 package org.usfirst.frc.team696.robot.subsystems;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
 import org.usfirst.frc.team696.utilities.DoubleMotor;
@@ -66,13 +68,13 @@ public class PivotArmSystem extends Subsystem {
     	error = this.targetAngle - Robot.pivotEncoder.get();
     	PID.setError(error);
     	speed = Util.constrain(PID.getValue(), -1, 1);
-    	pivotRatchetSol.set(!ratchet);
     	run();
+    	System.out.println(Robot.pivotEncoder.get());
     	
     }
 
     public void ratchet(boolean ratcheted){
-    	this.ratchet = ratcheted;
+    	pivotRatchetSol.set(!ratcheted);
     }
     
     public void run(){

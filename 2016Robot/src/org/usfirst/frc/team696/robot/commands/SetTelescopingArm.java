@@ -10,24 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetTelescopingArm extends Command {
 
 	double target = 0;
-	double fullyExtended = 950;
+	double fullyExtended = 800;
 //	double fullyExtended = 500;
-	double halfExtended = 220;
+	double halfExtended = 40;
 	double fullyContracted = 0;
+	int whatTarget = 0;
 	
     public SetTelescopingArm(int whatTarget) {
-        
-    	switch(whatTarget){
-    	case 1:
-    		target = halfExtended;
-    		break;
-    	case 2:
-    		target = fullyExtended;
-    		break;
-		default:
-			target = fullyContracted;
-			break;
-    	}
+        this.whatTarget = whatTarget;
     }
 
     // Called just before this Command runs the first time
@@ -36,6 +26,21 @@ public class SetTelescopingArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	switch(whatTarget){
+    	case 1:
+    		target = halfExtended;
+    		Robot.state = 3;
+    		break;
+    	case 2:
+    		target = fullyExtended;
+    		Robot.startReleaseRatchetTimer = true;
+    		Robot.state = 1;
+    		break;
+		default:
+			target = fullyContracted;
+			Robot.state = 0;
+			break;
+    	}
     	Robot.telescopingTargetDistance = target;
     }
 

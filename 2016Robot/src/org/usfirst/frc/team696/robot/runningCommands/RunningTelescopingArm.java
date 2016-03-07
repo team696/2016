@@ -15,15 +15,13 @@ import org.usfirst.frc.team696.utilities.Util;
 public class RunningTelescopingArm extends Command {
 	
 	double maxDistance = 1000;
-	double current = 0;
+	double currentDistance = 0;
 	double target = 0;
 	double speed = 0;
 	double oldSpeed = 0;
 	double error = 0;
 	double oldError = 0;
 	Timer timer = new Timer();
-	boolean hanging = false;
-	boolean firstTimeExtend = true;
 	
     public RunningTelescopingArm() {
     	requires(Robot.telescopingArmSystem);
@@ -35,56 +33,51 @@ public class RunningTelescopingArm extends Command {
 
     protected void execute() {
     	target = Robot.telescopingTargetDistance;
+    	currentDistance = Robot.telescopingEncoder.get();
+    	error = target - currentDistance;
+    	error = Util.deadZone(error, -30, 30, 0);
     	
-    	current = Robot.telescopingEncoder.get();
-    	
-    	
-    	
-    	error = target - current;
-    	if(!hanging)error = Util.deadZone(error, -30, 30, 0);
-    	else error = Util.deadZone(0, -40, 40, 0);
-    	
-    	speed = 1 * Util.signOf(error);
-
-    	speed = Util.constrain(speed, -0.7, 0.7);
-    	
-    	if(Math.abs(error) < 300)speed = Util.constrain(speed, -0.5, 0.5);
-    	
-    	if(!hanging)if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.3, 0.3);
-    	if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.5, 0.3);
-    	
-    	if(maxDistance < current && speed > 0 || current < 10 && speed < 0)speed = 0;
-    	
-    	if(error == 0)speed = 0;
-    	
-    	if(speed > 0 && firstTimeExtend){
-    		speed = -0.1;
-    		firstTimeExtend = false;
-    	}
-    	
-    	if(speed < 0 && !firstTimeExtend)hanging = true;
-    	
-    	if(speed < 0){
+    	switch(Robot.state){
+    	case 0:
+    		speed = 0;
     		Robot.telescopingArmSystem.ratchet(true);
-    		Robot.pivotArm.ratchet(true);
-    		System.out.println("Going in");
-    	}else if(speed > 0 && !hanging){
+    		Robot.pivotArm.ratchet(false);
+    		break;
+    	case 1:
+    		if(Robot.startReleaseRatchetTimer){
+    			timer.start();
+    			Robot.startReleaseRatchetTimer = false;
+    		}
+    		speed = -0.1;
+    		if(timer.get() > 0.2){
+    			Robot.state = 2;
+    			timer.stop();
+    			timer.reset();
+    		}
     		Robot.telescopingArmSystem.ratchet(false);
     		Robot.pivotArm.ratchet(false);
-    		System.out.println("goin out");
-    	}else{
+    		break;
+    	case 2:
+    		speed = 1;
+    		speed = Util.constrain(speed, 0, 0.7);
+    		if(Math.abs(error) < 300)speed = Util.constrain(speed, 0, 0.5);
+    		if(Math.abs(error) < 80)speed = Util.constrain(speed, 0, 0.3);
+    		if(error <= 0 || maxDistance < currentDistance && speed > 0)speed = 0;
+    		Robot.telescopingArmSystem.ratchet(false);
+    		Robot.pivotArm.ratchet(false);
+    		break;
+    	case 3:
+    		speed = -1;
+    		speed = Util.constrain(speed, -0.7, 0);
+    		if(Math.abs(error) < 300)speed = Util.constrain(speed, -0.5, 0);
+    		if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.5, 0);
+    		if(error >= 0)speed = 0;
     		Robot.telescopingArmSystem.ratchet(true);
-    		System.out.println("Nothing is happening");
+    		Robot.pivotArm.ratchet(true);
     	}
     	
     	
-    	
-    	if(!Robot.telescopingArmSystem.getRatchet() && speed > 0)speed = 0;
-    	
     	Robot.telescopingArmSystem.set(speed);
-    	
-    	oldSpeed = speed;
-    	oldError = error;
     }
     
     protected boolean isFinished() {
