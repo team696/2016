@@ -1,5 +1,7 @@
 package org.usfirst.frc.team696.robot.subsystems;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.usfirst.frc.team696.robot.Robot;
 import org.usfirst.frc.team696.robot.RobotMap;
 import org.usfirst.frc.team696.utilities.DoubleMotor;
@@ -67,6 +69,7 @@ public class PivotArmSystem extends Subsystem {
     	PID.setError(error);
     	speed = Util.constrain(PID.getValue(), -1, 1);
     	run();
+    	System.out.println(Robot.pivotEncoder.get());
     	
     }
 

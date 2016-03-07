@@ -44,6 +44,8 @@ public class OI {
 	Button telescopingArmMidPosButton = new JoystickButton(arduino, 10);
 	Button telescopingArmFullRetractButton = new JoystickButton(arduino, 8);
 	
+	Button setTelescopingAngle = new JoystickButton(arduino, 3);
+	
 	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
 	public OI() {
@@ -53,8 +55,8 @@ public class OI {
 		shiftHighButton.whenPressed(new ShiftHigh(true));
 		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(true, 2.5));
-		pivotDownButton.whileHeld(new SetPivot(true, -2.5));
+		pivotUpButton.whileHeld(new SetPivot(true, 1));
+		pivotDownButton.whileHeld(new SetPivot(true, -1));
 		pivotUpButton.whenInactive(new SetPivot(true, 0));
 		pivotDownButton.whenInactive(new SetPivot(true, 0));
 		
@@ -78,6 +80,8 @@ public class OI {
 		
 		telescopingArmFullPosButton.whenPressed(new SetTelescopingArm(2));
 		telescopingArmMidPosButton.whenPressed(new SetTelescopingArm(1));
+		
+		setTelescopingAngle.whenPressed(new SetPivot(false, arduino.getRawAxis(0)));
 		
 		zeroAllEncodersButton.whenPressed(new ZeroEncoders());
 		

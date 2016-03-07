@@ -17,7 +17,6 @@ public class SetTelescopingArm extends Command {
 	int whatTarget = 0;
 	
     public SetTelescopingArm(int whatTarget) {
-        System.out.println("SetTelescopingArm constructor");
         this.whatTarget = whatTarget;
     }
 
@@ -31,18 +30,15 @@ public class SetTelescopingArm extends Command {
     	case 1:
     		target = halfExtended;
     		Robot.state = 3;
-    		System.out.println("halfExtended");
     		break;
     	case 2:
     		target = fullyExtended;
     		Robot.startReleaseRatchetTimer = true;
     		Robot.state = 1;
-    		System.out.println("fully extend");
     		break;
 		default:
 			target = fullyContracted;
 			Robot.state = 0;
-			System.out.println("full contract");
 			break;
     	}
     	Robot.telescopingTargetDistance = target;
