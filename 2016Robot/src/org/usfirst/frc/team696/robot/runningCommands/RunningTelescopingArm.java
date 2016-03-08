@@ -76,6 +76,7 @@ public class RunningTelescopingArm extends Command {
     		Robot.pivotArm.ratchet(true);
     	}
     	
+    	if(Robot.useEncoder)speed = 0;
     	
     	Robot.telescopingArmSystem.set(speed);
     }

@@ -61,7 +61,7 @@ public class ShooterSystem extends Subsystem {
     	
     	time = timer.get();
     	
-    	if(direction > 0){
+    	if(direction > 0 && Robot.useEncoder){
 	    	topDistance = Robot.topShooterWheelEncoder.get();
 	    	currentTopRPM = Util.findVelocity(time, oldTime, Math.abs(topDistance), Math.abs(oldTopDistance));
 	    	topTBH.setTargetRPM(Math.abs(topTargetRPM));
@@ -84,7 +84,7 @@ public class ShooterSystem extends Subsystem {
 
     	oldTime = time;
     	
-    	if(!Robot.isRPM){
+    	if(!Robot.isRPM || !Robot.useEncoder){
     		topMotorPower = Robot.topShooterSpeed;
     		botMotorPower = Robot.botShooterSpeed;
     		Robot.isAtSpeed = true;

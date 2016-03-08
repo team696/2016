@@ -23,29 +23,7 @@ public class SetPivot extends Command {
 	double axisPos = 0;
 	
     public SetPivot(boolean incremental, double value) {
-    	if(!incremental){
-    		axisPos = value;
-//    		switch((int)value){
-//    		case 0:
-//    			targetAngle = zeroPivotPos;
-//    			break;
-//    		case 1:
-//    			targetAngle = partWay;
-//    			break;
-//    		case 2:
-//    			targetAngle = distanceShot;
-//    			break;
-//    		case 3:
-//    			targetAngle = shootAtBatterPos;
-//    			break;
-//    		case 4:
-//    			targetAngle = climbingAngle;
-//    			break;
-//			default:
-//				targetAngle = zeroPivotPos;
-//				break;
-//    		}
-    	}
+    	if(!incremental && !Robot.useEncoder)axisPos = value;
     	else incrementValue = value;
     	this.incremental = incremental;
     } 
@@ -72,6 +50,11 @@ public class SetPivot extends Command {
 //    	System.out.println("execute of SetPivot");
     	if(incremental)Robot.targetAngle+=incrementValue;
     	if(!incremental)Robot.targetAngle = targetAngle;
+    	if(!Robot.useEncoder){
+    		if(incrementValue > 0)Robot.pivotArm.setSpeed(0.1);
+    		else if(incrementValue < 0)Robot.pivotArm.setSpeed(-0.1);
+    		else Robot.pivotArm.setSpeed(0);
+    	}
     }
 
     protected boolean isFinished() {

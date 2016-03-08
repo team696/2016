@@ -4,6 +4,7 @@ package org.usfirst.frc.team696.robot;
 import org.usfirst.frc.team696.robot.commands.FastTurn;
 import org.usfirst.frc.team696.robot.commands.SetPivot;
 import org.usfirst.frc.team696.robot.commands.SetTelescopingArm;
+import org.usfirst.frc.team696.robot.commands.SetUseEncoder;
 import org.usfirst.frc.team696.robot.commands.ShiftHigh;
 import org.usfirst.frc.team696.robot.commands.Shoot;
 import org.usfirst.frc.team696.robot.commands.ZeroEncoders;
@@ -48,7 +49,13 @@ public class OI {
 	
 	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
+	Button enableEncoderButton = new JoystickButton(wheel, 10);
+	Button disableEncoderButton = new JoystickButton(wheel, 9);
+	
 	public OI() {
+		enableEncoderButton.whenPressed(new SetUseEncoder(true));
+		disableEncoderButton.whenPressed(new SetUseEncoder(false));
+		
 		fastTurn.whenPressed(new FastTurn(true));
 		fastTurn.whenReleased(new FastTurn(false));
 		
