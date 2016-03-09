@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ZeroEncoders extends Command {
+public class SetShifter extends Command {
 
-	boolean isFinished = false;
+	int state = 0;
 	
-    public ZeroEncoders() {
+    public SetShifter(int state) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	isFinished = false;
+    	this.state = state;
     }
 
     // Called just before this Command runs the first time
@@ -23,18 +23,12 @@ public class ZeroEncoders extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.botShooterWheelEncoder.reset();
-    	Robot.topShooterWheelEncoder.reset();
-    	Robot.leftEncoder.reset();
-    	Robot.rightEncoder.reset();
-    	Robot.telescopingEncoder.reset();
-    	Robot.pivotEncoder.reset();
-    	isFinished = true;
+    	Robot.shifterState = state;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isFinished;
+        return false;
     }
 
     // Called once after isFinished returns true

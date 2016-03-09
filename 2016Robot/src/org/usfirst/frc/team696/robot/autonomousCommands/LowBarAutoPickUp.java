@@ -14,12 +14,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LowBarAutoPickUp extends CommandGroup {
     
     public  LowBarAutoPickUp() {
-    	addSequential(new SetPivot(false, 0));
+    	addSequential(new SetPivot(0));
     	addParallel(new Drive(Robot.navX.getYaw(), 0.5, 1));
     	addSequential(new SetShooterSpeed(false, false, -0.75), 2);
     	addParallel(new SetShooterSpeed(false, false, 0));
     	addSequential(new Drive(Robot.navX.getYaw(), 1, -25));
-    	addParallel(new SetPivot(false, 100));
+    	addParallel(new SetPivot(100));
     	addSequential(new Drive(Robot.navX.getYaw() - 120, 0.5, 0));
     	addSequential(new SetShooterSpeed(false, false, 1));
     	addSequential(new Shoot(), 2);

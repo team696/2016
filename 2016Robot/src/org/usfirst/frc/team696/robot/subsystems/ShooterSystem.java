@@ -69,7 +69,7 @@ public class ShooterSystem extends Subsystem {
 	    	topTBH.run();
 	    	oldTopDistance = topDistance;
 	    	
-	    	bottomDistance = Robot.bottomShooterWheelEncoder.get();
+	    	bottomDistance = Robot.botShooterWheelEncoder.get();
 	    	currentBottomRPM = Util.findVelocity(time, oldTime, Math.abs(bottomDistance), Math.abs(oldBottomDistance));
 	    	bottomTBH.setTargetRPM(Math.abs(botTargetRPM));
 	    	bottomTBH.setCurrentRPM(Math.abs(currentBottomRPM));
