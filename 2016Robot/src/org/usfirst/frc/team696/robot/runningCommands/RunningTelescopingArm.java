@@ -42,8 +42,10 @@ public class RunningTelescopingArm extends Command {
     		speed = 0;
     		Robot.telescopingArmSystem.ratchet(true);
     		Robot.pivotArm.ratchet(false);
+    		System.out.println("in state 0");
     		break;
     	case 1:
+    		System.out.println("In state 1");
     		if(Robot.startReleaseRatchetTimer){
     			timer.start();
     			Robot.startReleaseRatchetTimer = false;
@@ -76,8 +78,7 @@ public class RunningTelescopingArm extends Command {
     		Robot.pivotArm.ratchet(true);
     	}
     	
-    	if(Robot.useEncoder)speed = 0;
-    	
+    	System.out.println(Robot.state);
     	Robot.telescopingArmSystem.set(speed);
     }
     

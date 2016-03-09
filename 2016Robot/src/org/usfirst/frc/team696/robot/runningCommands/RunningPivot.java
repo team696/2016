@@ -17,7 +17,7 @@ public class RunningPivot extends Command {
     }
 
     protected void execute() {
-    	if(Robot.useEncoder)Robot.pivotArm.setTargetAngle(Robot.targetAngle);
+    	Robot.pivotArm.setTargetAngle(Robot.targetAngle);
     }
 
     protected boolean isFinished() {

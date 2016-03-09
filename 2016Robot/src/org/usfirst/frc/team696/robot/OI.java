@@ -4,7 +4,6 @@ package org.usfirst.frc.team696.robot;
 import org.usfirst.frc.team696.robot.commands.FastTurn;
 import org.usfirst.frc.team696.robot.commands.SetPivot;
 import org.usfirst.frc.team696.robot.commands.SetTelescopingArm;
-import org.usfirst.frc.team696.robot.commands.SetUseEncoder;
 import org.usfirst.frc.team696.robot.commands.ShiftHigh;
 import org.usfirst.frc.team696.robot.commands.Shoot;
 import org.usfirst.frc.team696.robot.commands.ZeroEncoders;
@@ -45,25 +44,17 @@ public class OI {
 	Button telescopingArmMidPosButton = new JoystickButton(arduino, 10);
 	Button telescopingArmFullRetractButton = new JoystickButton(arduino, 8);
 	
-	Button setTelescopingAngle = new JoystickButton(arduino, 3);
-	
 	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
-	Button enableEncoderButton = new JoystickButton(wheel, 10);
-	Button disableEncoderButton = new JoystickButton(wheel, 9);
-	
 	public OI() {
-		enableEncoderButton.whenPressed(new SetUseEncoder(true));
-		disableEncoderButton.whenPressed(new SetUseEncoder(false));
-		
 		fastTurn.whenPressed(new FastTurn(true));
 		fastTurn.whenReleased(new FastTurn(false));
 		
 		shiftHighButton.whenPressed(new ShiftHigh(true));
 		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(true, 1));
-		pivotDownButton.whileHeld(new SetPivot(true, -1));
+		pivotUpButton.whileHeld(new SetPivot(true, 2.5));
+		pivotDownButton.whileHeld(new SetPivot(true, -2.5));
 		pivotUpButton.whenInactive(new SetPivot(true, 0));
 		pivotDownButton.whenInactive(new SetPivot(true, 0));
 		
@@ -87,8 +78,6 @@ public class OI {
 		
 		telescopingArmFullPosButton.whenPressed(new SetTelescopingArm(2));
 		telescopingArmMidPosButton.whenPressed(new SetTelescopingArm(1));
-		
-		setTelescopingAngle.whenPressed(new SetPivot(false, arduino.getRawAxis(0)));
 		
 		zeroAllEncodersButton.whenPressed(new ZeroEncoders());
 		

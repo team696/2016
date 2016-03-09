@@ -30,13 +30,13 @@ public class SetShooterSpeed extends Command {
     		if(isAxis){
 	    		if(value > 0.7){
 	    			topSpeed = 1;
-	    			botSpeed = 0.8;
+	    			botSpeed = 1;
 	    		} else if(value < -0.7){
 	    			topSpeed = 0.8;
-	    			botSpeed = 0.6;
+	    			botSpeed = 0.8;
 	    		} else {
 	    			topSpeed = 0.9;
-	    			botSpeed = 0.7;
+	    			botSpeed = 0.9;
 	    		}
     		} else {
     			topSpeed = value;

@@ -3,6 +3,7 @@ package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.autonomousCommands.DoNothing;
 import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAutoPickUp;
+import org.usfirst.frc.team696.robot.commands.Drive;
 import org.usfirst.frc.team696.robot.runningCommands.RunningPivot;
 import org.usfirst.frc.team696.robot.runningCommands.RunningShooter;
 import org.usfirst.frc.team696.robot.runningCommands.RunningTelescopingArm;
@@ -52,7 +53,7 @@ public class Robot extends IterativeRobot {
 	
 	public static boolean shiftedHigh = true;
     Command autonomousCommand;
-    SendableChooser chooser;
+//    SendableChooser chooser;
     public static IMU navX;
 	SerialPort port;
 	public static boolean fastTurn = false;
@@ -82,8 +83,6 @@ public class Robot extends IterativeRobot {
 	public static int state = 0;
 	public static boolean startReleaseRatchetTimer = false;
 	
-	public static boolean useEncoder = true;
-	
 //	public static boolean manualPivotControl = false;
 	
 	/**
@@ -92,11 +91,11 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new DoNothing());
-        chooser.addObject("Low Bar", new LowBarAutoPickUp());
-        chooser.addObject("Do Nothing", new DoNothing());
-        SmartDashboard.putData("Auto mode", chooser);
+//        chooser = new SendableChooser();
+//        chooser.addDefault("Default Auto", new DoNothing());
+//        chooser.addObject("Low Bar", new LowBarAuto());
+//        chooser.addObject("Do Nothing", new DoNothing());
+//        SmartDashboard.putData("Auto mode", chooser);
         try {
 			byte UpdateRateHz = 50;
 			port = new SerialPort(57600, SerialPort.Port.kMXP);
@@ -132,17 +131,17 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
     	matchTimer.start();
-        autonomousCommand = (Command) chooser.getSelected();
-//        String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
-//		switch(autoSelected) {
-//		case "Low Bar":
-//			autonomousCommand = new LowBarAutoPickUp();
-//			break;
-//		case "Default Auto":
-//		default:
-//			autonomousCommand = new DoNothing();
-//			break;
-//		} 
+//        autonomousCommand = (Command) chooser.getSelected();
+        String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
+		switch(autoSelected) {
+		case "Low Bar":
+			autonomousCommand = new LowBarAutoPickUp();
+			break;
+		case "Default Auto":
+		default:
+			autonomousCommand = new DoNothing();
+			break;
+		} 
     	
         Scheduler.getInstance().add(new RunningPivot());
         Scheduler.getInstance().add(new RunningShooter());
