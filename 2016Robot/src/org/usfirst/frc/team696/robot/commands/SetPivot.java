@@ -22,17 +22,11 @@ public class SetPivot extends Command {
 	double speed = 0;
 	double axisPos = 0;
 	
-    public SetPivot(double value) {
-    	if(!incremental && !Robot.useEncoder)axisPos = Robot.oi.arduino.getRawAxis(0);
+    public SetPivot(boolean incremental, double value) {
+    	if(!incremental && !Robot.useEncoder)axisPos = value;
     	else incrementValue = value;
-    	incremental = true;
+    	this.incremental = incremental;
     } 
-    
-    public SetPivot(){
-    	incremental = false;
-    	incrementValue = 0;
-    	axisPos = Robot.oi.arduino.getRawAxis(0);
-    }
 
 //    public SetPivot(boolean autoUnderLift){
 //    	this.autoUnderLift = autoUnderLift;
@@ -46,24 +40,21 @@ public class SetPivot extends Command {
     }
 
     protected void execute() {
-//    	if(axisPos < -0.8){
-//			targetAngle = shootAtBatterPos;
-//		} else if(axisPos < -0.4){
-//			targetAngle = twoWheelsAgainstBatter;
-//		} else if(axisPos < 0){
-//			targetAngle = distanceShot;
-//		}
-//
-//    	if(incremental)Robot.targetAngle+=incrementValue;
-//    	if(!incremental)Robot.targetAngle = targetAngle;
-//    	if(!Robot.useEncoder){
-//    		if(incrementValue > 0)Robot.pivotArm.setSpeed(0.1);
-//    		else if(incrementValue < 0)Robot.pivotArm.setSpeed(-0.1);
-//    		else Robot.pivotArm.setSpeed(0);
-//    	}
-    	Robot.targetAngle = Robot.pivotEncoder.get();
-    	System.out.println(axisPos);
-    	
+    	if(axisPos < -0.8){
+			targetAngle = shootAtBatterPos;
+		} else if(axisPos < -0.4){
+			targetAngle = twoWheelsAgainstBatter;
+		} else if(axisPos < 0){
+			targetAngle = distanceShot;
+		}
+//    	System.out.println("execute of SetPivot");
+    	if(incremental)Robot.targetAngle+=incrementValue;
+    	if(!incremental)Robot.targetAngle = targetAngle;
+    	if(!Robot.useEncoder){
+    		if(incrementValue > 0)Robot.pivotArm.setSpeed(0.1);
+    		else if(incrementValue < 0)Robot.pivotArm.setSpeed(-0.1);
+    		else Robot.pivotArm.setSpeed(0);
+    	}
     }
 
     protected boolean isFinished() {

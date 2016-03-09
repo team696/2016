@@ -3,9 +3,9 @@ package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.commands.FastTurn;
 import org.usfirst.frc.team696.robot.commands.SetPivot;
-import org.usfirst.frc.team696.robot.commands.SetShifter;
 import org.usfirst.frc.team696.robot.commands.SetTelescopingArm;
 import org.usfirst.frc.team696.robot.commands.SetUseEncoder;
+import org.usfirst.frc.team696.robot.commands.ShiftHigh;
 import org.usfirst.frc.team696.robot.commands.Shoot;
 import org.usfirst.frc.team696.robot.commands.ZeroEncoders;
 import org.usfirst.frc.team696.utilities.JoystickAnalogButton;
@@ -59,13 +59,13 @@ public class OI {
 		fastTurn.whenPressed(new FastTurn(true));
 		fastTurn.whenReleased(new FastTurn(false));
 		
-		shiftHighButton.whenPressed(new SetShifter(2));
-		shiftLowButton.whenPressed(new SetShifter(1));
+		shiftHighButton.whenPressed(new ShiftHigh(true));
+		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(1.75));
-		pivotDownButton.whileHeld(new SetPivot(-1.75));
-		pivotUpButton.whenInactive(new SetPivot(0));
-		pivotDownButton.whenInactive(new SetPivot(0));
+		pivotUpButton.whileHeld(new SetPivot(true, 1));
+		pivotDownButton.whileHeld(new SetPivot(true, -1));
+		pivotUpButton.whenInactive(new SetPivot(true, 0));
+		pivotDownButton.whenInactive(new SetPivot(true, 0));
 		
 		shootButton.whenPressed(new Shoot());
 		
@@ -82,10 +82,13 @@ public class OI {
 		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.75));
 		noSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0));
 		
+//		intakePivotArmPosButton.whenPressed(new SetPivot(false, arduino.getRawAxis(1)));
+//		shootPivotArmPosButton.whenPressed(new SetPivot(false, 160));
+		
 		telescopingArmFullPosButton.whenPressed(new SetTelescopingArm(2));
 		telescopingArmMidPosButton.whenPressed(new SetTelescopingArm(1));
 		
-		setTelescopingAngle.whenPressed(new SetPivot());
+		setTelescopingAngle.whenPressed(new SetPivot(false, arduino.getRawAxis(0)));
 		
 		zeroAllEncodersButton.whenPressed(new ZeroEncoders());
 		

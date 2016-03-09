@@ -58,7 +58,7 @@ public class Robot extends IterativeRobot {
 	public static boolean fastTurn = false;
 	
 	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB, false,EncodingType.k1X);
-	public static Encoder botShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB, false, EncodingType.k1X);
+	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB, false, EncodingType.k1X);
 	
 	public static Encoder pivotEncoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
 	public static Encoder telescopingEncoder = new Encoder(RobotMap.telescopingArmEncoderA, RobotMap.telescopingArmEncoderB);
@@ -84,7 +84,6 @@ public class Robot extends IterativeRobot {
 	
 	public static boolean useEncoder = true;
 	
-	public static int shifterState = 0;
 //	public static boolean manualPivotControl = false;
 	
 	/**
@@ -107,14 +106,6 @@ public class Robot extends IterativeRobot {
 		leftEncoder.setDistancePerPulse(0.009765625);
 		rightEncoder.setDistancePerPulse(0.009765625);
 //		navX.zeroYaw();
-		
-		SmartDashboard.putNumber("Right Drive Encoder", rightEncoder.getDistance());
-		SmartDashboard.putNumber("Left Drive Encoder", leftEncoder.getDistance());
-		SmartDashboard.putNumber("Pivot Encoder", pivotEncoder.getDistance());
-		SmartDashboard.putNumber("Bottom Shooter Encoder", botShooterWheelEncoder.getDistance());
-		SmartDashboard.putNumber("Top Shooter Encoder", topShooterWheelEncoder.getDistance());
-		SmartDashboard.putNumber("Telescoping Encoder", telescopingEncoder.getDistance());
-		SmartDashboard.putNumber("Yaw", navX.getYaw());
     }
 	
 	/**
@@ -164,13 +155,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	SmartDashboard.putNumber("Right Drive Encoder", rightEncoder.getDistance());
-		SmartDashboard.putNumber("Left Drive Encoder", leftEncoder.getDistance());
-		SmartDashboard.putNumber("Pivot Encoder", pivotEncoder.getDistance());
-		SmartDashboard.putNumber("Bottom Shooter Encoder", botShooterWheelEncoder.getDistance());
-		SmartDashboard.putNumber("Top Shooter Encoder", topShooterWheelEncoder.getDistance());
-		SmartDashboard.putNumber("Telescoping Encoder", telescopingEncoder.getDistance());
-		SmartDashboard.putNumber("Yaw", navX.getYaw());
         Scheduler.getInstance().run();
     }
 
@@ -193,14 +177,8 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	SmartDashboard.putNumber("Right Drive Encoder", rightEncoder.getDistance());
-		SmartDashboard.putNumber("Left Drive Encoder", leftEncoder.getDistance());
-		SmartDashboard.putNumber("Pivot Encoder", pivotEncoder.getDistance());
-		SmartDashboard.putNumber("Bottom Shooter Encoder", botShooterWheelEncoder.getDistance());
-		SmartDashboard.putNumber("Top Shooter Encoder", topShooterWheelEncoder.getDistance());
-		SmartDashboard.putNumber("Telescoping Encoder", telescopingEncoder.getDistance());
-		SmartDashboard.putNumber("Yaw", navX.getYaw());
-    	Scheduler.getInstance().run();
+//    	if(2-matchTimer.get() < 25)Scheduler.getInstance().add(new RunningTelescopingArm());
+        Scheduler.getInstance().run();
     }
     
     /**
