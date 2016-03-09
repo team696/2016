@@ -25,9 +25,7 @@ public class CamAuto extends CommandGroup {
     	addParallel(new SetPivot(false, 5));
     	// 5  needs to be a preset for shooting in auto
     	addSequential(new AutoAdjust());
-    	addSequential(new SetShooterSpeed(false, false, 1));
-    	addSequential(new Shoot(), 2);
-    	addSequential(new SetShooterSpeed(false, false, 0));
+    	addSequential(new Shoot());
     	/*
     	 * PSEUDOCODE for auto
     	 * Set pivot false, zeroPivot
