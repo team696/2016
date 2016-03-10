@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 	
 	public static boolean shiftedHigh = true;
     Command autonomousCommand;
-//    SendableChooser chooser;
+    SendableChooser chooser;
     public static IMU navX;
 	SerialPort port;
 	public static boolean fastTurn = false;
@@ -90,11 +90,11 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-//        chooser = new SendableChooser();
-//        chooser.addDefault("Default Auto", new DoNothing());
-//        chooser.addObject("Low Bar", new LowBarAutoPickUp());
-//        chooser.addObject("Do Nothing", new DoNothing());
-//        SmartDashboard.putData("Auto mode", chooser);
+        chooser = new SendableChooser();
+        chooser.addDefault("Default Auto", new DoNothing());
+        chooser.addObject("Low Bar", new LowBarAutoPickUp());
+        chooser.addObject("Do Nothing", new DoNothing());
+        SmartDashboard.putData("Auto mode", chooser);
         try {
 			byte UpdateRateHz = 50;
 			port = new SerialPort(57600, SerialPort.Port.kMXP);
@@ -138,7 +138,7 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
     	matchTimer.start();
-//        autonomousCommand = (Command) chooser.getSelected();
+        autonomousCommand = (Command) chooser.getSelected();
 //        String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
 //		switch(autoSelected) {
 //		case "Low Bar":
