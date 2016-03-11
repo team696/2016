@@ -2,6 +2,7 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.autonomousCommands.DoNothing;
+import org.usfirst.frc.team696.robot.autonomousCommands.DriveStraightBackward;
 import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAutoPickUp;
 import org.usfirst.frc.team696.robot.runningCommands.RunningPivot;
 import org.usfirst.frc.team696.robot.runningCommands.RunningShooter;
@@ -82,6 +83,8 @@ public class Robot extends IterativeRobot {
 	public static int state = 0;
 	public static boolean startReleaseRatchetTimer = false;
 	
+	public static boolean endOfMatch = false;
+	
 //	public static boolean manualPivotControl = false;
 	
 	/**
@@ -89,17 +92,20 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	try {
+			byte UpdateRateHz = 50;
+			port = new SerialPort(57600, SerialPort.Port.kMXP);
+			navX = new IMUAdvanced(port, UpdateRateHz);
+		} catch(Exception ex){System.out.println("NavX not working");};
+    	
 		oi = new OI();
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new DoNothing());
         chooser.addObject("Low Bar", new LowBarAutoPickUp());
         chooser.addObject("Do Nothing", new DoNothing());
+        chooser.addObject("Drive Straight", new DriveStraightBackward());
         SmartDashboard.putData("Auto mode", chooser);
-        try {
-			byte UpdateRateHz = 50;
-			port = new SerialPort(57600, SerialPort.Port.kMXP);
-			navX = new IMUAdvanced(port, UpdateRateHz);
-		} catch(Exception ex){System.out.println("NavX not working");};
+        
 		shootTimer.start();
 		leftEncoder.setDistancePerPulse(0.009765625);
 		rightEncoder.setDistancePerPulse(0.009765625);
@@ -112,6 +118,7 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putNumber("Telescoping Enc", telescopingEncoder.getDistance());
 //		SmartDashboard.putNumber("Yaw", navX.getYaw());
 //		navX.zeroYaw();
+		
     }
 	
 	/**
@@ -149,7 +156,10 @@ public class Robot extends IterativeRobot {
 //			autonomousCommand = new DoNothing();
 //			break;
 //		} 
-    	
+    	targetAngle = pivotEncoder.getDistance();
+    	leftEncoder.reset();
+		rightEncoder.reset();
+        
         Scheduler.getInstance().add(new RunningPivot());
         Scheduler.getInstance().add(new RunningShooter());
         
@@ -172,6 +182,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	targetAngle = pivotEncoder.getDistance();
+    	leftEncoder.reset();
+		rightEncoder.reset();
     	state = 0;
     	Scheduler.getInstance().add(new TeleopDrive());
     	Scheduler.getInstance().add(new RunningPivot());

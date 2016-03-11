@@ -42,10 +42,8 @@ public class RunningTelescopingArm extends Command {
     		speed = 0;
     		Robot.telescopingArmSystem.ratchet(true);
     		Robot.pivotArm.ratchet(false);
-    		System.out.println("in state 0");
     		break;
     	case 1:
-    		System.out.println("In state 1");
     		if(Robot.startReleaseRatchetTimer){
     			timer.start();
     			Robot.startReleaseRatchetTimer = false;
@@ -61,24 +59,25 @@ public class RunningTelescopingArm extends Command {
     		break;
     	case 2:
     		speed = 1;
-    		speed = Util.constrain(speed, 0, 0.7);
-    		if(Math.abs(error) < 300)speed = Util.constrain(speed, 0, 0.5);
-    		if(Math.abs(error) < 80)speed = Util.constrain(speed, 0, 0.3);
+    		speed = Util.constrain(speed, 0, 0.85);
+    		if(Math.abs(error) < 300)speed = Util.constrain(speed, 0, 0.6);
+    		if(Math.abs(error) < 80)speed = Util.constrain(speed, 0, 0.4);
     		if(error <= 0 || maxDistance < currentDistance && speed > 0)speed = 0;
+    		Robot.endOfMatch = true;
     		Robot.telescopingArmSystem.ratchet(false);
     		Robot.pivotArm.ratchet(false);
     		break;
     	case 3:
     		speed = -1;
-    		speed = Util.constrain(speed, -0.7, 0);
-    		if(Math.abs(error) < 300)speed = Util.constrain(speed, -0.5, 0);
-    		if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.5, 0);
+    		speed = Util.constrain(speed, -0.95, 0);
+    		if(Math.abs(error) < 300)speed = Util.constrain(speed, -0.85, 0);
+    		if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.60, 0);
     		if(error >= 0)speed = 0;
+    		Robot.endOfMatch = true;
     		Robot.telescopingArmSystem.ratchet(true);
     		Robot.pivotArm.ratchet(true);
     	}
     	
-    	System.out.println(Robot.state);
     	Robot.telescopingArmSystem.set(speed);
     }
     

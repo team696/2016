@@ -12,13 +12,13 @@ public class SetTelescopingArm extends Command {
 	double target = 0;
 	double fullyExtended = 800;
 //	double fullyExtended = 500;
-	double halfExtended = 40;
+	double halfExtended = 10;
 	double fullyContracted = 0;
-	int whatTarget = 0;
+	int whatState = 0;
 	
-    public SetTelescopingArm(int whatTarget) {
+    public SetTelescopingArm(int whatState) {
         System.out.println("SetTelescopingArm constructor");
-        this.whatTarget = whatTarget;
+        this.whatState = whatState;
     }
 
     // Called just before this Command runs the first time
@@ -27,7 +27,7 @@ public class SetTelescopingArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	switch(whatTarget){
+    	switch(whatState){
     	case 1:
     		target = halfExtended;
     		Robot.state = 3;
@@ -39,9 +39,10 @@ public class SetTelescopingArm extends Command {
     		Robot.state = 1;
     		System.out.println("fully extend");
     		break;
+    	case 0:
 		default:
 			target = fullyContracted;
-			Robot.state = 0;
+			Robot.state = 3;
 			System.out.println("full contract");
 			break;
     	}

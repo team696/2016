@@ -65,7 +65,7 @@ public class PivotArmSystem extends Subsystem {
     	
     	error = this.targetAngle - Robot.pivotEncoder.get();
     	PID.setError(error);
-    	speed = Util.constrain(PID.getValue(), -1, 1);
+    	speed = Util.constrain(PID.getValue(), -0.35, 0.35);
     	run();
     	
     }

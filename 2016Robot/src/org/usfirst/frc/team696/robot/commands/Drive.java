@@ -30,6 +30,9 @@ public class Drive extends Command {
 	
 	PIDControl directionPID = new PIDControl(kP, kI, kD, alpha);
 	
+	boolean isFinished = false;
+	
+	
 	
     public Drive(double direction, double distance, double speed) {
         // Use requires() here to declare subsystem dependencies
@@ -68,11 +71,15 @@ public class Drive extends Command {
     	
     	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
     	
+    	if(Math.abs(directionError) < 30 && Math.abs(distanceError) == 0)isFinished = true;
+    	
+    	System.out.println("current distance traveled: " + currentDistance);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isFinished;
     }
 
     // Called once after isFinished returns true

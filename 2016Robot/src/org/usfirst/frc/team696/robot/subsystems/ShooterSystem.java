@@ -22,8 +22,8 @@ public class ShooterSystem extends Subsystem {
 	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
 	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
 	
-	StallPrevention topSP = new StallPrevention(43);
-	StallPrevention botSP = new StallPrevention(43);
+	StallPrevention topSP = new StallPrevention(50);
+	StallPrevention botSP = new StallPrevention(50);
 	
 	double speedTop = 0;
 	double speedBottom = 0;
