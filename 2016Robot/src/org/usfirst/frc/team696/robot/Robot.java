@@ -41,11 +41,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
+	public static ShootSystem shoot = new ShootSystem();
+	public static ShooterSystem shooter = new ShooterSystem();
 	public static ChassisSystem chassis= new ChassisSystem();
 	public static ShifterSystem shifter = new ShifterSystem();
 	public static PivotArmSystem pivotArm = new PivotArmSystem();
-	public static ShootSystem shoot = new ShootSystem();
-	public static ShooterSystem shooter = new ShooterSystem();
+	
 	public static TelescopingArmSystem telescopingArmSystem = new TelescopingArmSystem();
 	
 	public static Encoder leftEncoder = new Encoder(RobotMap.encoderLeftA, RobotMap.encoderLeftB);
@@ -185,6 +186,7 @@ public class Robot extends IterativeRobot {
     	targetAngle = pivotEncoder.getDistance();
     	leftEncoder.reset();
 		rightEncoder.reset();
+		telescopingEncoder.reset();
     	state = 0;
     	Scheduler.getInstance().add(new TeleopDrive());
     	Scheduler.getInstance().add(new RunningPivot());

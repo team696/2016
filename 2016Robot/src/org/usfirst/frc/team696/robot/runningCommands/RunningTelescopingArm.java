@@ -35,7 +35,7 @@ public class RunningTelescopingArm extends Command {
     	target = Robot.telescopingTargetDistance;
     	currentDistance = Robot.telescopingEncoder.get();
     	error = target - currentDistance;
-    	error = Util.deadZone(error, -30, 30, 0);
+//    	error = Util.deadZone(error, -10, 10, 0);
     	
     	switch(Robot.state){
     	case 0:

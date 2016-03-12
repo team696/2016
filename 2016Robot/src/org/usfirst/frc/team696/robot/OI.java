@@ -40,10 +40,13 @@ public class OI {
 	Button intakeSpeedButton = new JoystickAnalogButton(arduino, 2, -1.1, -0.7);
 	Button noSpeedButton = new JoystickAnalogButton(arduino, 2, -0.5, 0.5);
 	Button outtakeSpeedButton = new JoystickAnalogButton(arduino, 2, 0.7, 1.1);
+	Button portcullisShooterSpeedButton = new JoystickButton(arduino, 8);
 	
 	Button telescopingArmFullPosButton = new JoystickButton(arduino, 9);
 	Button telescopingArmMidPosButton = new JoystickButton(arduino, 10);
-	Button telescopingArmFullRetractButton = new JoystickButton(arduino, 8);
+	Button telescopingArmFullRetractButton = new JoystickButton(arduino, 4);
+	Button manualRetract = new JoystickButton(arduino, 6);
+	Button manualExtend = new JoystickButton(arduino, 5);
 	
 	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
@@ -54,8 +57,8 @@ public class OI {
 		shiftHighButton.whenPressed(new ShiftHigh(true));
 		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(2.5));
-		pivotDownButton.whileHeld(new SetPivot(-2.5));
+		pivotUpButton.whileHeld(new SetPivot(5));
+		pivotDownButton.whileHeld(new SetPivot(-5));
 		pivotUpButton.whenInactive(new SetPivot(0));
 		pivotDownButton.whenInactive(new SetPivot(0));
 		pivotPresetButton.whenPressed(new SetPivot());
@@ -63,17 +66,16 @@ public class OI {
 		shootButton.whenPressed(new Shoot());
 		
 		
-//		shootingSpeedButton.whenPressed(new SetShooterSpeed(4500));
-//		intakeSpeedButton.whenPressed(new SetShooterSpeed(-3500));
-//		stopWheelButton.whenPressed(new SetShooterSpeed(0));
-		
-		
-		setShootingSpeedButton.whileHeld(new SetShooterSpeed(true, false, arduino.getRawAxis(3)));
+//		setShootingSpeedButton.whileHeld(new SetShooterSpeed(4500));
+		setShootingSpeedButton.whileHeld(new SetShooterSpeed(true, true, arduino.getRawAxis(3)));
+//		setShootingSpeedButton.whileHeld(new SetShooterSpeed(true, false, arduino.getRawAxis(3)));
 		setShootingSpeedButton.whenReleased(new SetShooterSpeed(false, false, 0));
 		
 		intakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, -0.9));
-		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.7));
+		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.5));
 		noSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0));
+		portcullisShooterSpeedButton.whenPressed(new SetShooterSpeed(false, 0.9, -0.9));
+		portcullisShooterSpeedButton.whenReleased(new SetShooterSpeed(false, 0, 0));
 		
 //		intakePivotArmPosButton.whenPressed(new SetPivot(false, arduino.getRawAxis(1)));
 //		shootPivotArmPosButton.whenPressed(new SetPivot(false, 160));
@@ -81,6 +83,10 @@ public class OI {
 		telescopingArmFullPosButton.whenPressed(new SetTelescopingArm(2));
 		telescopingArmMidPosButton.whenPressed(new SetTelescopingArm(1));
 		telescopingArmFullRetractButton.whenPressed(new SetTelescopingArm(0));
+		manualExtend.whenPressed(new SetTelescopingArm(true, 1));
+		manualExtend.whenReleased(new SetTelescopingArm(true, 0));
+		manualRetract.whenPressed(new SetTelescopingArm(true, -1));
+		manualRetract.whenReleased(new SetTelescopingArm(true, 0));
 		
 		zeroAllEncodersButton.whenPressed(new ZeroEncoders());
 		

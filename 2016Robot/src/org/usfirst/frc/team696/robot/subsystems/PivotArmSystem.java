@@ -68,8 +68,6 @@ public class PivotArmSystem extends Subsystem {
     	speed = Util.constrain(PID.getValue(), -1, 1);
     	if(!Robot.endOfMatch)speed = Util.constrain(PID.getValue(), -0.35, 0.35);
     	run();
-    	System.out.println("target Angle" + targetAngle + "    current" + Robot.pivotEncoder.get());
-    	
     }
 
     public void ratchet(boolean ratcheted){

@@ -44,13 +44,13 @@ public class TakeBackHalfControl {
     public void setCurrentRPM(double currentRPM){
         this.currentRPM = currentRPM;
     }
-        
+    
     public void run(){
         error = targetRPM - currentRPM;
         motorPower+=gain * error;
         motorPower = constrain(motorPower, 1, -1);
         if(isPositive(oldError) != isPositive(error)){
-            motorPower = tbh = 0.5* (motorPower + tbh);
+            motorPower = tbh = 0.95* (motorPower + tbh);
             oldError =  error;
         }
     }

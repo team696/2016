@@ -91,6 +91,8 @@ public class Robot extends IterativeRobot {
 		} catch(Exception ex){System.out.println("NavX not working");};
     }
     
+    
+    
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
 	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
@@ -146,6 +148,11 @@ public class Robot extends IterativeRobot {
 //        System.out.print("   speed:" + speed);
         System.out.println("Motor " + "encoder: one:" + enc1.get() + "   two:" + enc2.get() + "   three:" + enc3.get() + "   four:" + enc4.get() + "   five:" + enc5.get() + "   six:" + enc6.get());
 
+        sol1.set(arduino.getRawButton(7));
+        sol2.set(arduino.getRawButton(8));
+        sol3.set(arduino.getRawButton(9));
+        sol4.set(arduino.getRawButton(10));
+        
         button = arduino.getRawButton(3);
         
         if(button && !oldButton)state++;

@@ -12,7 +12,7 @@ public class SetTelescopingArm extends Command {
 	double target = 0;
 	double fullyExtended = 800;
 //	double fullyExtended = 500;
-	double halfExtended = 10;
+	double halfExtended = 5;
 	double fullyContracted = 0;
 	int whatState = 0;
 	
@@ -20,7 +20,16 @@ public class SetTelescopingArm extends Command {
         System.out.println("SetTelescopingArm constructor");
         this.whatState = whatState;
     }
-
+    
+    public SetTelescopingArm(boolean increment, int val) {
+    	if(increment){
+    		halfExtended+=val;
+    		if(val > 0)Robot.state = 2;
+    		else Robot.state = 1;
+    	}
+    	else this.whatState = val;
+    }
+    	
     // Called just before this Command runs the first time
     protected void initialize() {
     }

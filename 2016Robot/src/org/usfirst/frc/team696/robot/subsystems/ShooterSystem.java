@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ShooterSystem extends Subsystem {
     
-	TakeBackHalfControl topTBH = new TakeBackHalfControl(4500);
-	TakeBackHalfControl bottomTBH = new TakeBackHalfControl(4500);
+	TakeBackHalfControl topTBH = new TakeBackHalfControl(4986);
+	TakeBackHalfControl botTBH = new TakeBackHalfControl(4986);
 	
 	Victor topShooterWheel = new Victor(RobotMap.topShooterMotor);
 	Victor bottomShooterWheel = new Victor(RobotMap.bottomShooterMotor);
@@ -27,8 +27,8 @@ public class ShooterSystem extends Subsystem {
 	
 	double speedTop = 0;
 	double speedBottom = 0;
-	double currentTopRPM = 0;
-	double currentBottomRPM = 0;
+	double topCurrentRPM = 0;
+	double botCurrentRPM = 0;
 	double topTargetRPM = 0;
 	double botTargetRPM = 0;
 	double time = 0;
@@ -63,20 +63,21 @@ public class ShooterSystem extends Subsystem {
     	
     	if(direction > 0){
 	    	topDistance = Robot.topShooterWheelEncoder.get();
-	    	currentTopRPM = Util.findVelocity(time, oldTime, Math.abs(topDistance), Math.abs(oldTopDistance));
+	    	topCurrentRPM = Util.findVelocity(time, oldTime, Math.abs(topDistance), Math.abs(oldTopDistance));
 	    	topTBH.setTargetRPM(Math.abs(topTargetRPM));
-	    	topTBH.setCurrentRPM(Math.abs(currentTopRPM));
+	    	topTBH.setCurrentRPM(Math.abs(topCurrentRPM));
 	    	topTBH.run();
 	    	oldTopDistance = topDistance;
 	    	
 	    	bottomDistance = Robot.bottomShooterWheelEncoder.get();
-	    	currentBottomRPM = Util.findVelocity(time, oldTime, Math.abs(bottomDistance), Math.abs(oldBottomDistance));
-	    	bottomTBH.setTargetRPM(Math.abs(botTargetRPM));
-	    	bottomTBH.setCurrentRPM(Math.abs(currentBottomRPM));
-	    	bottomTBH.run();
+	    	botCurrentRPM = Util.findVelocity(time, oldTime, Math.abs(bottomDistance), Math.abs(oldBottomDistance));
+	    	botTBH.setTargetRPM(Math.abs(botTargetRPM));
+	    	botTBH.setCurrentRPM(Math.abs(botCurrentRPM));
+	    	botTBH.run();
 	    	oldBottomDistance = bottomDistance;
 	    	
 	    	topMotorPower = topTBH.getMotorPower();
+	    	botMotorPower = botTBH.getMotorPower();
     	} else {
     		topMotorPower = topTargetRPM;
     		botMotorPower = botTargetRPM;
@@ -89,15 +90,23 @@ public class ShooterSystem extends Subsystem {
     		botMotorPower = Robot.botShooterSpeed;
     		Robot.isAtSpeed = true;
     	} else {
-    		if(topTargetRPM - currentTopRPM < 100 /*&& botTargetRPM - currentBottomRPM < 100*/)Robot.isAtSpeed = true;
+    		if(Math.abs(topTargetRPM - topCurrentRPM) < 400 /*&& Math.abs(botTargetRPM - botCurrentRPM) < 150*/)Robot.isAtSpeed = true;
         	else Robot.isAtSpeed = false;
+    		
+//    		Robot.isAtSpeed = true;
     	}
+    	
+    	System.out.println("isAtSpeed: " + Robot.isAtSpeed + "   targetRPM: " + topTargetRPM + "   " + botTargetRPM + "   currentRPM: " + topCurrentRPM + "    " + botCurrentRPM + "   pivotPosition: " + Robot.targetAngle);
     	
     	if(Math.abs(topMotorPower) < 0.05)topMotorPower = 0;
 
-    	
-    	topSP.setCurrentAmps(Robot.PDP.getCurrent(12), topMotorPower*direction);
-    	botSP.setCurrentAmps(Robot.PDP.getCurrent(3), topMotorPower*direction);
+    	if(Robot.isRPM){
+    		topSP.setCurrentAmps(Robot.PDP.getCurrent(12), topMotorPower*direction);
+    		botSP.setCurrentAmps(Robot.PDP.getCurrent(3), topMotorPower*direction);
+    	} else {
+    		topSP.setCurrentAmps(Robot.PDP.getCurrent(12), topMotorPower*direction);
+    		botSP.setCurrentAmps(Robot.PDP.getCurrent(3), botMotorPower*direction);
+    	}
     	
 //    	System.out.println("SP: " + topSP.getOutput());
     	
