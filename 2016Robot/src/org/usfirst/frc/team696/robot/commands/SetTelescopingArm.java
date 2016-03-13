@@ -12,6 +12,7 @@ public class SetTelescopingArm extends Command {
 	double target = 0;
 	double fullyExtended = 800;
 //	double fullyExtended = 500;
+//	double halfExtended = 5;
 	double halfExtended = 5;
 	double fullyContracted = 0;
 	int whatState = 0;

@@ -3,6 +3,7 @@ package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.autonomousCommands.DoNothing;
 import org.usfirst.frc.team696.robot.autonomousCommands.DriveStraightBackward;
+import org.usfirst.frc.team696.robot.autonomousCommands.DriveStraightForward;
 import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAuto;
 import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAndLowGoal;
 import org.usfirst.frc.team696.robot.runningCommands.RunningPivot;
@@ -109,6 +110,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Low Bar and low goal", new LowBarAndLowGoal());
         chooser.addObject("Do Nothing", new DoNothing());
         chooser.addObject("Drive Straight Backward", new DriveStraightBackward());
+        chooser.addObject("Drive Straight Forward", new DriveStraightForward());
         SmartDashboard.putData("Auto mode", chooser);
         
 		shootTimer.start();
@@ -161,6 +163,7 @@ public class Robot extends IterativeRobot {
 //			autonomousCommand = new DoNothing();
 //			break;
 //		} 
+        
     	targetAngle = pivotEncoder.getDistance();
     	leftEncoder.reset();
 		rightEncoder.reset();

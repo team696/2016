@@ -35,8 +35,6 @@ public class Drive extends Command {
 	
 	
     public Drive(double direction, double distance, double speed) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.chassis);
     	this.direction = direction;
     	this.distance = distance;
@@ -73,7 +71,7 @@ public class Drive extends Command {
     	
     	if(Math.abs(directionError) < 30 && Math.abs(distanceError) == 0)isFinished = true;
     	
-    	System.out.println("current distance traveled: " + currentDistance);
+    	System.out.println("Target Distance: " + distance + "   current distance traveled: " + currentDistance + "   speeds: " + leftSpeed + "   " + rightSpeed);
     	
     }
 

@@ -96,8 +96,6 @@ public class ShooterSystem extends Subsystem {
 //    		Robot.isAtSpeed = true;
     	}
     	
-    	System.out.println("isAtSpeed: " + Robot.isAtSpeed + "   targetRPM: " + topTargetRPM + "   " + botTargetRPM + "   currentRPM: " + topCurrentRPM + "    " + botCurrentRPM + "   pivotPosition: " + Robot.targetAngle);
-    	
     	if(Math.abs(topMotorPower) < 0.05)topMotorPower = 0;
 
     	if(Robot.isRPM){

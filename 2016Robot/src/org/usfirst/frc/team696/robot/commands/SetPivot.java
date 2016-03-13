@@ -13,8 +13,8 @@ public class SetPivot extends Command {
 	double incrementValue = 0;
 	double targetAngle = 0;
 	
-	double zeroPivotPos = 3;
-	double climbingAngle = 0;
+	double zeroPivotPos = 0;
+	double climbingAngle = 200;
 	double generalPosition = 50;
 	double shootAtBatterPos = 195;
 //	double twoWheelsAgainstBatter = 174;
@@ -29,8 +29,9 @@ public class SetPivot extends Command {
 		incrementValue = 0;
 	}
 	
-    public SetPivot(double value) {
+    public SetPivot(boolean incremental, double value) {
     	System.out.println("SetPivot Constructor");
+    	this.incremental = incremental;
     	if(!incremental){
     		switch((int)value){
     		case 0:
@@ -54,9 +55,12 @@ public class SetPivot extends Command {
     		}
     	}
     	else incrementValue = value;
-    	this.constrainSpeed = constrainSpeed;
-    	this.incremental = incremental;
     } 
+    
+    public SetPivot(double value) {
+    	this.incremental = true;
+    	incrementValue = value;
+    }
 
     public SetPivot(double value, double constrainSpeed) {
     	switch((int)value){
@@ -102,7 +106,6 @@ public class SetPivot extends Command {
     				&& Robot.oi.arduino.getRawAxis(0) > 0.58) Robot.targetAngle = generalPosition;
     		else if(Robot.oi.arduino.getRawAxis(0) < 1.1
     				&& Robot.oi.arduino.getRawAxis(0) > 0.9) Robot.targetAngle = zeroPivotPos;
-    		
     	}
     }
 

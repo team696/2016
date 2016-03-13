@@ -25,8 +25,15 @@ public class LowBarAuto extends CommandGroup {
 //    	addSequential(new SetShooterSpeed(false, false, 1));
 //    	addSequential(new Shoot(), 2);
 //    	addSequential(new SetShooterSpeed(false, false, 0));
-    	addParallel(new ShiftHigh(false));
-    	addParallel(new SetPivot(0, 0.35));
-    	addSequential(new Drive(Robot.navX.getYaw(), -60, 0.75));
+    	
+    	
+//    	addSequential(new ShiftHigh(false));
+//    	addParallel(new Drive(Robot.navX.getYaw(), -60, 0.75));
+//    	addSequential(new SetPivot(0));
+    	
+    	addParallel(new Drive(Robot.navX.getYaw(), -60, 0.75));
+    	addSequential(new SetPivot(5, 0.05));
+    	
     }
+    
 }

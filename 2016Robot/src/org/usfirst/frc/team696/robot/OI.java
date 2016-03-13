@@ -57,8 +57,8 @@ public class OI {
 		shiftHighButton.whenPressed(new ShiftHigh(true));
 		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(5));
-		pivotDownButton.whileHeld(new SetPivot(-5));
+		pivotUpButton.whileHeld(new SetPivot(3.5));
+		pivotDownButton.whileHeld(new SetPivot(-3.5));
 		pivotUpButton.whenInactive(new SetPivot(0));
 		pivotDownButton.whenInactive(new SetPivot(0));
 		pivotPresetButton.whenPressed(new SetPivot());
@@ -72,7 +72,7 @@ public class OI {
 		setShootingSpeedButton.whenReleased(new SetShooterSpeed(false, false, 0));
 		
 		intakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, -0.9));
-		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.5));
+		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.75));
 		noSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0));
 		portcullisShooterSpeedButton.whenPressed(new SetShooterSpeed(false, 0.9, -0.9));
 		portcullisShooterSpeedButton.whenReleased(new SetShooterSpeed(false, 0, 0));

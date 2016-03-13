@@ -30,8 +30,9 @@ public class DriveStraightBackward extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
+//    	addParallel(new SetPivot(210));
     	addSequential(new ShiftHigh(false));
-//    	addParallel(new SetPivot(0));
     	addSequential(new Drive(Robot.navX.getYaw(), -50, 0.75));
     }
 }

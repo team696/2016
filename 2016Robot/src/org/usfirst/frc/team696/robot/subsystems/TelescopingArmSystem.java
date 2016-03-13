@@ -19,7 +19,10 @@ public class TelescopingArmSystem extends Subsystem {
 	public boolean pulling = false;
 	public boolean finished = false;
 	
-    DoubleMotor telescopingArms = new DoubleMotor(RobotMap.telescopingMotorTop, RobotMap.telescopingMotorBot);
+//    DoubleMotor telescopingArms = new DoubleMotor(RobotMap.telescopingMotorTop, RobotMap.telescopingMotorBot);
+    Victor top = new Victor(RobotMap.telescopingMotorTop);
+    Victor bot = new Victor(RobotMap.telescopingMotorBot);
+    
     Solenoid telescopingRatchet = new Solenoid(RobotMap.telescopingSolenoid);
     
     public void ratchet(boolean ratcheted) {
@@ -27,7 +30,9 @@ public class TelescopingArmSystem extends Subsystem {
     }
     
     public void set(double speed){
-    	telescopingArms.set(speed);
+//    	telescopingArms.set(speed);
+    	top.set(speed);
+    	bot.set(speed);
     }
     
     public boolean getRatchet(){

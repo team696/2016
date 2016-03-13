@@ -141,12 +141,12 @@ public class Robot extends IterativeRobot {
 //        if(control.getRawButton(12))speed = -.25;
 //        if(control.getRawButton(13))speed = 0;
         
-        if(arduino.getRawAxis(3) > 0.25) speed = 0.25;
-        else if(arduino.getRawAxis(3) < -0.25) speed = -0.25;
+        if(arduino.getRawAxis(1) > 0.25) speed = -0.25;
+        else if(arduino.getRawAxis(1) < -0.25) speed = 0.25;
         else speed = 0;
         
 //        System.out.print("   speed:" + speed);
-        System.out.println("Motor " + "encoder: one:" + enc1.get() + "   two:" + enc2.get() + "   three:" + enc3.get() + "   four:" + enc4.get() + "   five:" + enc5.get() + "   six:" + enc6.get());
+        System.out.println("Motor " + state + "   encoder: one:" + enc1.get() + "   two:" + enc2.get() + "   three:" + enc3.get() + "   four:" + enc4.get() + "   five:" + enc5.get() + "   six:" + enc6.get());
 
         sol1.set(arduino.getRawButton(7));
         sol2.set(arduino.getRawButton(8));
@@ -180,7 +180,7 @@ public class Robot extends IterativeRobot {
 		    vic5.set(speed);//inverted?
 		    break;
         case 6:
-		    vic6.set(speed);//inverted?
+		    vic6.set(-speed);//inverted?
 		    break;
         case 7:
 		    vic7.set(speed);//inverted?
