@@ -14,8 +14,6 @@ public class TeleopDrive extends Command {
 
 	double speed = 0;
 	double turnValue = 0;
-	double leftSpeed = 0;
-	double rightSpeed = 0;
 	double goalAngle;
 	double currentAngle;
 	double kPHigh = 0.0105;
@@ -63,15 +61,13 @@ public class TeleopDrive extends Command {
     	fastTurn = Robot.fastTurn;
     	if(fastTurn)turnValue*=2;
     	
-    	leftSpeed = speed;
-    	rightSpeed = speed;
+    	Robot.leftSpeed = speed;
+    	Robot.rightSpeed = speed;
 
     	if(regularDrive)regularArcade();
-    	else if(arcingDrive)arcingDrive();
-    	else driveStraight();
     	
     	
-    	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
+    	Robot.chassis.setSpeeds(Robot.leftSpeed, Robot.rightSpeed);
     	
     }
     
@@ -97,15 +93,15 @@ public class TeleopDrive extends Command {
 	    	turnValue = Math.pow(turnValue, 2) * Util.signOf(turnValue);
     	}
     	
-    	leftSpeed-=turnValue;
-    	rightSpeed+= turnValue;
+    	Robot.leftSpeed-=turnValue;
+    	Robot.rightSpeed+= turnValue;
     	
     }
     
     public void regularArcade(){
     	if(Robot.fastTurn)turnValue*=2;
-    	leftSpeed-=turnValue;
-    	rightSpeed+=turnValue;
+    	Robot.leftSpeed-=turnValue;
+    	Robot.rightSpeed+=turnValue;
     }
     
     public void driveStraight(){
@@ -127,14 +123,14 @@ public class TeleopDrive extends Command {
         PID.setError(delta);
         output = PID.getValue();
         
-    	leftSpeed+=output;
-    	rightSpeed-=output;
+        Robot.leftSpeed+=output;
+        Robot.rightSpeed-=output;
     	
-    	if(Math.abs(leftSpeed)>1)rightSpeed-=(Math.abs(leftSpeed)-1) * Util.signOf(leftSpeed);
-    	if(Math.abs(rightSpeed)>1)leftSpeed-=(Math.abs(rightSpeed)-1) * Util.signOf(rightSpeed);
+    	if(Math.abs(Robot.leftSpeed)>1)Robot.rightSpeed-=(Math.abs(Robot.leftSpeed)-1) * Util.signOf(Robot.leftSpeed);
+    	if(Math.abs(Robot.rightSpeed)>1)Robot.leftSpeed-=(Math.abs(Robot.rightSpeed)-1) * Util.signOf(Robot.rightSpeed);
 
-    	leftSpeed = Util.constrain(leftSpeed, -1, 1);
-    	rightSpeed = Util.constrain(rightSpeed, -1, 1);
+    	Robot.leftSpeed = Util.constrain(Robot.leftSpeed, -1, 1);
+    	Robot.rightSpeed = Util.constrain(Robot.rightSpeed, -1, 1);
     	
     	oldDelta = delta;
     }

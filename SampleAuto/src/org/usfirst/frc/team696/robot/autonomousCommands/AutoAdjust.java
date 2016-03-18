@@ -1,8 +1,7 @@
 package org.usfirst.frc.team696.robot.autonomousCommands;
 
-import org.usfirst.frc.team696.utilities.GetCamVals;
 import org.usfirst.frc.team696.robot.Robot;
-import org.usfirst.frc.team696.robot.commands.Drive;
+import org.usfirst.frc.team696.robot.utilities.GetCamVals;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -31,7 +30,6 @@ public class AutoAdjust extends Command {
 	GetCamVals camCaller = new GetCamVals();
 	
     public AutoAdjust() {
-        requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time

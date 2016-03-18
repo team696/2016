@@ -33,17 +33,8 @@ public class ChassisSystem extends Subsystem {
     	drive();
     }
     
-	public double getLeftSpeed() {
-		return leftSpeed;
-	}
-	
-	public double getRightSpeed() {
-		return rightSpeed;
-	}
-	
     public void drive() {
     	drive.tankDrive(leftSpeed, rightSpeed);
-//    	drive.tankDrive(0, 0);
     }
     
     public void stop() {

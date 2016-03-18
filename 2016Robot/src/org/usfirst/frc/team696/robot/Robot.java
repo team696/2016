@@ -78,6 +78,11 @@ public class Robot extends IterativeRobot {
 	public static double botShooterSpeed = 0;
 	public static boolean isRPM = true;
 	
+	public static double leftSpeed = 0;
+	public static double rightSpeed = 0;
+	
+	public static boolean autoAlign = false;
+	
 	public static Timer shootTimer = new Timer();
 	Timer matchTimer = new Timer();
 	
