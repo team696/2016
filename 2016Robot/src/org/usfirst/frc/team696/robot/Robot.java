@@ -17,6 +17,7 @@ import org.usfirst.frc.team696.robot.subsystems.ShootSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShooterSystem;
 // import org.usfirst.frc.team696.robot.subsystems.TelescopingArmSystem;
 import org.usfirst.frc.team696.robot.subsystems.TelescopingArmSystem;
+import org.usfirst.frc.team696.utilities.GetCamVals;
 
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
@@ -78,11 +79,6 @@ public class Robot extends IterativeRobot {
 	public static double botShooterSpeed = 0;
 	public static boolean isRPM = true;
 	
-	public static double leftSpeed = 0;
-	public static double rightSpeed = 0;
-	
-	public static boolean autoAlign = false;
-	
 	public static Timer shootTimer = new Timer();
 	Timer matchTimer = new Timer();
 	
@@ -94,8 +90,6 @@ public class Robot extends IterativeRobot {
 	public static boolean startReleaseRatchetTimer = false;
 	
 	public static boolean endOfMatch = false;
-	
-//	public static boolean manualPivotControl = false;
 	
 	/**
      * This function is run when the robot is first started up and should be
@@ -121,15 +115,6 @@ public class Robot extends IterativeRobot {
 		shootTimer.start();
 		leftEncoder.setDistancePerPulse(0.009765625);
 		rightEncoder.setDistancePerPulse(0.009765625);
-		
-//		SmartDashboard.putNumber("Right Drive Enc", rightEncoder.getDistance());
-//		SmartDashboard.putNumber("Left Drive Enc", leftEncoder.getDistance());
-//		SmartDashboard.putNumber("Pivot Enc", pivotEncoder.getDistance());
-//		SmartDashboard.putNumber("Bottom Shooter Enc", bottomShooterWheelEncoder.getDistance());
-//		SmartDashboard.putNumber("Top Shooter Enc", topShooterWheelEncoder.getDistance());
-//		SmartDashboard.putNumber("Telescoping Enc", telescopingEncoder.getDistance());
-//		SmartDashboard.putNumber("Yaw", navX.getYaw());
-//		navX.zeroYaw();
 		
     }
 	
@@ -216,15 +201,13 @@ public class Robot extends IterativeRobot {
     /**
      * This function is called periodically during operator control
      */
+    
+    GetCamVals camera = new GetCamVals();
+    
     public void teleopPeriodic() {
-//    	SmartDashboard.putNumber("Right Drive Enc", rightEncoder.getDistance());
-//		SmartDashboard.putNumber("Left Drive Enc", leftEncoder.getDistance());
-//		SmartDashboard.putNumber("Pivot Enc", pivotEncoder.getDistance());
-//		SmartDashboard.putNumber("Bottom Shooter Enc", bottomShooterWheelEncoder.getDistance());
-//		SmartDashboard.putNumber("Top Shooter Enc", topShooterWheelEncoder.getDistance());
-//		SmartDashboard.putNumber("Telescoping Enc", telescopingEncoder.getDistance());
-//		SmartDashboard.putNumber("Yaw", navX.getYaw());
-        Scheduler.getInstance().run();
+    	System.out.println("x1: " + camera.getX1() + "\n y1: " + camera.getY1() + "\n x2: " + camera.getY2() + "\n length: " + camera.getLength() + "\n angle: " + camera.getAngle());
+    	
+    	Scheduler.getInstance().run();
     }
     
     /**

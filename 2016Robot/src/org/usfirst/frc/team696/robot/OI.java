@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team696.robot;
 
-import org.usfirst.frc.team696.robot.commands.AutoAlign;
 import org.usfirst.frc.team696.robot.commands.FastTurn;
 import org.usfirst.frc.team696.robot.commands.SetPivot;
 import org.usfirst.frc.team696.robot.commands.SetTelescopingArm;
@@ -49,8 +48,6 @@ public class OI {
 	Button manualRetract = new JoystickButton(arduino, 6);
 	Button manualExtend = new JoystickButton(arduino, 5);
 	
-	Button autoAlign = new JoystickButton(arduino, 11);
-	
 	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
 	public OI() {
@@ -67,6 +64,7 @@ public class OI {
 		pivotPresetButton.whenPressed(new SetPivot());
 		
 		shootButton.whenPressed(new Shoot());
+		
 		
 //		setShootingSpeedButton.whileHeld(new SetShooterSpeed(4500));
 		setShootingSpeedButton.whileHeld(new SetShooterSpeed(true, true, arduino.getRawAxis(3)));
@@ -91,9 +89,6 @@ public class OI {
 		manualRetract.whenReleased(new SetTelescopingArm(true, 0));
 		
 		zeroAllEncodersButton.whenPressed(new ZeroEncoders());
-		
-		autoAlign.whenPressed(new AutoAlign(true));
-		autoAlign.whenReleased(new AutoAlign(false));
 		
 	}
 }
