@@ -50,6 +50,8 @@ public class PivotArmSystem extends Subsystem {
     	botSP.setCurrentAmps(Robot.PDP.getCurrent(6), speed);
     	if(topSP.getOutput() == 0 || botSP.getOutput() == 0)this.speed = 0;
     	else this.speed = speed;
+    	run();
+    	System.out.println(speed + "     " + Robot.PDP.getCurrent(7));
     }
     
     public void togglePID(boolean usePID){}

@@ -72,7 +72,7 @@ public class OI {
 		setShootingSpeedButton.whenReleased(new SetShooterSpeed(false, false, 0));
 		
 		intakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, -0.9));
-		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.75));
+		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.9));
 		noSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0));
 		portcullisShooterSpeedButton.whenPressed(new SetShooterSpeed(false, 0.9, -0.9));
 		portcullisShooterSpeedButton.whenReleased(new SetShooterSpeed(false, 0, 0));

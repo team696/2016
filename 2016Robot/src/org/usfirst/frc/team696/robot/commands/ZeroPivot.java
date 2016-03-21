@@ -12,14 +12,15 @@ import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
  *
 **/
 
-public class zeroPivot extends Command {
+public class ZeroPivot extends Command {
 
 	boolean limitTrigger = false;
-	boolean zeroing = true;
 	
-	double zeroingSpeed = 0.0;
+	double zeroingSpeed = -0.75;
+	
+	boolean isFinished = false;
 
-    public zeroPivot() {
+    public ZeroPivot() {
         requires(Robot.pivotArm);
     }
 
@@ -27,19 +28,24 @@ public class zeroPivot extends Command {
     }
 
     protected void execute() {
-    	zeroing = true;
-    	if (!limitTrigger) Robot.pivotArm.setSpeed(zeroingSpeed);
-    	else {
+    	Robot.pivotArm.ratchet(false);
+    	
+    	Robot.pivotArm.setSpeed(-0.75);
+    	
+    	if(Robot.PDP.getCurrent(7) > 50){
+    		isFinished = true;
     		Robot.pivotArm.setSpeed(0);
-    		zeroing = false;
+    		System.out.println("HEHE");
     	}
+    	System.out.println("I AM IN ZERO PIVOT CODE!@!!");
     }
 
     protected boolean isFinished() {
-       return !zeroing;
+    	return isFinished;
     }
 
     protected void end() {
+    	Robot.pivotArm.setSpeed(0);
     }
 
     protected void interrupted() {

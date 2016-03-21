@@ -5,6 +5,8 @@ import org.usfirst.frc.team696.robot.autonomousCommands.DoNothing;
 import org.usfirst.frc.team696.robot.autonomousCommands.DriveStraightBackward;
 import org.usfirst.frc.team696.robot.autonomousCommands.DriveStraightForward;
 import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAuto;
+import org.usfirst.frc.team696.robot.autonomousCommands.TestEncoder;
+import org.usfirst.frc.team696.robot.autonomousCommands.ZeroArm;
 import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAndLowGoal;
 import org.usfirst.frc.team696.robot.runningCommands.RunningPivot;
 import org.usfirst.frc.team696.robot.runningCommands.RunningShooter;
@@ -91,6 +93,8 @@ public class Robot extends IterativeRobot {
 	
 	public static boolean endOfMatch = false;
 	
+	public static double incrementTargetDirection = 0;
+	
 	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -110,11 +114,12 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Do Nothing", new DoNothing());
         chooser.addObject("Drive Straight Backward", new DriveStraightBackward());
         chooser.addObject("Drive Straight Forward", new DriveStraightForward());
+        chooser.addObject("ZeroPivotTest", new ZeroArm());
+        chooser.addObject("Testing Encoder", new TestEncoder());
         SmartDashboard.putData("Auto mode", chooser);
         
 		shootTimer.start();
-		leftEncoder.setDistancePerPulse(0.009765625);
-		rightEncoder.setDistancePerPulse(0.009765625);
+		
 		
     }
 	
@@ -143,23 +148,13 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	matchTimer.start();
         autonomousCommand = (Command) chooser.getSelected();
-//        String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
-//		switch(autoSelected) {
-//		case "Low Bar":
-//			autonomousCommand = new LowBarAutoPickUp();
-//			break;
-//		case "Default Auto":
-//		default:
-//			autonomousCommand = new DoNothing();
-//			break;
-//		} 
-        
-    	targetAngle = pivotEncoder.getDistance();
+
     	leftEncoder.reset();
 		rightEncoder.reset();
-        
+		
         Scheduler.getInstance().add(new RunningPivot());
         Scheduler.getInstance().add(new RunningShooter());
+//        Scheduler.getInstance().add(new RunningTelescopingArm());
         
         if (autonomousCommand != null) autonomousCommand.start();
         
@@ -169,13 +164,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-//    	SmartDashboard.putNumber("Right Drive Enc", rightEncoder.getDistance());
-//		SmartDashboard.putNumber("Left Drive Enc", leftEncoder.getDistance());
-//		SmartDashboard.putNumber("Pivot Enc", pivotEncoder.getDistance());
-//		SmartDashboard.putNumber("Bottom Shooter Enc", bottomShooterWheelEncoder.getDistance());
-//		SmartDashboard.putNumber("Top Shooter Enc", topShooterWheelEncoder.getDistance());
-//		SmartDashboard.putNumber("Telescoping Enc", telescopingEncoder.getDistance());
-//		SmartDashboard.putNumber("Yaw", navX.getYaw());
+    	System.out.println("navX: " + navX.getYaw());
         Scheduler.getInstance().run();
     }
 
@@ -202,11 +191,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     
-    GetCamVals camera = new GetCamVals();
-    
     public void teleopPeriodic() {
-    	System.out.println("x1: " + camera.getX1() + "\n y1: " + camera.getY1() + "\n x2: " + camera.getY2() + "\n length: " + camera.getLength() + "\n angle: " + camera.getAngle());
-    	
     	Scheduler.getInstance().run();
     }
     

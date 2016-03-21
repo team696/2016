@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Drive extends Command {
 
-	double kP = 0.0105;
+	double kP = 0.0175;
 	double kI = 0.0002;
 	double kD = 0.0003;
 	double alpha = 0.95;
@@ -27,18 +27,18 @@ public class Drive extends Command {
 	
 	double distanceError = 0;
 	double directionError = 0;
+	double oldDirectionError = 0;
 	
 	PIDControl directionPID = new PIDControl(kP, kI, kD, alpha);
 	
 	boolean isFinished = false;
-	
-	
+	boolean firstRun = true;
 	
     public Drive(double direction, double distance, double speed) {
     	requires(Robot.chassis);
     	this.direction = direction;
     	this.distance = distance;
-    	this.speed = speed;
+    	this.speed = speed * -Util.signOf(distance);;
     }
 
     // Called just before this Command runs the first time
@@ -47,9 +47,16 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(firstRun){
+    		direction = Robot.navX.getYaw() + direction;
+    		Robot.leftEncoder.reset();
+    		Robot.rightEncoder.reset();
+    		firstRun = false;
+    	}
+    	
     	currentDistance = (Robot.leftEncoder.getDistance() + Robot.rightEncoder.getDistance()) / 2;
     	currentDirection = Robot.navX.getYaw();
-    	
+
     	distanceError = distance - currentDistance;
     	directionError = direction - currentDirection;
     	
@@ -69,9 +76,11 @@ public class Drive extends Command {
     	
     	Robot.chassis.setSpeeds(leftSpeed, rightSpeed);
     	
-    	if(Math.abs(directionError) < 30 && Math.abs(distanceError) == 0)isFinished = true;
+    	if(Math.abs(directionError) < 2 && Math.abs(oldDirectionError) < 2 && Math.abs(distanceError) == 0 && Math.abs(leftSpeed) < 0.25 && Math.abs(rightSpeed) < 0.25)isFinished = true;
     	
-    	System.out.println("Target Distance: " + distance + "   current distance traveled: " + currentDistance + "   speeds: " + leftSpeed + "   " + rightSpeed);
+    	oldDirectionError = directionError;
+    	
+    	System.out.print("target distance: " + distance + "    currentDistance: " + currentDistance);
     	
     }
 
@@ -82,6 +91,7 @@ public class Drive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.chassis.setSpeeds(0, 0);
     }
 
     // Called when another command which requires one or more of the same
