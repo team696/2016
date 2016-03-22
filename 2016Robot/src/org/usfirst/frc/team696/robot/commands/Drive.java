@@ -80,7 +80,7 @@ public class Drive extends Command {
     	
     	oldDirectionError = directionError;
     	
-    	System.out.print("target distance: " + distance + "    currentDistance: " + currentDistance);
+    	System.out.print("target distance: " + distance + "    currentDistance: " + currentDistance + "     target Angle: " + direction + "     cureent Angle: " + Robot.navX.getYaw());
     	
     }
 
