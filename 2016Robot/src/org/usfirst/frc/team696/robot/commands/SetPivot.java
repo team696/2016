@@ -25,8 +25,17 @@ public class SetPivot extends Command {
 	double constrainSpeed = 1;
 	
 	public SetPivot(){
-		incremental = false;
+		incremental = true;
 		incrementValue = 0;
+	}
+	
+	public SetPivot(boolean keepPosition){
+		if(!keepPosition){
+			incremental = true;
+			incrementValue = 0;
+		} else {
+			targetAngle = Robot.pivotEncoder.getDistance();
+		}
 	}
 	
     public SetPivot(boolean incremental, double value) {

@@ -37,7 +37,7 @@ public class ZeroPivot extends Command {
     		Robot.pivotArm.setSpeed(0);
     		System.out.println("HEHE");
     	}
-    	System.out.println("I AM IN ZERO PIVOT CODE!@!!");
+    	System.out.println("Current Pull: " + Robot.PDP.getCurrent(7));
     }
 
     protected boolean isFinished() {

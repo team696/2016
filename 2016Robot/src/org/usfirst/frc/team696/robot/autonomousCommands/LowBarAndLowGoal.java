@@ -39,7 +39,7 @@ public class LowBarAndLowGoal extends CommandGroup {
     	addSequential(new ShiftHigh(true));
     	
     	addSequential(new Drive(-58, -15, 0.65));
-    	addSequential(new Drive(160, 0, 0));
+    	addSequential(new Drive(120, 0, 0));
 //    	addSequential(new Drive(0, 11, 0.65));
     }
 }
