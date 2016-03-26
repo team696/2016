@@ -60,6 +60,9 @@ public class Drive extends Command {
     	distanceError = distance - currentDistance;
     	directionError = direction - currentDirection;
     	
+    	if(directionError > 180)directionError = directionError - 360;
+    	if(directionError < -180)directionError = directionError + 360;
+    	
     	directionPID.setError(directionError);
     	
     	distanceError = Util.deadZone(distanceError, -0.5, 0.5, 0);

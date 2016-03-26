@@ -31,8 +31,8 @@ public class DriveStraightBackward extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addParallel(new SetPivot(45, 0.2));
-    	addSequential(new ShiftHigh(false));
-    	addSequential(new Drive(0, -50, 0.75));
+//    	addParallel(new SetPivot(45, 0.2));
+    	addSequential(new ShiftHigh(true));
+    	addSequential(new Drive(0, -10, 0.75));
     }
 }

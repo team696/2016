@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveStraightForward extends CommandGroup {
     
     public  DriveStraightForward() {
-    	addParallel(new SetPivot(45, 0.2));
-    	addSequential(new ShiftHigh(false));
-    	addSequential(new Drive(0, 50, 0.75));
+//    	addParallel(new SetPivot(45, 0.2));
+    	addSequential(new ShiftHigh(true));
+    	addSequential(new Drive(0, 15, 0.75));
     }
 }

@@ -180,7 +180,7 @@ public class Robot extends IterativeRobot {
 		    vic5.set(speed);//inverted?
 		    break;
         case 6:
-		    vic6.set(-speed);//inverted?
+		    vic6.set(speed);//inverted?
 		    break;
         case 7:
 		    vic7.set(speed);//inverted?

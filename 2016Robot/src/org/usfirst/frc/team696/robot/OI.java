@@ -42,11 +42,11 @@ public class OI {
 	Button outtakeSpeedButton = new JoystickAnalogButton(arduino, 2, 0.7, 1.1);
 	Button portcullisShooterSpeedButton = new JoystickButton(arduino, 8);
 	
-	Button telescopingArmFullPosButton = new JoystickButton(arduino, 9);
-	Button telescopingArmMidPosButton = new JoystickButton(arduino, 10);
-	Button telescopingArmFullRetractButton = new JoystickButton(arduino, 4);
-	Button manualRetract = new JoystickButton(arduino, 6);
-	Button manualExtend = new JoystickButton(arduino, 5);
+	Button telescopingArmFullPosButton = new JoystickButton(arduino, 5);
+	Button telescopingArmMidPosButton = new JoystickButton(arduino, 6);
+//	Button telescopingArmFullRetractButton = new JoystickButton(arduino, 4);
+	Button manualRetract = new JoystickButton(arduino, 4);
+//	Button manualExtend = new JoystickButton(arduino, 5);
 	
 	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
@@ -57,8 +57,8 @@ public class OI {
 		shiftHighButton.whenPressed(new ShiftHigh(true));
 		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(2.5));
-		pivotDownButton.whileHeld(new SetPivot(-2.5));
+		pivotUpButton.whileHeld(new SetPivot(3.5));
+		pivotDownButton.whileHeld(new SetPivot(-3.5));
 		pivotUpButton.whenInactive(new SetPivot(true));
 		pivotDownButton.whenInactive(new SetPivot(true));
 		pivotPresetButton.whenPressed(new SetPivot());
@@ -82,9 +82,9 @@ public class OI {
 		
 		telescopingArmFullPosButton.whenPressed(new SetTelescopingArm(2));
 		telescopingArmMidPosButton.whenPressed(new SetTelescopingArm(1));
-		telescopingArmFullRetractButton.whenPressed(new SetTelescopingArm(0));
-		manualExtend.whenPressed(new SetTelescopingArm(true, 1));
-		manualExtend.whenReleased(new SetTelescopingArm(true, 0));
+//		telescopingArmFullRetractButton.whenPressed(new SetTelescopingArm(0));
+//		manualExtend.whenPressed(new SetTelescopingArm(true, 1));
+//		manualExtend.whenReleased(new SetTelescopingArm(true, 0));
 		manualRetract.whenPressed(new SetTelescopingArm(true, -1));
 		manualRetract.whenReleased(new SetTelescopingArm(true, 0));
 		
