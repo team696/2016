@@ -32,7 +32,7 @@ public class ZeroPivot extends Command {
     	
     	Robot.pivotArm.setSpeed(-0.75);
     	
-    	if(Robot.PDP.getCurrent(7) > 50){
+    	if(Robot.PDP.getCurrent(7) > 50 || Robot.PDP.getCurrent(6) > 50){
     		isFinished = true;
     		Robot.pivotArm.setSpeed(0);
     		System.out.println("HEHE");

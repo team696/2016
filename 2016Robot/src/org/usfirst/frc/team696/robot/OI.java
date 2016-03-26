@@ -85,7 +85,7 @@ public class OI {
 //		telescopingArmFullRetractButton.whenPressed(new SetTelescopingArm(0));
 //		manualExtend.whenPressed(new SetTelescopingArm(true, 1));
 //		manualExtend.whenReleased(new SetTelescopingArm(true, 0));
-		manualRetract.whenPressed(new SetTelescopingArm(true, -1));
+		manualRetract.whenPressed(new SetTelescopingArm(true, -40));
 		manualRetract.whenReleased(new SetTelescopingArm(true, 0));
 		
 		zeroAllEncodersButton.whenPressed(new ZeroEncoders());

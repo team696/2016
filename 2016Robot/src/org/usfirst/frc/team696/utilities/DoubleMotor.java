@@ -13,7 +13,7 @@ public class DoubleMotor implements PIDOutput {
 	}
 	
 	public void set(double speed){
-		motorA.set(speed);
+		motorA.set(-speed);
 		motorB.set(speed);
 	}
 

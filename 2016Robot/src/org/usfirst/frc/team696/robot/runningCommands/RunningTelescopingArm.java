@@ -71,7 +71,7 @@ public class RunningTelescopingArm extends Command {
     		speed = -1;
     		speed = Util.constrain(speed, -0.95, 0);
     		if(Math.abs(error) < 300)speed = Util.constrain(speed, -0.85, 0);
-    		if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.60, 0);
+    		if(Math.abs(error) < 80)speed = Util.constrain(speed, -0.70, 0);
     		if(error >= 0)speed = 0;
     		Robot.endOfMatch = true;
     		Robot.telescopingArmSystem.ratchet(true);

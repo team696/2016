@@ -68,7 +68,12 @@ public class PivotArmSystem extends Subsystem {
     	error = this.targetAngle - Robot.pivotEncoder.get();
     	PID.setError(error);
     	speed = Util.constrain(PID.getValue(), -Robot.pivotConstrainSpeed, Robot.pivotConstrainSpeed);
-    	if(!Robot.endOfMatch)speed = Util.constrain(PID.getValue(), -0.35, 0.35);
+    	if(!Robot.endOfMatch)speed = Util.constrain(PID.getValue(), -1, 1);
+    	
+    	//manual control with straight out voltage
+//    	if(error > 0)speed = 0.7;
+//    	if(error < 0)speed = -0.7;
+    	
     	run();
     }
 
