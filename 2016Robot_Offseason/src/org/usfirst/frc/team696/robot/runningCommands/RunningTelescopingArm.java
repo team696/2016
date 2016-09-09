@@ -3,10 +3,7 @@ package org.usfirst.frc.team696.robot.runningCommands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-import java.lang.management.ClassLoadingMXBean;
-
 import org.usfirst.frc.team696.robot.Robot;
-import org.usfirst.frc.team696.utilities.PIDControl;
 import org.usfirst.frc.team696.utilities.Util;
 
 /**
@@ -41,7 +38,7 @@ public class RunningTelescopingArm extends Command {
     	case 0:
     		speed = 0;
     		Robot.telescopingArmSystem.ratchet(true);
-    		Robot.pivotArm.ratchet(false);
+//    		Robot.pivotArm.ratchet(false);
     		break;
     	case 1:
     		if(Robot.startReleaseRatchetTimer){
@@ -55,7 +52,7 @@ public class RunningTelescopingArm extends Command {
     			timer.reset();
     		}
     		Robot.telescopingArmSystem.ratchet(false);
-    		Robot.pivotArm.ratchet(false);
+//    		Robot.pivotArm.ratchet(false);
     		break;
     	case 2:
     		speed = 1;
@@ -65,7 +62,7 @@ public class RunningTelescopingArm extends Command {
     		if(error <= 0 || maxDistance < currentDistance && speed > 0)speed = 0;
     		Robot.endOfMatch = true;
     		Robot.telescopingArmSystem.ratchet(false);
-    		Robot.pivotArm.ratchet(false);
+//    		Robot.pivotArm.ratchet(false);
     		break;
     	case 3:
     		speed = -1;
@@ -75,7 +72,7 @@ public class RunningTelescopingArm extends Command {
     		if(error >= 0)speed = 0;
     		Robot.endOfMatch = true;
     		Robot.telescopingArmSystem.ratchet(true);
-    		Robot.pivotArm.ratchet(true);
+//    		Robot.pivotArm.ratchet(true);
     	}
     	
     	Robot.telescopingArmSystem.set(speed);

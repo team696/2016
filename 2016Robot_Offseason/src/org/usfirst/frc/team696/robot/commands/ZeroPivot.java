@@ -28,7 +28,7 @@ public class ZeroPivot extends Command {
     }
 
     protected void execute() {
-    	Robot.pivotArm.ratchet(false);
+    	Robot.pivotArm.brake(false);
     	
     	Robot.pivotArm.setSpeed(-0.75);
     	

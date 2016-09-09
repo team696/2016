@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -24,6 +25,7 @@ public class PivotArmSystem extends Subsystem {
 	Solenoid pivotRatchetSol = new Solenoid(RobotMap.pivotRatchetSolChannel);
 	StallPrevention topSP = new StallPrevention(30);
 	StallPrevention botSP = new StallPrevention(30);
+	Timer discBreakTimer = new Timer();
 	
 	
 	boolean ratchet = false;
@@ -77,12 +79,23 @@ public class PivotArmSystem extends Subsystem {
     	run();
     }
 
-    public void ratchet(boolean ratcheted){
+    public void brake(boolean ratcheted){
     	pivotRatchetSol.set(!ratcheted);
     }
     
     public void run(){
-    	pivotMotors.set(speed);
+    	if(speed != 0 && discBreakTimer.get() == 0){
+    		discBreakTimer.start();
+    		brake(false);
+    	}
+    	if(speed == 0){
+    		discBreakTimer.stop();
+    		discBreakTimer.reset();
+    		brake(true);
+    	}
+    	if(discBreakTimer.get() < 1)speed = 0;//jack
+
+		pivotMotors.set(speed);
     }
     
     public double getSpeed() {

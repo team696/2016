@@ -19,7 +19,6 @@ import org.usfirst.frc.team696.robot.subsystems.ShootSystem;
 import org.usfirst.frc.team696.robot.subsystems.ShooterSystem;
 // import org.usfirst.frc.team696.robot.subsystems.TelescopingArmSystem;
 import org.usfirst.frc.team696.robot.subsystems.TelescopingArmSystem;
-import org.usfirst.frc.team696.utilities.GetCamVals;
 
 import com.kauailabs.nav6.frc.IMU;
 import com.kauailabs.nav6.frc.IMUAdvanced;
