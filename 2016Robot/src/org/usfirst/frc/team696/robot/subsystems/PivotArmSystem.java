@@ -20,7 +20,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class PivotArmSystem extends Subsystem {
     
-	DoubleMotor pivotMotors= new DoubleMotor(RobotMap.topPivotMotor, RobotMap.bottomPivotMotor);;
+//	DoubleMotor pivotMotors= new DoubleMotor(RobotMap.topPivotMotor, RobotMap.bottomPivotMotor);;
+	Victor topPivotMotor = new Victor(RobotMap.topPivotMotor);
+	Victor botPivotMotor = new Victor(RobotMap.bottomPivotMotor);
 	Solenoid pivotRatchetSol = new Solenoid(RobotMap.pivotRatchetSolChannel);
 	StallPrevention topSP = new StallPrevention(30);
 	StallPrevention botSP = new StallPrevention(30);
@@ -82,7 +84,8 @@ public class PivotArmSystem extends Subsystem {
     }
     
     public void run(){
-    	pivotMotors.set(speed);
+    	topPivotMotor.set(speed);
+		botPivotMotor.set(speed);
     }
     
     public double getSpeed() {
