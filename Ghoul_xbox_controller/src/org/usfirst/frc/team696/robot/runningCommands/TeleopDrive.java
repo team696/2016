@@ -52,10 +52,10 @@ public class TeleopDrive extends Command {
 //    	if(Robot.shiftedHigh)PID.setPID(kPHigh, kIHigh, kDHigh, alpha);
 //    	else PID.setPID(kPLow, kILow, kDLow, alpha);
     	
-    	speed = Robot.oi.arduino.getRawAxis(4);
+    	speed = Robot.oi.xbox.getRawAxis(1);
     	speed = Util.deadZone(speed, -0.05, 0.05, 0);
     	
-    	turnValue = Robot.oi.wheel.getAxis(Joystick.AxisType.kX);
+    	turnValue = Robot.oi.xbox.getRawAxis(4);
     	turnValue = Util.smoothDeadZone(turnValue, -0.13, 0.13, -1, 1, 0);
 //    	if squaring isn't enough, do this
 //    	turnValue = Util.map(turnValue, -1, 1, -1.5, 1.5);

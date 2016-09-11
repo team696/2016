@@ -39,7 +39,7 @@ public class PivotArmSystem extends Subsystem {
 	double cumulativeError = 0;
 	double alpha = 0;
 	
-	private static double kP = 0.05;
+	private static double kP = 0.03;
 	
 	PIDControl PID = new PIDControl(kP);
 	
@@ -65,19 +65,21 @@ public class PivotArmSystem extends Subsystem {
      * @param targetAngle must be in degrees
      */
     public void setTargetAngle(double targetAngle){
+    	if(targetAngle <= 10/*test*/)targetAngle = 11;
     	this.targetAngle = targetAngle;
     	
 //    	if(this.targetAngle < 0)this.targetAngle = Robot.pivotEncoder.get();
     	
     	error = this.targetAngle - Robot.pivotEncoder.get();
     	PID.setError(error);
-    	speed = Util.constrain(PID.getValue(), -Robot.pivotConstrainSpeed, Robot.pivotConstrainSpeed);
+    	speed = Util.constrain(PID.getValue(), -.5, Robot.pivotConstrainSpeed);
     	if(!Robot.endOfMatch)speed = Util.constrain(PID.getValue(), -1, 1);
     	
     	//manual control with straight out voltage
 //    	if(error > 0)speed = 0.7;
 //    	if(error < 0)speed = -0.7;
     	
+    	System.out.print("    target Angle: " + this.targetAngle + "    pivot: " + Robot.pivotEncoder.get() + "    speed: " + speed + "     ");
     	run();
     }
 
@@ -95,10 +97,10 @@ public class PivotArmSystem extends Subsystem {
     		discBreakTimer.reset();
     		brake(true);
     	}
-    	if(discBreakTimer.get() < 1)speed = 0;//jack
+    	if(discBreakTimer.get() < 0.1)speed = 0;//jack
 
-		topPivotMotor.set(speed);
-		botPivotMotor.set(speed);
+		topPivotMotor.set(-speed);
+		botPivotMotor.set(-speed);
     }
     
     public double getSpeed() {

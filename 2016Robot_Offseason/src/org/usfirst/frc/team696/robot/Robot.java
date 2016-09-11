@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 	public static double telescopingTargetDistance = 0;
 	
 	public static double targetAngle = 0;
-	public static double pivotConstrainSpeed = 1;
+	public static double pivotConstrainSpeed = .25;
 	
 	public static double topShooterRPM = 0;
 	public static double botShooterRPM = 0;
@@ -145,6 +145,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+    	targetAngle = pivotEncoder.get();
     	matchTimer.start();
         autonomousCommand = (Command) chooser.getSelected();
 
@@ -168,7 +169,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	targetAngle = pivotEncoder.getDistance();
+    	targetAngle = pivotEncoder.get();
     	leftEncoder.reset();
 		rightEncoder.reset();
 		telescopingEncoder.reset();

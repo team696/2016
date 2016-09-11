@@ -102,20 +102,20 @@ public class SetPivot extends Command {
     protected void execute() {
     	Robot.pivotConstrainSpeed = constrainSpeed;
     	if(incremental)Robot.targetAngle+=incrementValue;
-    	if(!incremental){
-    		if(Robot.oi.arduino.getRawAxis(0) < -0.9 
-    				&& Robot.oi.arduino.getRawAxis(0) > -1.1) Robot.targetAngle = distanceShot;
-    		else if(Robot.oi.arduino.getRawAxis(0) < -0.5 
-    				&& Robot.oi.arduino.getRawAxis(0) > -0.6) Robot.targetAngle = distanceShot;
-    		else if(Robot.oi.arduino.getRawAxis(0) < 0
-    				&& Robot.oi.arduino.getRawAxis(0) > -0.3) Robot.targetAngle = twoWheelsAgainstBatter;
-    		else if(Robot.oi.arduino.getRawAxis(0) < 0.19
-    				&& Robot.oi.arduino.getRawAxis(0) > 0.17) Robot.targetAngle = shootAtBatterPos;
-    		else if(Robot.oi.arduino.getRawAxis(0) < 0.6
-    				&& Robot.oi.arduino.getRawAxis(0) > 0.58) Robot.targetAngle = generalPosition;
-    		else if(Robot.oi.arduino.getRawAxis(0) < 1.1
-    				&& Robot.oi.arduino.getRawAxis(0) > 0.9) Robot.targetAngle = zeroPivotPos;
-    	}
+//    	if(!incremental){
+//    		if(Robot.oi.arduino.getRawAxis(0) < -0.9 
+//    				&& Robot.oi.arduino.getRawAxis(0) > -1.1) Robot.targetAngle = distanceShot;
+//    		else if(Robot.oi.arduino.getRawAxis(0) < -0.5 
+//    				&& Robot.oi.arduino.getRawAxis(0) > -0.6) Robot.targetAngle = distanceShot;
+//    		else if(Robot.oi.arduino.getRawAxis(0) < 0
+//    				&& Robot.oi.arduino.getRawAxis(0) > -0.3) Robot.targetAngle = twoWheelsAgainstBatter;
+//    		else if(Robot.oi.arduino.getRawAxis(0) < 0.19
+//    				&& Robot.oi.arduino.getRawAxis(0) > 0.17) Robot.targetAngle = shootAtBatterPos;
+//    		else if(Robot.oi.arduino.getRawAxis(0) < 0.6
+//    				&& Robot.oi.arduino.getRawAxis(0) > 0.58) Robot.targetAngle = generalPosition;
+//    		else if(Robot.oi.arduino.getRawAxis(0) < 1.1
+//    				&& Robot.oi.arduino.getRawAxis(0) > 0.9) Robot.targetAngle = zeroPivotPos;
+//    	}
     }
 
     protected boolean isFinished() {

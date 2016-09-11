@@ -101,7 +101,9 @@ public class SetPivot extends Command {
 
     protected void execute() {
     	Robot.pivotConstrainSpeed = constrainSpeed;
+    	
     	if(incremental)Robot.targetAngle+=incrementValue;
+//    	if(Robot.pivotEncoder.get() <= 10)Robot.targetAngle = 11;
     	if(!incremental){
     		if(Robot.oi.arduino.getRawAxis(0) < -0.9 
     				&& Robot.oi.arduino.getRawAxis(0) > -1.1) Robot.targetAngle = distanceShot;

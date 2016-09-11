@@ -192,7 +192,7 @@ public class Robot extends IterativeRobot {
      */
     
     public void teleopPeriodic() {
-    	System.out.println("navX yaw: " + navX.getYaw());
+    	System.out.println("navX yaw: " + navX.getYaw() + "    pivot: " + pivotEncoder.get());
     	Scheduler.getInstance().run();
     }
     

@@ -75,7 +75,7 @@ public class PivotArmSystem extends Subsystem {
     	//manual control with straight out voltage
 //    	if(error > 0)speed = 0.7;
 //    	if(error < 0)speed = -0.7;
-    	
+    	System.out.print("    target Angle: " + targetAngle + "    ");
     	run();
     }
 

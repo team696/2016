@@ -19,16 +19,16 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public Joystick xbox = new Joystick(3);
-	public Joystick arduino = new Joystick(1);
-	public Joystick wheel = new Joystick(2);
-	Button fastTurn = new JoystickButton(wheel, 6);
+	public Joystick xbox = new Joystick(0);
+//	public Joystick arduino = new Joystick(1);
+//	public Joystick wheel = new Joystick(2);
+//	Button fastTurn = new JoystickButton(wheel, 6);
 	
-	Button shiftHighButton = new JoystickButton(xbox, 4);
-	Button shiftLowButton = new JoystickButton(xbox, 3);
+	Button shiftHighButton = new JoystickButton(xbox, 2);
+	Button shiftLowButton = new JoystickButton(xbox, 1);
 	
-	Button pivotUpButton = new JoystickButton(xbox, 5);
-	Button pivotDownButton = new JoystickButton(xbox, 6);
+//	Button pivotUpButton = new JoystickButton(xbox, 5);
+//	Button pivotDownButton = new JoystickButton(xbox, 6);
 //	Button pivotPresetButton = new JoystickButton(arduino, 3);
 	
 //	Button shootButton = new JoystickButton(xbox, 1);
@@ -38,9 +38,9 @@ public class OI {
 //	Button lowShootingSpeedButton = new JoystickAnalogButton(arduino, 3, -1.1, -0.7);
 //	Button setShootingSpeedButton = new JoystickButton(arduino, 11);
 	
-	Button intakeSpeedButton = new JoystickButton(xbox, 1);
+//	Button intakeSpeedButton = new JoystickButton(xbox, 1);
 //	Button noSpeedButton = new JoystickAnalogButton(arduino, 2, -0.5, 0.5);
-	Button outtakeSpeedButton = new JoystickButton(xbox, 2);
+//	Button outtakeSpeedButton = new JoystickButton(xbox, 2);
 //	Button portcullisShooterSpeedButton = new JoystickButton(arduino, 8);
 	
 //	Button telescopingArmFullPosButton = new JoystickButton(arduino, 5);
@@ -52,16 +52,16 @@ public class OI {
 //	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
 	public OI() {
-		fastTurn.whenPressed(new FastTurn(true));
-		fastTurn.whenReleased(new FastTurn(false));
+//		fastTurn.whenPressed(new FastTurn(true));
+//		fastTurn.whenReleased(new FastTurn(false));
 		
 		shiftHighButton.whenPressed(new ShiftHigh(true));
 		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(2));
-		pivotDownButton.whileHeld(new SetPivot(-2));
-		pivotUpButton.whenInactive(new SetPivot(true));
-		pivotDownButton.whenInactive(new SetPivot(true));
+//		pivotUpButton.whileHeld(new SetPivot(2));
+//		pivotDownButton.whileHeld(new SetPivot(-2));
+//		pivotUpButton.whenInactive(new SetPivot(true));
+//		pivotDownButton.whenInactive(new SetPivot(true));
 //		pivotPresetButton.whenPressed(new SetPivot());
 		
 //		shootButton.whenPressed(new Shoot());
@@ -71,11 +71,11 @@ public class OI {
 //		setShootingSpeedButton.whileHeld(new SetShooterSpeed(true, true, arduino.getRawAxis(3)));
 //		setShootingSpeedButton.whileHeld(new SetShooterSpeed(true, false, arduino.getRawAxis(3)));
 //		setShootingSpeedButton.whenReleased(new SetShooterSpeed(false, false, 0));
-		
-		intakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, -0.9));
-		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.9));
-		intakeSpeedButton.whenReleased(new SetShooterSpeed(false, false, 0));
-		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0));
+//		
+//		intakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, -0.9));
+//		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0.9));
+//		intakeSpeedButton.whenReleased(new SetShooterSpeed(false, false, 0));
+//		outtakeSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0));
 //		noSpeedButton.whenPressed(new SetShooterSpeed(false, false, 0));
 //		portcullisShooterSpeedButton.whenPressed(new SetShooterSpeed(false, 0.9, -0.9));
 //		portcullisShooterSpeedButton.whenReleased(new SetShooterSpeed(false, 0, 0));
