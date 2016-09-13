@@ -71,8 +71,9 @@ public class PivotArmSystem extends Subsystem {
 //    	if(this.targetAngle < 0)this.targetAngle = Robot.pivotEncoder.get();
     	
     	error = this.targetAngle - Robot.pivotEncoder.get();
+    	error = Util.deadZone(error, -3, 3, 0);
     	PID.setError(error);
-    	speed = Util.constrain(PID.getValue(), -.5, Robot.pivotConstrainSpeed);
+    	speed = Util.constrain(PID.getValue(), -Robot.pivotConstrainSpeed, Robot.pivotConstrainSpeed);
     	if(!Robot.endOfMatch)speed = Util.constrain(PID.getValue(), -1, 1);
     	
     	//manual control with straight out voltage
@@ -99,6 +100,7 @@ public class PivotArmSystem extends Subsystem {
     	}
     	if(discBreakTimer.get() < 0.1)speed = 0;//jack
 
+    	speed = Util.constrain(speed, -Robot.pivotConstrainSpeed, Robot.pivotConstrainSpeed);
 		topPivotMotor.set(-speed);
 		botPivotMotor.set(-speed);
     }
