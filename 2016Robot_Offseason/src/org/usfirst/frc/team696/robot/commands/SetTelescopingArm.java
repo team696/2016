@@ -14,7 +14,7 @@ public class SetTelescopingArm extends Command {
 //	double fullyExtended = 500;
 //	double halfExtended = 5;
 	double halfExtended = 5;
-	double fullyContracted = 0;
+	double fullyRetracted = 0;
 	int whatState = 0;
 	
     public SetTelescopingArm(int whatState) {
@@ -24,7 +24,7 @@ public class SetTelescopingArm extends Command {
     
     public SetTelescopingArm(boolean increment, int val) {
     	if(increment){
-    		halfExtended+=val;
+    		target+=val;
     		if(val > 0)Robot.state = 2;
     		else Robot.state = 1;
     	}
@@ -51,7 +51,7 @@ public class SetTelescopingArm extends Command {
     		break;
     	case 0:
 		default:
-			target = fullyContracted;
+			target = fullyRetracted;
 			Robot.state = 3;
 			System.out.println("full contract");
 			break;

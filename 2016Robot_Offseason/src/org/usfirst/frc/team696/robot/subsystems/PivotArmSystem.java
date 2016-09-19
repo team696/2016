@@ -80,7 +80,6 @@ public class PivotArmSystem extends Subsystem {
 //    	if(error > 0)speed = 0.7;
 //    	if(error < 0)speed = -0.7;
     	
-    	System.out.print("    target Angle: " + this.targetAngle + "    pivot: " + Robot.pivotEncoder.get() + "    speed: " + speed + "     ");
     	run();
     }
 
@@ -89,16 +88,16 @@ public class PivotArmSystem extends Subsystem {
     }
     
     public void run(){
-    	if(speed != 0 && discBreakTimer.get() == 0){
-    		discBreakTimer.start();
-    		brake(false);
-    	}
-    	if(speed == 0){
-    		discBreakTimer.stop();
-    		discBreakTimer.reset();
-    		brake(true);
-    	}
-    	if(discBreakTimer.get() < 0.1)speed = 0;//jack
+//    	if(speed != 0 && discBreakTimer.get() == 0){
+//    		discBreakTimer.start();
+//    		brake(false);
+//    	}
+//    	if(speed == 0){
+//    		discBreakTimer.stop();
+//    		discBreakTimer.reset();
+//    		brake(true);
+//    	}
+//    	if(discBreakTimer.get() < 0.1)speed = 0;//jack
 
     	speed = Util.constrain(speed, -Robot.pivotConstrainSpeed, Robot.pivotConstrainSpeed);
 		topPivotMotor.set(-speed);

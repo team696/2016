@@ -75,6 +75,7 @@ public class RunningTelescopingArm extends Command {
 //    		Robot.pivotArm.ratchet(true);
     	}
     	
+    	System.out.print("   Telescoping Target: " + target + "     state: " + Robot.state + "       position: " + currentDistance + "     ");
     	Robot.telescopingArmSystem.set(speed);
     }
     
