@@ -7,6 +7,7 @@ import org.usfirst.frc.team696.utilities.PIDControl;
 import org.usfirst.frc.team696.utilities.StallPrevention;
 import org.usfirst.frc.team696.utilities.Util;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -29,8 +30,11 @@ public class PivotArmSystem extends Subsystem {
 	StallPrevention topSP = new StallPrevention(30);
 	StallPrevention botSP = new StallPrevention(30);
 	Timer discBreakTimer = new Timer();
-	DigitalInput topLimit = new DigitalInput(19);
-	DigitalInput bottomLimit = new DigitalInput(20);
+//	DigitalInput topLimit = new DigitalInput(20);
+//	DigitalInput bottomLimit = new DigitalInput(19);
+	AnalogInput topLimit = new AnalogInput(0);
+	AnalogInput bottomLimit = new AnalogInput(1);
+
 	
 	boolean ratchet = false;
 	
@@ -88,7 +92,7 @@ public class PivotArmSystem extends Subsystem {
     	 * TO BE TESZTED
     	 */
     	pivotError = Robot.pivotEncoder.get() - oldPivotEncoder;
-    	if((speed == 0 && pivotError == 0) || (speed > 0 && pivotError > 0) || (speed < 0 && pivotError < 0))broken = false;
+    	if(/*(speed == 0 && pivotError == 0) || */(speed > 0 && pivotError > 0) || (speed < 0 && pivotError < 0))broken = false;
     	else broken = true; 
     	oldPivotEncoder = Robot.pivotEncoder.get();
     	
@@ -96,16 +100,16 @@ public class PivotArmSystem extends Subsystem {
     	 * what to do if broken 
     	 * TO BE TESTED
     	 */
-    	if(broken){
-    		if(this.targetAngle > 50){
-    			if(topLimit.get())speed = 0;
-    			else speed = 0.25;
-    		}
-    		if(this.targetAngle < 50){
-    			if(bottomLimit.get())speed = 0;
-    			else speed = -0.25;
-    		}
-    	}
+//    	if(broken){
+//    		if(this.targetAngle > 50){
+//    			if(topLimit.get())speed = 0;
+//    			else speed = 0.25;
+//    		}
+//    		if(this.targetAngle < 50){
+//    			if(bottomLimit.get())speed = 0;
+//    			else speed = -0.25;
+//    		}
+//    	}
     	
     	/*
     	 * constrain speed to pivotConstrainSpeed constant
@@ -139,6 +143,8 @@ public class PivotArmSystem extends Subsystem {
     }
     
     public void run(){
+    	
+    	System.out.print("   speed: " + speed + "    broken: " + broken + "    target: " + this.targetAngle + "    current: " + Robot.pivotEncoder.get() + "    top: " + topLimit.getValue() + "    bottom: " + bottomLimit.getValue() + "     ");
 		topPivotMotor.set(-speed);
 		botPivotMotor.set(-speed);
     }

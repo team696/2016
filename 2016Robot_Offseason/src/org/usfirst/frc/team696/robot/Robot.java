@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 	public static double telescopingTargetDistance = 0;
 	
 	public static double targetAngle = 0;
-	public static double pivotConstrainSpeed = .25;
+	public static double pivotConstrainSpeed = .05;
 	
 	public static double topShooterRPM = 0;
 	public static double botShooterRPM = 0;
