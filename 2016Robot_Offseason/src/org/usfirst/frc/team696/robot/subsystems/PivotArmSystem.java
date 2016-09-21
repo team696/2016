@@ -144,7 +144,7 @@ public class PivotArmSystem extends Subsystem {
     
     public void run(){
     	
-    	System.out.print("   speed: " + speed + "    broken: " + broken + "    target: " + this.targetAngle + "    current: " + Robot.pivotEncoder.get() + "    top: " + topLimit.getValue() + "    bottom: " + bottomLimit.getValue() + "     ");
+//    	System.out.print("   speed: " + speed + "    broken: " + broken + "    target: " + this.targetAngle + "    current: " + Robot.pivotEncoder.get() + "    top: " + topLimit.getValue() + "    bottom: " + bottomLimit.getValue() + "     ");
 		topPivotMotor.set(-speed);
 		botPivotMotor.set(-speed);
     }

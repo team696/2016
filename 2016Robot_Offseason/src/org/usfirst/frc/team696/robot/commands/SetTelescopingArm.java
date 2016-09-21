@@ -11,31 +11,27 @@ public class SetTelescopingArm extends Command {
 
 	double target = 0;
 	double fullyExtended = 720;
-//	double fullyExtended = 500;
-//	double halfExtended = 5;
 	double halfExtended = 5;
 	double fullyRetracted = 0;
 	int whatState = 0;
 	
     public SetTelescopingArm(int whatState) {
-        System.out.println("SetTelescopingArm constructor");
         this.whatState = whatState;
     }
     
     public SetTelescopingArm(boolean increment, int val) {
     	if(increment){
-    		target+=val;
-    		if(val > 0)Robot.state = 2;
-    		else Robot.state = 1;
+    		 target = Robot.telescopingEncoder.get() + val;
+    		if(val < 0){
+    			whatState = 3;
+    		}
     	}
     	else this.whatState = val;
     }
     	
-    // Called just before this Command runs the first time
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	switch(whatState){
     	case 1:
@@ -48,6 +44,9 @@ public class SetTelescopingArm extends Command {
     		Robot.startReleaseRatchetTimer = true;
     		Robot.state = 1;
     		System.out.println("fully extend");
+    		break;
+    	case 3:
+    		Robot.state = 3;
     		break;
     	case 0:
 		default:

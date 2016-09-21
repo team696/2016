@@ -32,13 +32,11 @@ public class RunningTelescopingArm extends Command {
     	target = Robot.telescopingTargetDistance;
     	currentDistance = Robot.telescopingEncoder.get();
     	error = target - currentDistance;
-//    	error = Util.deadZone(error, -10, 10, 0);
     	
     	switch(Robot.state){
     	case 0:
     		speed = 0;
     		Robot.telescopingArmSystem.ratchet(true);
-//    		Robot.pivotArm.ratchet(false);
     		break;
     	case 1:
     		if(Robot.startReleaseRatchetTimer){
@@ -52,7 +50,6 @@ public class RunningTelescopingArm extends Command {
     			timer.reset();
     		}
     		Robot.telescopingArmSystem.ratchet(false);
-//    		Robot.pivotArm.ratchet(false);
     		break;
     	case 2:
     		speed = 1;
@@ -62,7 +59,6 @@ public class RunningTelescopingArm extends Command {
     		if(error <= 0 || maxDistance < currentDistance && speed > 0)speed = 0;
     		Robot.endOfMatch = true;
     		Robot.telescopingArmSystem.ratchet(false);
-//    		Robot.pivotArm.ratchet(false);
     		break;
     	case 3:
     		speed = -1;
@@ -72,10 +68,9 @@ public class RunningTelescopingArm extends Command {
     		if(error >= 0)speed = 0;
     		Robot.endOfMatch = true;
     		Robot.telescopingArmSystem.ratchet(true);
-//    		Robot.pivotArm.ratchet(true);
     	}
     	
-    	System.out.print("   Telescoping Target: " + target + "     state: " + Robot.state + "       position: " + currentDistance + "     ");
+//    	System.out.print("   Telescoping Target: " + target + "     state: " + Robot.state + "       position: " + currentDistance + "     ");
     	Robot.telescopingArmSystem.set(speed);
     }
     
