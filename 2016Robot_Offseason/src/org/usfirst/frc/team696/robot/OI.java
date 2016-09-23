@@ -53,8 +53,8 @@ public class OI {
 		shiftHighButton.whenPressed(new ShiftHigh(true));
 		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(+1));
-		pivotDownButton.whileHeld(new SetPivot(-1));
+		pivotUpButton.whileHeld(new SetPivot(true, +1));
+		pivotDownButton.whileHeld(new SetPivot(true, -1));
 		pivotUpButton.whenReleased(new SetPivot(true));
 		pivotDownButton.whenReleased(new SetPivot(true));
 		

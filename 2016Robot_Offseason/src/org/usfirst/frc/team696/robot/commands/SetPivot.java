@@ -28,8 +28,13 @@ public class SetPivot extends Command {
 		}
 	}
 	
+	public SetPivot(boolean incremental, double value){
+		this.incremental = incremental;
+		incrementValue = value;
+	}
+	
     public SetPivot(double value) {
-    	this.incremental = true;
+    	this.incremental = false;
     	incrementValue = value;
     }
 

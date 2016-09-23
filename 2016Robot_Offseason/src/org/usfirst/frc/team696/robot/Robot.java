@@ -4,9 +4,6 @@ package org.usfirst.frc.team696.robot;
 import org.usfirst.frc.team696.robot.autonomousCommands.DoNothing;
 import org.usfirst.frc.team696.robot.autonomousCommands.DriveStraightBackward;
 import org.usfirst.frc.team696.robot.autonomousCommands.DriveStraightForward;
-import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAuto;
-import org.usfirst.frc.team696.robot.autonomousCommands.TestEncoder;
-import org.usfirst.frc.team696.robot.autonomousCommands.ZeroArm;
 import org.usfirst.frc.team696.robot.autonomousCommands.LowBarAndLowGoal;
 import org.usfirst.frc.team696.robot.runningCommands.RunningPivot;
 import org.usfirst.frc.team696.robot.runningCommands.RunningShooter;
@@ -108,13 +105,10 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new DoNothing());
-        chooser.addObject("Low Bar", new LowBarAuto());
         chooser.addObject("Low Bar and low goal", new LowBarAndLowGoal());
         chooser.addObject("Do Nothing", new DoNothing());
         chooser.addObject("Drive Straight Backward", new DriveStraightBackward());
         chooser.addObject("Drive Straight Forward", new DriveStraightForward());
-        chooser.addObject("ZeroPivotTest", new ZeroArm());
-        chooser.addObject("Testing Encoder", new TestEncoder());
         SmartDashboard.putData("Auto mode", chooser);
         
 		shootTimer.start();

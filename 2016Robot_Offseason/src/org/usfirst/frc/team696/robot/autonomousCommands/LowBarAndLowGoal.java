@@ -6,7 +6,6 @@ import org.usfirst.frc.team696.robot.commands.SetPivot;
 import org.usfirst.frc.team696.robot.commands.SetShooterSpeed;
 import org.usfirst.frc.team696.robot.commands.ShiftHigh;
 import org.usfirst.frc.team696.robot.commands.Shoot;
-import org.usfirst.frc.team696.robot.commands.ZeroPivot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -19,7 +18,7 @@ public class LowBarAndLowGoal extends CommandGroup {
     	//ensure shifted high
     	addParallel(new ShiftHigh(true));
     	//zero the pivot
-    	addSequential(new ZeroPivot());
+    	addSequential(new SetPivot(11));
     	//drive forward under low bar
     	addSequential(new Drive(0, 16.25, 0.65));
     	
