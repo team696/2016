@@ -142,7 +142,7 @@ public class Robot extends IterativeRobot {
 //        if(control.getRawButton(13))speed = 0;
         
         if(arduino.getRawAxis(1) > 0.25) speed = -0.25;
-        else if(arduino.getRawAxis(1) < -0.25) speed = 0.75;
+        else if(arduino.getRawAxis(1) < -0.25) speed = 0.25;
         else speed = 0;
         
 //        System.out.print("   speed:" + speed);
