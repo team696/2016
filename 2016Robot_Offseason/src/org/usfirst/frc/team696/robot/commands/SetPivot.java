@@ -1,6 +1,7 @@
 package org.usfirst.frc.team696.robot.commands;
 
 import org.usfirst.frc.team696.robot.Robot;
+import org.usfirst.frc.team696.robot.subsystems.PivotArmSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -24,7 +25,7 @@ public class SetPivot extends Command {
 			incremental = true;
 			incrementValue = 0;
 		} else {
-			targetAngle = Robot.pivotEncoder.getDistance();
+			targetAngle = Robot.pivotEncoder.getDistance() + Robot.pivotK;
 		}
 	}
 	
@@ -50,8 +51,14 @@ public class SetPivot extends Command {
     protected void execute() {
     	Robot.pivotConstrainSpeed = constrainSpeed;
     	
-    	if(incremental)Robot.targetAngle+=incrementValue;
-    	else Robot.targetAngle = targetAngle;
+    	if(Robot.safeMode){
+    		if(incremental)Robot.targetAngle+=incrementValue;
+    		else Robot.targetAngle = targetAngle;
+    	} else {
+    		if(incrementValue > 0)Robot.pivotArm.speed = 0.25;
+    		if(incrementValue < 0)Robot.pivotArm.speed = -0.25;
+    		if(incrementValue == 0)Robot.pivotArm.speed = 0;
+    	}
     }
 
     protected boolean isFinished() {

@@ -33,6 +33,6 @@ public class DriveStraightBackward extends CommandGroup {
     	
 //    	addParallel(new SetPivot(45, 0.2));
     	addSequential(new ShiftHigh(true));
-    	addSequential(new Drive(0, -10, 0.75));
+    	addSequential(new Drive(0, -20, 0.75));
     }
 }

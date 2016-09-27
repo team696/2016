@@ -15,6 +15,6 @@ public class DriveStraightForward extends CommandGroup {
     public  DriveStraightForward() {
 //    	addParallel(new SetPivot(45, 0.2));
     	addSequential(new ShiftHigh(true));
-    	addSequential(new Drive(0, 15, 0.75));
+    	addSequential(new Drive(0, 20, 0.75));
     }
 }

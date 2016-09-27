@@ -64,6 +64,8 @@ public class Robot extends IterativeRobot {
 	public static Encoder bottomShooterWheelEncoder = new Encoder(RobotMap.bottomShooterWheelEncoderA, RobotMap.bottomShooterWheelEncoderB, false, EncodingType.k1X);
 	
 	public static Encoder pivotEncoder = new Encoder(RobotMap.pivotEncoderA,RobotMap.pivotEncoderB);
+	public static boolean safeMode = true;
+	
 	public static Encoder telescopingEncoder = new Encoder(RobotMap.telescopingArmEncoderA, RobotMap.telescopingArmEncoderB);
 	
 	public static double telescopingTargetDistance = 0;
@@ -78,7 +80,6 @@ public class Robot extends IterativeRobot {
 	public static boolean isRPM = true;
 	
 	public static Timer shootTimer = new Timer();
-	Timer matchTimer = new Timer();
 	
 	public static PowerDistributionPanel PDP = new PowerDistributionPanel();
 	
@@ -90,6 +91,8 @@ public class Robot extends IterativeRobot {
 	public static boolean endOfMatch = false;
 	
 	public static double incrementTargetDirection = 0;
+	
+	public static double pivotK = 193;
 	
 	/**
      * This function is run when the robot is first started up and should be
@@ -139,8 +142,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	targetAngle = pivotEncoder.get();
-    	matchTimer.start();
+    	pivotEncoder.reset();
+    	targetAngle = pivotEncoder.get() + pivotK;
         autonomousCommand = (Command) chooser.getSelected();
 
     	leftEncoder.reset();
@@ -163,7 +166,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	targetAngle = pivotEncoder.get();
+    	targetAngle = pivotEncoder.get() + pivotK;
     	leftEncoder.reset();
 		rightEncoder.reset();
 		telescopingEncoder.reset();
@@ -175,9 +178,6 @@ public class Robot extends IterativeRobot {
     	
     	System.out.println("Teleop Init");
     	if (autonomousCommand != null) autonomousCommand.cancel();
-    	matchTimer.stop();
-    	matchTimer.reset();
-    	matchTimer.start();
     }
 
     
@@ -186,7 +186,7 @@ public class Robot extends IterativeRobot {
      */
     
     public void teleopPeriodic() {
-    	System.out.println("navX yaw: " + navX.getYaw() + "    telescoping current position: " + telescopingEncoder.get() + "     target: " + telescopingTargetDistance);
+    	System.out.println("navX yaw: " + navX.getYaw() + "    safeMode: " + safeMode + "     targetAngle: " + targetAngle + "     currentAngle: " + pivotEncoder.get() + "    speed: " + pivotArm.speed);
     	Scheduler.getInstance().run();
     }
     

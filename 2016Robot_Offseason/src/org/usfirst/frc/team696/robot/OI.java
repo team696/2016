@@ -2,6 +2,7 @@
 package org.usfirst.frc.team696.robot;
 
 import org.usfirst.frc.team696.robot.commands.FastTurn;
+import org.usfirst.frc.team696.robot.commands.SafeMode;
 import org.usfirst.frc.team696.robot.commands.SetPivot;
 import org.usfirst.frc.team696.robot.commands.SetTelescopingArm;
 import org.usfirst.frc.team696.robot.commands.ShiftHigh;
@@ -44,6 +45,9 @@ public class OI {
 	Button climbingAngle = new JoystickButton(arduino, 10);
 	Button zeroAngle = new JoystickButton(arduino, 11);
 	
+	Button disableSafeMode = new JoystickButton(wheel, 9);
+//	Button enableSafeMode = new JoystickButton(wheel, 10);
+	
 	Button zeroAllEncodersButton = new JoystickButton(wheel, 7);
 	
 	public OI() {
@@ -58,7 +62,10 @@ public class OI {
 		pivotUpButton.whenReleased(new SetPivot(true));
 		pivotDownButton.whenReleased(new SetPivot(true));
 		
-		shootingAngle.whenPressed(new SetPivot(206, .25));
+//		enableSafeMode.whenPressed(new SafeMode(true));
+		disableSafeMode.whenPressed(new SafeMode(false));
+		
+		shootingAngle.whenPressed(new SetPivot(228, .25));
 		climbingAngle.whenPressed(new SetPivot(340, .25));
 		zeroAngle.whenPressed(new SetPivot(11, .25));
 		zeroAngle.whenReleased(new SetPivot(11, .25));
@@ -73,7 +80,7 @@ public class OI {
 		
 		telescopingArmFullPosButton.whenPressed(new SetTelescopingArm(2));
 		telescopingArmMidPosButton.whenPressed(new SetTelescopingArm(1));
-		manualRetract.whenPressed(new SetTelescopingArm(true, -5));
+		manualRetract.whenPressed(new SetTelescopingArm(true, -100));
 //		manualRetract.whenReleased(new SetTelescopingArm(true, 0));
 		
 		

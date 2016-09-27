@@ -11,8 +11,8 @@ public class SetTelescopingArm extends Command {
 
 	double target = 0;
 	double fullyExtended = 720;
-	double halfExtended = 5;
-	double fullyRetracted = 0;
+	double halfExtended = 0;
+	double fullyRetracted = -100;
 	int whatState = 0;
 	
     public SetTelescopingArm(int whatState) {

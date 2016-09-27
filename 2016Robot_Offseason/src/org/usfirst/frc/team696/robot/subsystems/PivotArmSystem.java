@@ -38,7 +38,7 @@ public class PivotArmSystem extends Subsystem {
 	
 	boolean ratchet = false;
 	
-	double speed = 0.0;
+	public double speed = 0.0;
 	double targetAngle = 0;
 	double error = 0;
 	double PIDSum = 0;
@@ -76,25 +76,27 @@ public class PivotArmSystem extends Subsystem {
      */
     public void setTargetAngle(double targetAngle){
     	if(targetAngle <= 10/*test*/)targetAngle = 11;
+    	if(targetAngle > 340)targetAngle = 340;
     	this.targetAngle = targetAngle;
     	
     	/*
     	 * decide speed value for pivot
     	 */
-    	error = this.targetAngle - Robot.pivotEncoder.get();
+    	double realPivotEncoder = Robot.pivotEncoder.get() + Robot.pivotK;
+    	error = this.targetAngle - realPivotEncoder;
     	error = Util.deadZone(error, -3, 3, 0);
     	PID.setError(error);
-    	speed = Util.constrain(PID.getValue(), -Robot.pivotConstrainSpeed, Robot.pivotConstrainSpeed);
-    	if(!Robot.endOfMatch)speed = Util.constrain(PID.getValue(), -1, 1);
+    	if(Robot.safeMode)speed = Util.constrain(PID.getValue(), -Robot.pivotConstrainSpeed, Robot.pivotConstrainSpeed);
+//    	if(!Robot.endOfMatch)speed = Util.constrain(PID.getValue(), -1, 1);
     	
     	/*
     	 * decide whether encoder is broken on pivot
     	 * TO BE TESZTED
     	 */
-    	pivotError = Robot.pivotEncoder.get() - oldPivotEncoder;
+    	pivotError = realPivotEncoder - oldPivotEncoder;
     	if(/*(speed == 0 && pivotError == 0) || */(speed > 0 && pivotError > 0) || (speed < 0 && pivotError < 0))broken = false;
     	else broken = true; 
-    	oldPivotEncoder = Robot.pivotEncoder.get();
+    	oldPivotEncoder = realPivotEncoder;
     	
     	/*
     	 * what to do if broken 
@@ -115,7 +117,7 @@ public class PivotArmSystem extends Subsystem {
     	 * constrain speed to pivotConstrainSpeed constant
     	 */
     	speed = Util.constrain(speed, -Robot.pivotConstrainSpeed, Robot.pivotConstrainSpeed);
-
+    	
     	/*
     	 * Disc Break Code
     	 * TO BE TESTED
