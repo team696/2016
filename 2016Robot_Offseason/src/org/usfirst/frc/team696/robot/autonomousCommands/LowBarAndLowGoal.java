@@ -18,7 +18,7 @@ public class LowBarAndLowGoal extends CommandGroup {
     	//ensure shifted high
     	addParallel(new ShiftHigh(true));
     	//zero the pivot
-    	addSequential(new SetPivot(11, .25));
+    	addSequential(new SetPivot(11, .7));
     	//drive forward under low bar
     	addSequential(new Drive(0, 16.25, 0.65));
     	

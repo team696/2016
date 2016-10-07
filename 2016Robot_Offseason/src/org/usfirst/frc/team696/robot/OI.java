@@ -65,10 +65,10 @@ public class OI {
 //		enableSafeMode.whenPressed(new SafeMode(true));
 		disableSafeMode.whenPressed(new SafeMode(false));
 		
-		shootingAngle.whenPressed(new SetPivot(228, .25));
-		climbingAngle.whenPressed(new SetPivot(340, .25));
-		zeroAngle.whenPressed(new SetPivot(11, .25));
-		zeroAngle.whenReleased(new SetPivot(11, .25));
+		shootingAngle.whenPressed(new SetPivot(228, .7));
+		climbingAngle.whenPressed(new SetPivot(340, .7));
+		zeroAngle.whenPressed(new SetPivot(11, .7));
+		zeroAngle.whenReleased(new SetPivot(11, .7));
 		
 		shootButton.whenPressed(new Shoot());
 		

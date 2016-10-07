@@ -92,7 +92,7 @@ public class Robot extends IterativeRobot {
 	
 	public static double incrementTargetDirection = 0;
 	
-	public static double pivotK = 193;
+	public static double pivotK = 206 	;
 	
 	/**
      * This function is run when the robot is first started up and should be
