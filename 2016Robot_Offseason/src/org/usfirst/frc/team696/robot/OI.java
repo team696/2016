@@ -44,6 +44,7 @@ public class OI {
 	Button shootingAngle = new JoystickButton(arduino, 9);
 	Button climbingAngle = new JoystickButton(arduino, 10);
 	Button zeroAngle = new JoystickButton(arduino, 11);
+	Button generalDriving = new JoystickButton(arduino, 8);
 	
 	Button disableSafeMode = new JoystickButton(wheel, 9);
 //	Button enableSafeMode = new JoystickButton(wheel, 10);
@@ -69,6 +70,7 @@ public class OI {
 		climbingAngle.whenPressed(new SetPivot(340, .7));
 		zeroAngle.whenPressed(new SetPivot(11, .7));
 		zeroAngle.whenReleased(new SetPivot(11, .7));
+		generalDriving.whenPressed(new SetPivot(100, 0.7));
 		
 		shootButton.whenPressed(new Shoot());
 		
