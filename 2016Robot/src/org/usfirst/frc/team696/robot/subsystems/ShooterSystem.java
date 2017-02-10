@@ -109,7 +109,7 @@ public class ShooterSystem extends Subsystem {
 //    	System.out.println("SP: " + topSP.getOutput());
     	
     	topShooterWheel.set(topSP.getOutput());
-    	bottomShooterWheel.set(botSP.getOutput());
+    	bottomShooterWheel.set(-botSP.getOutput());
     }
 }
 

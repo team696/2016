@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public Joystick arduino = new Joystick(1);
-	public Joystick wheel = new Joystick(2);
+	public Joystick wheel = new Joystick(0);
 	Button fastTurn = new JoystickButton(wheel, 6);
 	
 	Button shiftHighButton = new JoystickButton(wheel, 3);
@@ -57,8 +57,8 @@ public class OI {
 		shiftHighButton.whenPressed(new ShiftHigh(true));
 		shiftLowButton.whenPressed(new ShiftHigh(false));
 		
-		pivotUpButton.whileHeld(new SetPivot(3.5));
-		pivotDownButton.whileHeld(new SetPivot(-3.5));
+		pivotUpButton.whileHeld(new SetPivot(-3.5));
+		pivotDownButton.whileHeld(new SetPivot(3.5));
 		pivotUpButton.whenInactive(new SetPivot(true));
 		pivotDownButton.whenInactive(new SetPivot(true));
 		pivotPresetButton.whenPressed(new SetPivot());

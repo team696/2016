@@ -60,8 +60,13 @@ public class Robot extends IterativeRobot {
 	public static boolean shiftedHigh = true;
     Command autonomousCommand;
     SendableChooser chooser;
+    
+    /*
+     * navX
+     */
     public static IMU navX;
 	SerialPort port;
+	
 	public static boolean fastTurn = false;
 	
 	public static Encoder topShooterWheelEncoder = new Encoder(RobotMap.topShooterWheelEncoderA, RobotMap.topShooterWheelEncoderB, false,EncodingType.k1X);
@@ -100,6 +105,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	
     	try {
 			byte UpdateRateHz = 50;
 			port = new SerialPort(57600, SerialPort.Port.kMXP);
